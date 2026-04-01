@@ -1,0 +1,15 @@
+{
+  "date": "2026-01-30",
+  "symbol": "NVDA",
+  "openingRange": {
+    "high": 192.54,
+    "low": 190.9096,
+    "size": 0.8503855526254194,
+    "sizeInDollars": 1.6303999999999803,
+    "timestamp": "2026-01-30T14:30:00.000Z"
+  },
+  "tradeExecutedToday": false,
+  "tradeCount": 0,
+  "sessionStatus": "MONITORING",
+  "lastUpdated": "2026-01-30T14:42:34.207Z"
+}

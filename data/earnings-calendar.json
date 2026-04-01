@@ -1,0 +1,11 @@
+{
+  "_comment": "Add earnings dates to skip trading specific symbols on volatile days",
+  "_format": "Symbol as key, array of dates (YYYY-MM-DD) as value",
+  "_example": "When AAPL reports earnings on Jan 28, add: \"AAPL\": [\"2026-01-28\"]",
+  "SPY": [],
+  "AAPL": [],
+  "MSFT": [],
+  "NVDA": [],
+  "GOOGL": [],
+  "META": []
+}

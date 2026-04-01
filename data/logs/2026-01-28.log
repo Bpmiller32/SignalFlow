@@ -1,0 +1,2660 @@
+[02:23:01] Market closed - Opening in 4.1 hours (1/28/2026, 12:30:00 PM EST)
+[06:59:43] Market is open - starting trading session
+[06:59:43] [DEBUG] Waiting for 09:35 EST (current: 06:59)
+[07:03:27] [DEBUG] Waiting for 09:35 EST (current: 07:03)
+[07:07:56] [DEBUG] Waiting for 09:35 EST (current: 07:07)
+[07:08:26] [DEBUG] Waiting for 09:35 EST (current: 07:08)
+[07:08:56] [DEBUG] Waiting for 09:35 EST (current: 07:08)
+[07:09:26] [DEBUG] Waiting for 09:35 EST (current: 07:09)
+[07:09:56] [DEBUG] Waiting for 09:35 EST (current: 07:09)
+[07:10:26] [DEBUG] Waiting for 09:35 EST (current: 07:10)
+[07:10:56] [DEBUG] Waiting for 09:35 EST (current: 07:10)
+[07:11:26] [DEBUG] Waiting for 09:35 EST (current: 07:11)
+[07:11:29] ════════════════════════════════════════════════════════════════════════════════
+[07:11:29] 🚀 SignalFlow Started | Mode: PAPER | Symbols: SPY, AAPL, MSFT, NVDA, GOOGL, META, GME
+[07:11:29] ════════════════════════════════════════════════════════════════════════════════
+[07:11:29] Paper broker initialized with $100000.00
+[07:11:29] Paper broker initialized with $100,000
+[07:11:29] Initializing SPY...
+[07:11:29] Performing startup recovery for SPY...
+[07:11:29] Created new daily state for SPY
+[07:11:29] Startup recovery complete for SPY
+[07:11:29] SPY initialized: Session=WAITING, Position=NO
+[07:11:29] Initializing AAPL...
+[07:11:29] Performing startup recovery for AAPL...
+[07:11:29] Created new daily state for AAPL
+[07:11:29] Startup recovery complete for AAPL
+[07:11:29] AAPL initialized: Session=WAITING, Position=NO
+[07:11:29] Initializing MSFT...
+[07:11:29] Performing startup recovery for MSFT...
+[07:11:29] Created new daily state for MSFT
+[07:11:29] Startup recovery complete for MSFT
+[07:11:29] MSFT initialized: Session=WAITING, Position=NO
+[07:11:29] Initializing NVDA...
+[07:11:29] Performing startup recovery for NVDA...
+[07:11:29] Created new daily state for NVDA
+[07:11:29] Startup recovery complete for NVDA
+[07:11:29] NVDA initialized: Session=WAITING, Position=NO
+[07:11:29] Initializing GOOGL...
+[07:11:29] Performing startup recovery for GOOGL...
+[07:11:29] Created new daily state for GOOGL
+[07:11:29] Startup recovery complete for GOOGL
+[07:11:29] GOOGL initialized: Session=WAITING, Position=NO
+[07:11:29] Initializing META...
+[07:11:29] Performing startup recovery for META...
+[07:11:29] Created new daily state for META
+[07:11:29] Startup recovery complete for META
+[07:11:29] META initialized: Session=WAITING, Position=NO
+[07:11:29] Initializing GME...
+[07:11:29] Performing startup recovery for GME...
+[07:11:29] Created new daily state for GME
+[07:11:29] Startup recovery complete for GME
+[07:11:29] GME initialized: Session=WAITING, Position=NO
+[07:11:29] System initialization complete
+[07:11:29] Market is open - starting trading session
+[07:11:56] [DEBUG] Waiting for 09:35 EST (current: 07:11)
+[07:12:26] [DEBUG] Waiting for 09:35 EST (current: 07:12)
+[07:12:56] [DEBUG] Waiting for 09:35 EST (current: 07:12)
+[07:13:26] [DEBUG] Waiting for 09:35 EST (current: 07:13)
+[07:13:56] [DEBUG] Waiting for 09:35 EST (current: 07:13)
+[07:14:26] [DEBUG] Waiting for 09:35 EST (current: 07:14)
+[07:14:56] [DEBUG] Waiting for 09:35 EST (current: 07:14)
+[07:15:26] [DEBUG] Waiting for 09:35 EST (current: 07:15)
+[07:15:56] [DEBUG] Waiting for 09:35 EST (current: 07:15)
+[07:16:26] [DEBUG] Waiting for 09:35 EST (current: 07:16)
+[07:16:56] [DEBUG] Waiting for 09:35 EST (current: 07:16)
+[07:17:26] [DEBUG] Waiting for 09:35 EST (current: 07:17)
+[07:17:36] [DEBUG] Fetching 5-min candles for SPY on 2026-01-28
+[07:17:37] [DEBUG] Fetched 10 5-min candles for SPY
+[07:17:37] Opening range calculated for SPY: High=697.7, Low=697.01, Size=0.10%
+[07:17:37] [DEBUG] Opening range rejected: Too tight (0.10% < 0.15%). Market may be choppy.
+[07:17:37] [DEBUG] Opening range strength: 4.4/10 (size: 1.4, bias: 0, body: 42%)
+[07:17:37] [DEBUG] Fetching 1-min candles for SPY on 2026-01-28
+[07:17:37] [DEBUG] Fetched 47 1-min candles for SPY
+[07:17:37] [DEBUG] Fetching 2 daily candles for SPY
+[07:17:37] [DEBUG] Fetched 7 daily candles for SPY
+[07:17:37] [DEBUG] Pre-market gap: +0.06% (open: 697.06, prev close: 696.63)
+[07:17:56] [DEBUG] Waiting for 09:35 EST (current: 07:17)
+[07:18:26] [DEBUG] Waiting for 09:35 EST (current: 07:18)
+[07:18:56] [DEBUG] Waiting for 09:35 EST (current: 07:18)
+[07:19:26] [DEBUG] Waiting for 09:35 EST (current: 07:19)
+[07:19:56] [DEBUG] Waiting for 09:35 EST (current: 07:19)
+[07:20:26] [DEBUG] Waiting for 09:35 EST (current: 07:20)
+[07:20:56] [DEBUG] Waiting for 09:35 EST (current: 07:20)
+[07:21:26] [DEBUG] Waiting for 09:35 EST (current: 07:21)
+[07:21:56] [DEBUG] Waiting for 09:35 EST (current: 07:21)
+[07:22:26] [DEBUG] Waiting for 09:35 EST (current: 07:22)
+[07:22:56] [DEBUG] Waiting for 09:35 EST (current: 07:22)
+[07:23:26] [DEBUG] Waiting for 09:35 EST (current: 07:23)
+[07:23:56] [DEBUG] Waiting for 09:35 EST (current: 07:23)
+[07:24:26] [DEBUG] Waiting for 09:35 EST (current: 07:24)
+[07:24:56] [DEBUG] Waiting for 09:35 EST (current: 07:24)
+[07:25:26] [DEBUG] Waiting for 09:35 EST (current: 07:25)
+[07:25:56] [DEBUG] Waiting for 09:35 EST (current: 07:25)
+[07:26:26] [DEBUG] Waiting for 09:35 EST (current: 07:26)
+[07:26:56] [DEBUG] Waiting for 09:35 EST (current: 07:26)
+[07:27:26] [DEBUG] Waiting for 09:35 EST (current: 07:27)
+[07:27:56] [DEBUG] Waiting for 09:35 EST (current: 07:27)
+[07:28:26] [DEBUG] Waiting for 09:35 EST (current: 07:28)
+[07:28:56] [DEBUG] Waiting for 09:35 EST (current: 07:28)
+[07:29:26] [DEBUG] Waiting for 09:35 EST (current: 07:29)
+[07:29:56] [DEBUG] Waiting for 09:35 EST (current: 07:29)
+[07:30:26] [DEBUG] Waiting for 09:35 EST (current: 07:30)
+[07:30:56] [DEBUG] Waiting for 09:35 EST (current: 07:30)
+[07:31:26] [DEBUG] Waiting for 09:35 EST (current: 07:31)
+[07:31:56] [DEBUG] Waiting for 09:35 EST (current: 07:31)
+[07:32:26] [DEBUG] Waiting for 09:35 EST (current: 07:32)
+[07:32:56] [DEBUG] Waiting for 09:35 EST (current: 07:32)
+[07:33:26] [DEBUG] Waiting for 09:35 EST (current: 07:33)
+[07:33:56] [DEBUG] Waiting for 09:35 EST (current: 07:33)
+[07:34:26] [DEBUG] Waiting for 09:35 EST (current: 07:34)
+[07:34:56] [DEBUG] Waiting for 09:35 EST (current: 07:34)
+[07:35:26] [DEBUG] Waiting for 09:35 EST (current: 07:35)
+[07:35:56] [DEBUG] Waiting for 09:35 EST (current: 07:35)
+[07:36:26] [DEBUG] Waiting for 09:35 EST (current: 07:36)
+[07:36:56] [DEBUG] Waiting for 09:35 EST (current: 07:36)
+[07:37:26] [DEBUG] Waiting for 09:35 EST (current: 07:37)
+[07:37:56] [DEBUG] Waiting for 09:35 EST (current: 07:37)
+[07:38:26] [DEBUG] Waiting for 09:35 EST (current: 07:38)
+[07:38:56] [DEBUG] Waiting for 09:35 EST (current: 07:38)
+[07:39:26] [DEBUG] Waiting for 09:35 EST (current: 07:39)
+[07:39:56] [DEBUG] Waiting for 09:35 EST (current: 07:39)
+[07:40:26] [DEBUG] Waiting for 09:35 EST (current: 07:40)
+[07:40:56] [DEBUG] Waiting for 09:35 EST (current: 07:40)
+[07:41:26] [DEBUG] Waiting for 09:35 EST (current: 07:41)
+[07:41:56] [DEBUG] Waiting for 09:35 EST (current: 07:41)
+[07:42:03] ════════════════════════════════════════════════════════════════════════════════
+[07:42:03] 🚀 SignalFlow Started | Mode: PAPER | Symbols: SPY, AAPL, MSFT, NVDA, GOOGL, META, GME
+[07:42:03] ════════════════════════════════════════════════════════════════════════════════
+[07:42:03] Paper broker initialized with $100000.00
+[07:42:03] Paper broker initialized with $100,000
+[07:42:03] Initializing SPY...
+[07:42:03] Performing startup recovery for SPY...
+[07:42:03] [DEBUG] Loaded daily state for SPY: Session=WAITING, Traded=false
+[07:42:03] [DEBUG] No current position file for SPY
+[07:42:03] [DEBUG] No position for SPY - normal state
+[07:42:03] Startup recovery complete for SPY
+[07:42:03] SPY initialized: Session=WAITING, Position=NO
+[07:42:03] Initializing AAPL...
+[07:42:03] Performing startup recovery for AAPL...
+[07:42:03] [DEBUG] Loaded daily state for AAPL: Session=WAITING, Traded=false
+[07:42:03] [DEBUG] No current position file for AAPL
+[07:42:03] [DEBUG] No position for AAPL - normal state
+[07:42:03] Startup recovery complete for AAPL
+[07:42:03] AAPL initialized: Session=WAITING, Position=NO
+[07:42:03] Initializing MSFT...
+[07:42:03] Performing startup recovery for MSFT...
+[07:42:03] [DEBUG] Loaded daily state for MSFT: Session=WAITING, Traded=false
+[07:42:03] [DEBUG] No current position file for MSFT
+[07:42:03] [DEBUG] No position for MSFT - normal state
+[07:42:03] Startup recovery complete for MSFT
+[07:42:03] MSFT initialized: Session=WAITING, Position=NO
+[07:42:03] Initializing NVDA...
+[07:42:03] Performing startup recovery for NVDA...
+[07:42:03] [DEBUG] Loaded daily state for NVDA: Session=WAITING, Traded=false
+[07:42:03] [DEBUG] No current position file for NVDA
+[07:42:03] [DEBUG] No position for NVDA - normal state
+[07:42:03] Startup recovery complete for NVDA
+[07:42:03] NVDA initialized: Session=WAITING, Position=NO
+[07:42:03] Initializing GOOGL...
+[07:42:03] Performing startup recovery for GOOGL...
+[07:42:03] [DEBUG] Loaded daily state for GOOGL: Session=WAITING, Traded=false
+[07:42:03] [DEBUG] No current position file for GOOGL
+[07:42:03] [DEBUG] No position for GOOGL - normal state
+[07:42:03] Startup recovery complete for GOOGL
+[07:42:03] GOOGL initialized: Session=WAITING, Position=NO
+[07:42:03] Initializing META...
+[07:42:03] Performing startup recovery for META...
+[07:42:03] [DEBUG] Loaded daily state for META: Session=WAITING, Traded=false
+[07:42:03] [DEBUG] No current position file for META
+[07:42:03] [DEBUG] No position for META - normal state
+[07:42:03] Startup recovery complete for META
+[07:42:03] META initialized: Session=WAITING, Position=NO
+[07:42:03] Initializing GME...
+[07:42:03] Performing startup recovery for GME...
+[07:42:03] [DEBUG] Loaded daily state for GME: Session=WAITING, Traded=false
+[07:42:03] [DEBUG] No current position file for GME
+[07:42:03] [DEBUG] No position for GME - normal state
+[07:42:03] Startup recovery complete for GME
+[07:42:03] GME initialized: Session=WAITING, Position=NO
+[07:42:03] System initialization complete
+[07:42:03] Market is open - starting trading session
+[07:42:03] [DEBUG] Waiting for 09:35 EST (current: 07:42)
+[07:42:26] [DEBUG] Waiting for 09:35 EST (current: 07:42)
+[07:42:33] [DEBUG] Waiting for 09:35 EST (current: 07:42)
+[07:42:56] [DEBUG] Waiting for 09:35 EST (current: 07:42)
+[07:43:03] [DEBUG] Waiting for 09:35 EST (current: 07:43)
+[07:43:26] [DEBUG] Waiting for 09:35 EST (current: 07:43)
+[07:43:33] [DEBUG] Waiting for 09:35 EST (current: 07:43)
+[07:43:56] [DEBUG] Waiting for 09:35 EST (current: 07:43)
+[07:44:26] [DEBUG] Waiting for 09:35 EST (current: 07:44)
+[07:44:56] [DEBUG] Waiting for 09:35 EST (current: 07:44)
+[07:45:13] Paper broker initialized with $100000.00
+[07:45:13] [DEBUG] Fetching 5-min candles for SPY on 2026-01-28
+[07:45:13] [DEBUG] Fetched 15 5-min candles for SPY
+[07:45:13] [DEBUG] Fetching 2 daily candles for SPY
+[07:45:14] [DEBUG] Fetched 7 daily candles for SPY
+[07:45:14] Opening range calculated for SPY: High=697.7, Low=697.01, Size=0.10%
+[07:45:14] [DEBUG] Pre-market gap: +0.18% (open: 697.06, prev close: 695.8201)
+[07:45:14] [DEBUG] Opening range strength: 4.4/10 (size: 1.4, bias: 0, body: 42%)
+[07:45:14] [DEBUG] Fetching 5-min candles for AAPL on 2026-01-28
+[07:45:14] [DEBUG] Fetched 15 5-min candles for AAPL
+[07:45:14] [DEBUG] Fetching 2 daily candles for AAPL
+[07:45:14] [DEBUG] Fetched 7 daily candles for AAPL
+[07:45:14] Opening range calculated for AAPL: High=258.855, Low=257.29, Size=0.61%
+[07:45:14] [DEBUG] Pre-market gap: +0.59% (open: 257.53, prev close: 256.0209)
+[07:45:14] [DEBUG] Opening range strength: 7.5/10 (size: 2.5, bias: 2, body: 9%)
+[07:45:14] [DEBUG] Fetching 5-min candles for MSFT on 2026-01-28
+[07:45:14] [DEBUG] Fetched 15 5-min candles for MSFT
+[07:45:14] [DEBUG] Fetching 2 daily candles for MSFT
+[07:45:14] [DEBUG] Fetched 7 daily candles for MSFT
+[07:45:14] Opening range calculated for MSFT: High=483.74, Low=480.1, Size=0.76%
+[07:45:14] [DEBUG] Pre-market gap: +0.81% (open: 483.27, prev close: 479.3701)
+[07:45:14] [DEBUG] Opening range strength: 9.8/10 (size: 2.8, bias: 2, body: 60%)
+[07:45:26] [DEBUG] Waiting for 09:35 EST (current: 07:45)
+[07:45:56] [DEBUG] Waiting for 09:35 EST (current: 07:45)
+[07:46:26] [DEBUG] Waiting for 09:35 EST (current: 07:46)
+[07:46:56] [DEBUG] Waiting for 09:35 EST (current: 07:46)
+[07:47:26] [DEBUG] Waiting for 09:35 EST (current: 07:47)
+[07:47:56] [DEBUG] Waiting for 09:35 EST (current: 07:47)
+[07:48:26] [DEBUG] Waiting for 09:35 EST (current: 07:48)
+[07:48:33] [DEBUG] Fetching 5-min candles for AAPL on 2026-01-28
+[07:48:33] [DEBUG] Fetched 16 5-min candles for AAPL
+[07:48:33] Opening range calculated for AAPL: High=258.855, Low=257.29, Size=0.61%
+[07:48:33] [DEBUG] Fetching 1-min candles for AAPL on 2026-01-28
+[07:48:34] [DEBUG] Fetched 78 1-min candles for AAPL
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (236439 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (223676 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (170681 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (145368 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (256808 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (124023 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (134207 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (113663 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (119265 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (122641 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (125213 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (153920 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (144719 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (105407 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (84909 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (87190 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (142730 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (90405 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (212734 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (125446 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (155438 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (101071 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (77037 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (77922 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (66255 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (155161 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (146725 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (141768 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (199881 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (113541 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (127448 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (133951 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (135325 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (109058 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (83225 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (65742 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (58672 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (52084 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (57141 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (66616 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (64562 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (79487 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (56597 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (79491 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (47495 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (71656 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (45504 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (71629 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (82574 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (63634 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (70057 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (43991 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (51074 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (126594 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (79567 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (73062 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (94280 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (69102 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (65769 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (78476 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (94867 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (98823 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (75547 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (70225 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (64188 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (53907 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (67226 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (117978 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (71107 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (44607 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (87706 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (45495 < 431803)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (66157 < 431803)
+[07:48:34] [DEBUG] Fetching 5-min candles for MSFT on 2026-01-28
+[07:48:34] [DEBUG] Fetched 16 5-min candles for MSFT
+[07:48:34] Opening range calculated for MSFT: High=483.74, Low=480.1, Size=0.76%
+[07:48:34] [DEBUG] Fetching 1-min candles for MSFT on 2026-01-28
+[07:48:34] [DEBUG] Fetched 78 1-min candles for MSFT
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (150883 < 270838)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (106579 < 270838)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (87741 < 270838)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (80295 < 270838)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (60726 < 270838)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (72942 < 270838)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (46812 < 270838)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (48396 < 270838)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (70466 < 270838)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (83386 < 270838)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (52863 < 270838)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (57361 < 270838)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (33189 < 270838)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (80138 < 270838)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (32588 < 270838)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (42484 < 270838)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (42901 < 270838)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (60804 < 270838)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (41271 < 270838)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (34719 < 270838)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (54688 < 270838)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (107854 < 270838)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (57738 < 270838)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (31401 < 270838)
+[07:48:34] [DEBUG] Breakout BELOW rejected: Low volume (43089 < 270838)
+[07:48:56] [DEBUG] Waiting for 09:35 EST (current: 07:48)
+[07:49:26] [DEBUG] Waiting for 09:35 EST (current: 07:49)
+[07:49:56] [DEBUG] Waiting for 09:35 EST (current: 07:49)
+[07:50:26] [DEBUG] Waiting for 09:35 EST (current: 07:50)
+[07:50:56] [DEBUG] Waiting for 09:35 EST (current: 07:50)
+[07:51:26] [DEBUG] Waiting for 09:35 EST (current: 07:51)
+[07:51:56] [DEBUG] Waiting for 09:35 EST (current: 07:51)
+[07:52:26] [DEBUG] Waiting for 09:35 EST (current: 07:52)
+[07:52:34] [DEBUG] Fetching 5-min candles for SPY on 2026-01-28
+[07:52:34] [DEBUG] Fetched 17 5-min candles for SPY
+[07:52:34] Opening range calculated for SPY: High=697.7, Low=697.01, Size=0.10%
+[07:52:34] [DEBUG] Fetching 2 daily candles for SPY
+[07:52:34] [DEBUG] Fetched 7 daily candles for SPY
+[07:52:34] [DEBUG] Pre-market gap: +0.20% (open: 697.06, prev close: 695.7)
+[07:52:34] [DEBUG] Opening range rejected: Too tight (0.10% < 0.15%). Market may be choppy.
+[07:52:34] [DEBUG] Opening range strength: 4.4/10 (size: 1.4, bias: 0, body: 42%)
+[07:52:34] [DEBUG] Fetching 5-min candles for AAPL on 2026-01-28
+[07:52:34] [DEBUG] Fetched 17 5-min candles for AAPL
+[07:52:34] Opening range calculated for AAPL: High=258.855, Low=257.29, Size=0.61%
+[07:52:34] [DEBUG] Fetching 2 daily candles for AAPL
+[07:52:35] [DEBUG] Fetched 7 daily candles for AAPL
+[07:52:35] [DEBUG] Pre-market gap: +0.68% (open: 257.53, prev close: 255.8)
+[07:52:35] Opening range valid: 0.61% (within 0.15% - 1.5%)
+[07:52:35] [DEBUG] Opening range strength: 7.5/10 (size: 2.5, bias: 2, body: 9%)
+[07:52:35] [DEBUG] Fetching 1-min candles for AAPL on 2026-01-28
+[07:52:35] [DEBUG] Fetched 82 1-min candles for AAPL
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (236439 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (223676 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (170681 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (145368 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (256808 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (124023 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (134207 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (113663 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (119265 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (122641 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (125213 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (153920 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (144719 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (105407 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (84909 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (87190 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (142730 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (90405 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (212734 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (125446 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (155438 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (101071 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (77037 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (77922 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (66255 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (155161 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (146725 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (141768 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (199881 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (113541 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (127448 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (133951 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (135325 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (109058 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (83225 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (65742 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (58672 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (52084 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (57141 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (66616 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (64562 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (79487 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (56597 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (79491 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (47495 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (71656 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (45504 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (71629 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (82574 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (63634 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (70057 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (43991 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (51074 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (126594 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (79567 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (73062 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (94280 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (69102 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (65769 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (78476 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (94867 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (98823 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (75547 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (70225 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (64188 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (53907 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (67226 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (117978 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (71107 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (44607 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (87706 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (45495 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (66157 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (61817 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (43117 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (41778 < 431803)
+[07:52:35] [DEBUG] Breakout BELOW rejected: Low volume (61968 < 431803)
+[07:52:35] [DEBUG] Fetching 5-min candles for MSFT on 2026-01-28
+[07:52:35] [DEBUG] Fetched 17 5-min candles for MSFT
+[07:52:35] Opening range calculated for MSFT: High=483.74, Low=480.1, Size=0.76%
+[07:52:35] [DEBUG] Fetching 2 daily candles for MSFT
+[07:52:56] [DEBUG] Waiting for 09:35 EST (current: 07:52)
+[07:53:26] [DEBUG] Waiting for 09:35 EST (current: 07:53)
+[07:53:56] [DEBUG] Waiting for 09:35 EST (current: 07:53)
+[07:54:26] [DEBUG] Waiting for 09:35 EST (current: 07:54)
+[07:54:56] [DEBUG] Waiting for 09:35 EST (current: 07:54)
+[07:55:26] [DEBUG] Waiting for 09:35 EST (current: 07:55)
+[07:55:56] [DEBUG] Waiting for 09:35 EST (current: 07:55)
+[07:56:26] [DEBUG] Waiting for 09:35 EST (current: 07:56)
+[07:56:45] [DEBUG] Fetching 5-min candles for SPY on 2026-01-28
+[07:56:45] [DEBUG] Fetched 18 5-min candles for SPY
+[07:56:45] Opening range calculated for SPY: High=697.7, Low=697.01, Size=0.10%
+[07:56:45] [DEBUG] Fetching 2 daily candles for SPY
+[07:56:45] [DEBUG] Fetched 7 daily candles for SPY
+[07:56:45] [DEBUG] Pre-market gap: +0.16% (open: 697.06, prev close: 695.9299)
+[07:56:45] [DEBUG] Opening range rejected: Too tight (0.10% < 0.15%). Market may be choppy.
+[07:56:45] [DEBUG] Opening range strength: 4.4/10 (size: 1.4, bias: 0, body: 42%)
+[07:56:45] [DEBUG] Fetching 5-min candles for AAPL on 2026-01-28
+[07:56:45] [DEBUG] Fetched 18 5-min candles for AAPL
+[07:56:45] Opening range calculated for AAPL: High=258.855, Low=257.29, Size=0.61%
+[07:56:45] [DEBUG] Fetching 2 daily candles for AAPL
+[07:56:45] [DEBUG] Fetched 7 daily candles for AAPL
+[07:56:45] [DEBUG] Pre-market gap: +0.63% (open: 257.53, prev close: 255.92)
+[07:56:45] Opening range valid: 0.61% (within 0.15% - 1.5%)
+[07:56:45] [DEBUG] Opening range strength: 7.5/10 (size: 2.5, bias: 2, body: 9%)
+[07:56:45] [DEBUG] Fetching 1-min candles for AAPL on 2026-01-28
+[07:56:45] [DEBUG] Fetched 86 1-min candles for AAPL
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (236439 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (223676 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (170681 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (145368 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (256808 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (124023 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (134207 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (113663 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (119265 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (122641 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (125213 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (153920 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (144719 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (105407 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (84909 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (87190 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (142730 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (90405 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (212734 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (125446 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (155438 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (101071 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (77037 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (77922 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (66255 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (155161 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (146725 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (141768 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (199881 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (113541 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (127448 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (133951 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (135325 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (109058 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (83225 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (65742 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (58672 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (52084 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (57141 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (66616 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (64562 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (79487 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (56597 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (79491 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (47495 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (71656 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (45504 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (71629 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (82574 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (63634 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (70057 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (43991 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (51074 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (126594 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (79567 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (73062 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (94280 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (69102 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (65769 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (78476 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (94867 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (98823 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (75547 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (70225 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (64188 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (53907 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (67226 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (117978 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (71107 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (44607 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (87706 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (45495 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (66157 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (61817 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (43117 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (41778 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (61968 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (67273 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (53326 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (65435 < 431803)
+[07:56:45] [DEBUG] Breakout BELOW rejected: Low volume (53647 < 431803)
+[07:56:45] [DEBUG] Fetching 5-min candles for MSFT on 2026-01-28
+[07:56:45] [DEBUG] Fetched 18 5-min candles for MSFT
+[07:56:45] Opening range calculated for MSFT: High=483.74, Low=480.1, Size=0.76%
+[07:56:45] [DEBUG] Fetching 2 daily candles for MSFT
+[07:56:45] [DEBUG] Fetched 7 daily candles for MSFT
+[07:56:45] [DEBUG] Pre-market gap: +0.78% (open: 483.27, prev close: 479.545)
+[07:56:45] Opening range valid: 0.76% (within 0.15% - 1.5%)
+[07:56:45] [DEBUG] Opening range strength: 9.8/10 (size: 2.8, bias: 2, body: 60%)
+[07:56:45] [DEBUG] Fetching 1-min candles for MSFT on 2026-01-28
+[07:56:46] [DEBUG] Fetched 86 1-min candles for MSFT
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (150883 < 270838)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (106579 < 270838)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (87741 < 270838)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (80295 < 270838)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (60726 < 270838)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (72942 < 270838)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (46812 < 270838)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (48396 < 270838)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (70466 < 270838)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (83386 < 270838)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (52863 < 270838)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (57361 < 270838)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (33189 < 270838)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (80138 < 270838)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (32588 < 270838)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (42484 < 270838)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (42901 < 270838)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (60804 < 270838)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (41271 < 270838)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (34719 < 270838)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (54688 < 270838)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (107854 < 270838)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (57738 < 270838)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (31401 < 270838)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (43089 < 270838)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (56272 < 270838)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (34203 < 270838)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (29996 < 270838)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (29882 < 270838)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (25733 < 270838)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (46709 < 270838)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (27853 < 270838)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (25559 < 270838)
+[07:56:46] [DEBUG] Fetching 5-min candles for NVDA on 2026-01-28
+[07:56:46] [DEBUG] Fetched 18 5-min candles for NVDA
+[07:56:46] Opening range calculated for NVDA: High=191.96, Low=190.12, Size=0.96%
+[07:56:46] [DEBUG] Fetching 2 daily candles for NVDA
+[07:56:46] [DEBUG] Fetched 7 daily candles for NVDA
+[07:56:46] [DEBUG] Pre-market gap: +0.12% (open: 191.28, prev close: 191.05)
+[07:56:46] Opening range valid: 0.96% (within 0.15% - 1.5%)
+[07:56:46] [DEBUG] Opening range strength: 5.7/10 (size: 2.7, bias: 0, body: 2%)
+[07:56:46] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[07:56:46] [DEBUG] Fetched 86 1-min candles for NVDA
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (679052 < 1808864)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (1663043 < 1808864)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (801451 < 1808864)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (744854 < 1808864)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (541244 < 1808864)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (556892 < 1808864)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (538018 < 1808864)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (386003 < 1808864)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (365867 < 1808864)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (910115 < 1808864)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (654260 < 1808864)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (627140 < 1808864)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (409829 < 1808864)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (421528 < 1808864)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (300973 < 1808864)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (708176 < 1808864)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (466151 < 1808864)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (409365 < 1808864)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (347661 < 1808864)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (381141 < 1808864)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (359955 < 1808864)
+[07:56:46] [DEBUG] Fetching 5-min candles for GOOGL on 2026-01-28
+[07:56:46] [DEBUG] Fetched 18 5-min candles for GOOGL
+[07:56:46] Opening range calculated for GOOGL: High=336.16, Low=334.425, Size=0.52%
+[07:56:46] [DEBUG] Fetching 2 daily candles for GOOGL
+[07:56:46] [DEBUG] Fetched 7 daily candles for GOOGL
+[07:56:46] [DEBUG] Pre-market gap: +0.59% (open: 336.14, prev close: 334.17)
+[07:56:46] Opening range valid: 0.52% (within 0.15% - 1.5%)
+[07:56:46] [DEBUG] Opening range strength: 7.3/10 (size: 2.3, bias: 2, body: 27%)
+[07:56:46] [DEBUG] Fetching 1-min candles for GOOGL on 2026-01-28
+[07:56:46] [DEBUG] Fetched 86 1-min candles for GOOGL
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (73469 < 296252)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (132812 < 296252)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (85560 < 296252)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (78936 < 296252)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (127024 < 296252)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (92584 < 296252)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (66973 < 296252)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (65348 < 296252)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (77525 < 296252)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (46395 < 296252)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (46120 < 296252)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (81925 < 296252)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (54398 < 296252)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (74095 < 296252)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (47697 < 296252)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (49653 < 296252)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (75641 < 296252)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (25407 < 296252)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (100466 < 296252)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (145425 < 296252)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (125734 < 296252)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (55505 < 296252)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (67813 < 296252)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (72217 < 296252)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (31761 < 296252)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (39247 < 296252)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (54425 < 296252)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (39085 < 296252)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (41866 < 296252)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (73836 < 296252)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (63360 < 296252)
+[07:56:46] [DEBUG] Breakout ABOVE rejected: Low volume (56887 < 296252)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (69041 < 296252)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (130770 < 296252)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (64161 < 296252)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (134152 < 296252)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (181961 < 296252)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (70033 < 296252)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (80616 < 296252)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (104795 < 296252)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (40839 < 296252)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (39463 < 296252)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (32832 < 296252)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (46670 < 296252)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (51009 < 296252)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (102506 < 296252)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (53290 < 296252)
+[07:56:46] [DEBUG] Fetching 5-min candles for META on 2026-01-28
+[07:56:46] [DEBUG] Fetched 18 5-min candles for META
+[07:56:46] Opening range calculated for META: High=675.55, Low=672.6, Size=0.44%
+[07:56:46] [DEBUG] Fetching 2 daily candles for META
+[07:56:46] [DEBUG] Fetched 7 daily candles for META
+[07:56:46] [DEBUG] Pre-market gap: +0.33% (open: 674.5, prev close: 672.26)
+[07:56:46] Opening range valid: 0.44% (within 0.15% - 1.5%)
+[07:56:46] [DEBUG] Opening range strength: 5.1/10 (size: 2.1, bias: 0, body: 0%)
+[07:56:46] [DEBUG] Fetching 1-min candles for META on 2026-01-28
+[07:56:46] [DEBUG] Fetched 86 1-min candles for META
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (54376 < 115505)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (66524 < 115505)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (48640 < 115505)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (42281 < 115505)
+[07:56:46] [DEBUG] Breakout BELOW rejected: Low volume (56532 < 115505)
+[07:56:46] [DEBUG] Breakout BELOW detected: META broke 672.6 (low: 671.69, volume: 119734)
+[07:56:46] [DEBUG] Fetching 5-min candles for GME on 2026-01-28
+[07:56:46] [DEBUG] Fetched 18 5-min candles for GME
+[07:56:46] Opening range calculated for GME: High=24.25, Low=23.9103, Size=1.41%
+[07:56:46] [DEBUG] Fetching 2 daily candles for GME
+[07:56:46] [DEBUG] Fetched 7 daily candles for GME
+[07:56:46] [DEBUG] Pre-market gap: +1.62% (open: 24.2, prev close: 23.815)
+[07:56:46] Pre-market gap too large: +1.62% (max: 1%)
+[07:56:46] Opening range valid: 1.41% (within 0.15% - 1.5%)
+[07:56:46] [DEBUG] Opening range strength: 6.7/10 (size: 1.7, bias: 0, body: 50%)
+[07:56:56] [DEBUG] Waiting for 09:35 EST (current: 07:56)
+[07:57:26] [DEBUG] Waiting for 09:35 EST (current: 07:57)
+[07:57:56] [DEBUG] Waiting for 09:35 EST (current: 07:57)
+[07:58:26] [DEBUG] Waiting for 09:35 EST (current: 07:58)
+[07:58:56] [DEBUG] Waiting for 09:35 EST (current: 07:58)
+[07:59:26] [DEBUG] Waiting for 09:35 EST (current: 07:59)
+[07:59:56] [DEBUG] Waiting for 09:35 EST (current: 07:59)
+[08:00:26] [DEBUG] Waiting for 09:35 EST (current: 08:00)
+[08:00:56] [DEBUG] Waiting for 09:35 EST (current: 08:00)
+[08:01:26] [DEBUG] Waiting for 09:35 EST (current: 08:01)
+[08:01:56] [DEBUG] Waiting for 09:35 EST (current: 08:01)
+[08:02:08] [DEBUG] Fetching 5-min candles for SPY on 2026-01-28
+[08:02:08] [DEBUG] Fetched 19 5-min candles for SPY
+[08:02:08] Opening range calculated for SPY: High=697.7, Low=697.01, Size=0.10%
+[08:02:08] [DEBUG] Fetching 2 daily candles for SPY
+[08:02:09] [DEBUG] Fetched 7 daily candles for SPY
+[08:02:09] [DEBUG] Pre-market gap: +0.16% (open: 697.06, prev close: 695.94)
+[08:02:09] [DEBUG] Opening range rejected: Too tight (0.10% < 0.15%). Market may be choppy.
+[08:02:09] [DEBUG] Opening range strength: 4.4/10 (size: 1.4, bias: 0, body: 42%)
+[08:02:09] [DEBUG] Fetching 5-min candles for AAPL on 2026-01-28
+[08:02:09] [DEBUG] Fetched 19 5-min candles for AAPL
+[08:02:09] Opening range calculated for AAPL: High=258.855, Low=257.29, Size=0.61%
+[08:02:09] [DEBUG] Fetching 2 daily candles for AAPL
+[08:02:09] [DEBUG] Fetched 7 daily candles for AAPL
+[08:02:09] [DEBUG] Pre-market gap: +0.63% (open: 257.53, prev close: 255.91)
+[08:02:09] Opening range valid: 0.61% (within 0.15% - 1.5%)
+[08:02:09] [DEBUG] Opening range strength: 7.5/10 (size: 2.5, bias: 2, body: 9%)
+[08:02:09] [DEBUG] Fetching 1-min candles for AAPL on 2026-01-28
+[08:02:09] [DEBUG] Fetched 92 1-min candles for AAPL
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (236439 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (223676 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (170681 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (145368 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (256808 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (124023 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (134207 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (113663 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (119265 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (122641 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (125213 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (153920 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (144719 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (105407 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (84909 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (87190 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (142730 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (90405 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (212734 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (125446 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (155438 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (101071 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (77037 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (77922 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (66255 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (155161 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (146725 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (141768 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (199881 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (113541 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (127448 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (133951 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (135325 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (109058 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (83225 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (65742 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (58672 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (52084 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (57141 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (66616 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (64562 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (79487 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (56597 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (79491 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (47495 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (71656 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (45504 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (71629 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (82574 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (63634 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (70057 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (43991 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (51074 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (126594 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (79567 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (73062 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (94280 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (69102 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (65769 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (78476 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (94867 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (98823 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (75547 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (70225 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (64188 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (53907 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (67226 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (117978 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (71107 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (44607 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (87706 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (45495 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (66157 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (61817 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (43117 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (41778 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (61968 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (67273 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (53326 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (65435 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (53647 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (40273 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (53547 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (50498 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (63688 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (45346 < 431803)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (51879 < 431803)
+[08:02:09] [DEBUG] Fetching 5-min candles for MSFT on 2026-01-28
+[08:02:09] [DEBUG] Fetched 19 5-min candles for MSFT
+[08:02:09] Opening range calculated for MSFT: High=483.74, Low=480.1, Size=0.76%
+[08:02:09] [DEBUG] Fetching 2 daily candles for MSFT
+[08:02:09] [DEBUG] Fetched 7 daily candles for MSFT
+[08:02:09] [DEBUG] Pre-market gap: +0.91% (open: 483.27, prev close: 478.93)
+[08:02:09] Opening range valid: 0.76% (within 0.15% - 1.5%)
+[08:02:09] [DEBUG] Opening range strength: 9.8/10 (size: 2.8, bias: 2, body: 60%)
+[08:02:09] [DEBUG] Fetching 1-min candles for MSFT on 2026-01-28
+[08:02:09] [DEBUG] Fetched 92 1-min candles for MSFT
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (150883 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (106579 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (87741 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (80295 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (60726 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (72942 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (46812 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (48396 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (70466 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (83386 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (52863 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (57361 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (33189 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (80138 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (32588 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (42484 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (42901 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (60804 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (41271 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (34719 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (54688 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (107854 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (57738 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (31401 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (43089 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (56272 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (34203 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (29996 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (29882 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (25733 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (46709 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (27853 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (25559 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (31951 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (71790 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (37008 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (42411 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (25725 < 270838)
+[08:02:09] [DEBUG] Breakout BELOW rejected: Low volume (30496 < 270838)
+[08:02:09] [DEBUG] Fetching 5-min candles for NVDA on 2026-01-28
+[08:02:09] [DEBUG] Fetched 19 5-min candles for NVDA
+[08:02:09] Opening range calculated for NVDA: High=191.96, Low=190.12, Size=0.96%
+[08:02:09] [DEBUG] Fetching 2 daily candles for NVDA
+[08:02:09] [DEBUG] Fetched 7 daily candles for NVDA
+[08:02:09] [DEBUG] Pre-market gap: +0.04% (open: 191.28, prev close: 191.205)
+[08:02:09] Opening range valid: 0.96% (within 0.15% - 1.5%)
+[08:02:09] [DEBUG] Opening range strength: 5.7/10 (size: 2.7, bias: 0, body: 2%)
+[08:02:09] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[08:02:10] [DEBUG] Fetched 92 1-min candles for NVDA
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (679052 < 1808864)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (1663043 < 1808864)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (801451 < 1808864)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (744854 < 1808864)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (541244 < 1808864)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (556892 < 1808864)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (538018 < 1808864)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (386003 < 1808864)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (365867 < 1808864)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (910115 < 1808864)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (654260 < 1808864)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (627140 < 1808864)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (409829 < 1808864)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (421528 < 1808864)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (300973 < 1808864)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (708176 < 1808864)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (466151 < 1808864)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (409365 < 1808864)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (347661 < 1808864)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (381141 < 1808864)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (359955 < 1808864)
+[08:02:10] [DEBUG] Fetching 5-min candles for GOOGL on 2026-01-28
+[08:02:10] [DEBUG] Fetched 19 5-min candles for GOOGL
+[08:02:10] Opening range calculated for GOOGL: High=336.16, Low=334.425, Size=0.52%
+[08:02:10] [DEBUG] Fetching 2 daily candles for GOOGL
+[08:02:10] [DEBUG] Fetched 7 daily candles for GOOGL
+[08:02:10] [DEBUG] Pre-market gap: +0.47% (open: 336.14, prev close: 334.57)
+[08:02:10] Opening range valid: 0.52% (within 0.15% - 1.5%)
+[08:02:10] [DEBUG] Opening range strength: 7.3/10 (size: 2.3, bias: 2, body: 27%)
+[08:02:10] [DEBUG] Fetching 1-min candles for GOOGL on 2026-01-28
+[08:02:10] [DEBUG] Fetched 92 1-min candles for GOOGL
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (73469 < 296252)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (132812 < 296252)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (85560 < 296252)
+[08:02:10] [DEBUG] Breakout BELOW rejected: Low volume (78936 < 296252)
+[08:02:10] [DEBUG] Breakout BELOW rejected: Low volume (127024 < 296252)
+[08:02:10] [DEBUG] Breakout BELOW rejected: Low volume (92584 < 296252)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (66973 < 296252)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (65348 < 296252)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (77525 < 296252)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (46395 < 296252)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (46120 < 296252)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (81925 < 296252)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (54398 < 296252)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (74095 < 296252)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (47697 < 296252)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (49653 < 296252)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (75641 < 296252)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (25407 < 296252)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (100466 < 296252)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (145425 < 296252)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (125734 < 296252)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (55505 < 296252)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (67813 < 296252)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (72217 < 296252)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (31761 < 296252)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (39247 < 296252)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (54425 < 296252)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (39085 < 296252)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (41866 < 296252)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (73836 < 296252)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (63360 < 296252)
+[08:02:10] [DEBUG] Breakout ABOVE rejected: Low volume (56887 < 296252)
+[08:02:10] [DEBUG] Breakout BELOW rejected: Low volume (69041 < 296252)
+[08:02:10] [DEBUG] Breakout BELOW rejected: Low volume (130770 < 296252)
+[08:02:10] [DEBUG] Breakout BELOW rejected: Low volume (64161 < 296252)
+[08:02:10] [DEBUG] Breakout BELOW rejected: Low volume (134152 < 296252)
+[08:02:10] [DEBUG] Breakout BELOW rejected: Low volume (181961 < 296252)
+[08:02:10] [DEBUG] Breakout BELOW rejected: Low volume (70033 < 296252)
+[08:02:10] [DEBUG] Breakout BELOW rejected: Low volume (80616 < 296252)
+[08:02:10] [DEBUG] Breakout BELOW rejected: Low volume (104795 < 296252)
+[08:02:10] [DEBUG] Breakout BELOW rejected: Low volume (40839 < 296252)
+[08:02:10] [DEBUG] Breakout BELOW rejected: Low volume (39463 < 296252)
+[08:02:10] [DEBUG] Breakout BELOW rejected: Low volume (32832 < 296252)
+[08:02:10] [DEBUG] Breakout BELOW rejected: Low volume (46670 < 296252)
+[08:02:10] [DEBUG] Breakout BELOW rejected: Low volume (51009 < 296252)
+[08:02:10] [DEBUG] Breakout BELOW rejected: Low volume (102506 < 296252)
+[08:02:10] [DEBUG] Breakout BELOW rejected: Low volume (53290 < 296252)
+[08:02:10] [DEBUG] Breakout BELOW rejected: Low volume (27525 < 296252)
+[08:02:10] [DEBUG] Breakout BELOW rejected: Low volume (26247 < 296252)
+[08:02:10] [DEBUG] Breakout BELOW rejected: Low volume (38165 < 296252)
+[08:02:10] [DEBUG] Breakout BELOW rejected: Low volume (24151 < 296252)
+[08:02:10] [DEBUG] Breakout BELOW rejected: Low volume (51505 < 296252)
+[08:02:10] [DEBUG] Breakout BELOW rejected: Low volume (39762 < 296252)
+[08:02:10] [DEBUG] Fetching 5-min candles for META on 2026-01-28
+[08:02:10] [DEBUG] Fetched 19 5-min candles for META
+[08:02:10] Opening range calculated for META: High=675.55, Low=672.6, Size=0.44%
+[08:02:10] [DEBUG] Fetching 2 daily candles for META
+[08:02:10] [DEBUG] Fetched 7 daily candles for META
+[08:02:10] [DEBUG] Pre-market gap: +0.35% (open: 674.5, prev close: 672.17)
+[08:02:10] Opening range valid: 0.44% (within 0.15% - 1.5%)
+[08:02:10] [DEBUG] Opening range strength: 5.1/10 (size: 2.1, bias: 0, body: 0%)
+[08:02:10] [DEBUG] Fetching 1-min candles for META on 2026-01-28
+[08:02:10] [DEBUG] Fetched 92 1-min candles for META
+[08:02:10] [DEBUG] Breakout BELOW rejected: Low volume (54376 < 115505)
+[08:02:10] [DEBUG] Breakout BELOW rejected: Low volume (66524 < 115505)
+[08:02:10] [DEBUG] Breakout BELOW rejected: Low volume (48640 < 115505)
+[08:02:10] [DEBUG] Breakout BELOW rejected: Low volume (42281 < 115505)
+[08:02:10] [DEBUG] Breakout BELOW rejected: Low volume (56532 < 115505)
+[08:02:10] [DEBUG] Breakout BELOW detected: META broke 672.6 (low: 671.69, volume: 119734)
+[08:02:10] [DEBUG] Fetching 5-min candles for GME on 2026-01-28
+[08:02:10] [DEBUG] Fetched 19 5-min candles for GME
+[08:02:10] Opening range calculated for GME: High=24.25, Low=23.9103, Size=1.41%
+[08:02:10] [DEBUG] Fetching 2 daily candles for GME
+[08:02:10] [DEBUG] Fetched 7 daily candles for GME
+[08:02:10] [DEBUG] Pre-market gap: +2.23% (open: 24.2, prev close: 23.6716)
+[08:02:10] Pre-market gap too large: +2.23% (max: 1%)
+[08:02:10] Opening range valid: 1.41% (within 0.15% - 1.5%)
+[08:02:10] [DEBUG] Opening range strength: 6.7/10 (size: 1.7, bias: 0, body: 50%)
+[08:02:26] [DEBUG] Waiting for 09:35 EST (current: 08:02)
+[08:02:56] [DEBUG] Waiting for 09:35 EST (current: 08:02)
+[08:03:26] [DEBUG] Waiting for 09:35 EST (current: 08:03)
+[08:03:56] [DEBUG] Waiting for 09:35 EST (current: 08:03)
+[08:04:26] [DEBUG] Waiting for 09:35 EST (current: 08:04)
+[08:04:56] [DEBUG] Waiting for 09:35 EST (current: 08:04)
+[08:05:26] [DEBUG] Waiting for 09:35 EST (current: 08:05)
+[08:05:56] [DEBUG] Waiting for 09:35 EST (current: 08:05)
+[08:06:26] [DEBUG] Waiting for 09:35 EST (current: 08:06)
+[08:06:56] [DEBUG] Waiting for 09:35 EST (current: 08:06)
+[08:07:27] [DEBUG] Waiting for 09:35 EST (current: 08:07)
+[08:07:57] [DEBUG] Waiting for 09:35 EST (current: 08:07)
+[08:08:27] [DEBUG] Waiting for 09:35 EST (current: 08:08)
+[08:08:57] [DEBUG] Waiting for 09:35 EST (current: 08:08)
+[08:09:27] [DEBUG] Waiting for 09:35 EST (current: 08:09)
+[08:09:57] [DEBUG] Waiting for 09:35 EST (current: 08:09)
+[08:10:27] [DEBUG] Waiting for 09:35 EST (current: 08:10)
+[08:10:57] [DEBUG] Waiting for 09:35 EST (current: 08:10)
+[08:11:27] [DEBUG] Waiting for 09:35 EST (current: 08:11)
+[08:11:57] [DEBUG] Waiting for 09:35 EST (current: 08:11)
+[08:12:27] [DEBUG] Waiting for 09:35 EST (current: 08:12)
+[08:12:57] [DEBUG] Waiting for 09:35 EST (current: 08:12)
+[08:13:27] [DEBUG] Waiting for 09:35 EST (current: 08:13)
+[08:13:57] [DEBUG] Waiting for 09:35 EST (current: 08:13)
+[08:14:27] [DEBUG] Waiting for 09:35 EST (current: 08:14)
+[08:14:57] [DEBUG] Waiting for 09:35 EST (current: 08:14)
+[08:15:27] [DEBUG] Waiting for 09:35 EST (current: 08:15)
+[08:15:57] [DEBUG] Waiting for 09:35 EST (current: 08:15)
+[08:16:27] [DEBUG] Waiting for 09:35 EST (current: 08:16)
+[08:16:57] [DEBUG] Waiting for 09:35 EST (current: 08:16)
+[08:17:27] [DEBUG] Waiting for 09:35 EST (current: 08:17)
+[08:17:57] [DEBUG] Waiting for 09:35 EST (current: 08:17)
+[08:18:27] [DEBUG] Waiting for 09:35 EST (current: 08:18)
+[08:18:57] [DEBUG] Waiting for 09:35 EST (current: 08:18)
+[08:19:27] [DEBUG] Waiting for 09:35 EST (current: 08:19)
+[08:19:57] [DEBUG] Waiting for 09:35 EST (current: 08:19)
+[08:20:27] [DEBUG] Waiting for 09:35 EST (current: 08:20)
+[08:20:47] [DEBUG] Fetching 5-min candles for SPY on 2026-01-28
+[08:20:47] [DEBUG] Fetched 22 5-min candles for SPY
+[08:20:47] Opening range calculated for SPY: High=697.7, Low=697.01, Size=0.10%
+[08:20:47] [DEBUG] Fetching 2 daily candles for SPY
+[08:20:47] [DEBUG] Fetched 7 daily candles for SPY
+[08:20:47] [DEBUG] Pre-market gap: +0.19% (open: 697.06, prev close: 695.73)
+[08:20:47] [DEBUG] Opening range rejected: Too tight (0.10% < 0.15%). Market may be choppy.
+[08:20:47] [DEBUG] Opening range strength: 4.4/10 (size: 1.4, bias: 0, body: 42%)
+[08:20:47] [DEBUG] Fetching 5-min candles for AAPL on 2026-01-28
+[08:20:47] [DEBUG] Fetched 22 5-min candles for AAPL
+[08:20:47] Opening range calculated for AAPL: High=258.855, Low=257.29, Size=0.61%
+[08:20:47] [DEBUG] Fetching 2 daily candles for AAPL
+[08:20:47] [DEBUG] Fetched 7 daily candles for AAPL
+[08:20:47] [DEBUG] Pre-market gap: +0.72% (open: 257.53, prev close: 255.69)
+[08:20:47] Opening range valid: 0.61% (within 0.15% - 1.5%)
+[08:20:47] [DEBUG] Opening range strength: 7.5/10 (size: 2.5, bias: 2, body: 9%)
+[08:20:47] [DEBUG] Fetching 1-min candles for AAPL on 2026-01-28
+[08:20:47] [DEBUG] Fetched 110 1-min candles for AAPL
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (236439 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (223676 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (170681 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (145368 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (256808 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (124023 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (134207 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (113663 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (119265 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (122641 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (125213 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (153920 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (144719 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (105407 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (84909 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (87190 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (142730 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (90405 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (212734 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (125446 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (155438 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (101071 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (77037 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (77922 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (66255 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (155161 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (146725 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (141768 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (199881 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (113541 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (127448 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (133951 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (135325 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (109058 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (83225 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (65742 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (58672 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (52084 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (57141 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (66616 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (64562 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (79487 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (56597 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (79491 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (47495 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (71656 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (45504 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (71629 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (82574 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (63634 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (70057 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (43991 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (51074 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (126594 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (79567 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (73062 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (94280 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (69102 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (65769 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (78476 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (94867 < 431803)
+[08:20:47] [DEBUG] Breakout BELOW rejected: Low volume (98823 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (75547 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (70225 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (64188 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (53907 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (67226 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (117978 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (71107 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (44607 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (87706 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (45495 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (66157 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (61817 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (43117 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (41778 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (61968 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (67273 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (53326 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (65435 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (53647 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (40273 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (53547 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (50498 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (63688 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (45346 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (51879 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (42047 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (43356 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (42418 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (42027 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (37497 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (36058 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (35928 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (97464 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (32211 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (37524 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (47804 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (61251 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (43633 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (37237 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (26214 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (61658 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (37817 < 431803)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (53255 < 431803)
+[08:20:48] [DEBUG] Fetching 5-min candles for MSFT on 2026-01-28
+[08:20:48] [DEBUG] Fetched 22 5-min candles for MSFT
+[08:20:48] Opening range calculated for MSFT: High=483.74, Low=480.1, Size=0.76%
+[08:20:48] [DEBUG] Fetching 2 daily candles for MSFT
+[08:20:48] [DEBUG] Fetched 7 daily candles for MSFT
+[08:20:48] [DEBUG] Pre-market gap: +0.81% (open: 483.27, prev close: 479.39)
+[08:20:48] Opening range valid: 0.76% (within 0.15% - 1.5%)
+[08:20:48] [DEBUG] Opening range strength: 9.8/10 (size: 2.8, bias: 2, body: 60%)
+[08:20:48] [DEBUG] Fetching 1-min candles for MSFT on 2026-01-28
+[08:20:48] [DEBUG] Fetched 110 1-min candles for MSFT
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (150883 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (106579 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (87741 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (80295 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (60726 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (72942 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (46812 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (48396 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (70466 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (83386 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (52863 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (57361 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (33189 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (80138 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (32588 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (42484 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (42901 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (60804 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (41271 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (34719 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (54688 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (107854 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (57738 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (31401 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (43089 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (56272 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (34203 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (29996 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (29882 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (25733 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (46709 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (27853 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (25559 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (31951 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (71790 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (37008 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (42411 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (25725 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (30496 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (30624 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (53026 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (60813 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (36521 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (31693 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (54676 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (35035 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (62891 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (20506 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (37038 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (36231 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (61079 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (29324 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (32595 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (28404 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (30613 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (41794 < 270838)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (84588 < 270838)
+[08:20:48] [DEBUG] Fetching 5-min candles for NVDA on 2026-01-28
+[08:20:48] [DEBUG] Fetched 22 5-min candles for NVDA
+[08:20:48] Opening range calculated for NVDA: High=191.96, Low=190.12, Size=0.96%
+[08:20:48] [DEBUG] Fetching 2 daily candles for NVDA
+[08:20:48] [DEBUG] Fetched 7 daily candles for NVDA
+[08:20:48] [DEBUG] Pre-market gap: -0.37% (open: 191.28, prev close: 191.995)
+[08:20:48] Opening range valid: 0.96% (within 0.15% - 1.5%)
+[08:20:48] [DEBUG] Opening range strength: 5.7/10 (size: 2.7, bias: 0, body: 2%)
+[08:20:48] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[08:20:48] [DEBUG] Fetched 110 1-min candles for NVDA
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (679052 < 1808864)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (1663043 < 1808864)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (801451 < 1808864)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (744854 < 1808864)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (541244 < 1808864)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (556892 < 1808864)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (538018 < 1808864)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (386003 < 1808864)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (365867 < 1808864)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (910115 < 1808864)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (654260 < 1808864)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (627140 < 1808864)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (409829 < 1808864)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (421528 < 1808864)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (300973 < 1808864)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (708176 < 1808864)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (466151 < 1808864)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (409365 < 1808864)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (347661 < 1808864)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (381141 < 1808864)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (359955 < 1808864)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (795314 < 1808864)
+[08:20:48] [DEBUG] Fetching 5-min candles for GOOGL on 2026-01-28
+[08:20:48] [DEBUG] Fetched 22 5-min candles for GOOGL
+[08:20:48] Opening range calculated for GOOGL: High=336.16, Low=334.425, Size=0.52%
+[08:20:48] [DEBUG] Fetching 2 daily candles for GOOGL
+[08:20:48] [DEBUG] Fetched 7 daily candles for GOOGL
+[08:20:48] [DEBUG] Pre-market gap: +0.61% (open: 336.14, prev close: 334.09)
+[08:20:48] Opening range valid: 0.52% (within 0.15% - 1.5%)
+[08:20:48] [DEBUG] Opening range strength: 7.3/10 (size: 2.3, bias: 2, body: 27%)
+[08:20:48] [DEBUG] Fetching 1-min candles for GOOGL on 2026-01-28
+[08:20:48] [DEBUG] Fetched 110 1-min candles for GOOGL
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (73469 < 296252)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (132812 < 296252)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (85560 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (78936 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (127024 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (92584 < 296252)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (66973 < 296252)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (65348 < 296252)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (77525 < 296252)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (46395 < 296252)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (46120 < 296252)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (81925 < 296252)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (54398 < 296252)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (74095 < 296252)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (47697 < 296252)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (49653 < 296252)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (75641 < 296252)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (25407 < 296252)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (100466 < 296252)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (145425 < 296252)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (125734 < 296252)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (55505 < 296252)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (67813 < 296252)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (72217 < 296252)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (31761 < 296252)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (39247 < 296252)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (54425 < 296252)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (39085 < 296252)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (41866 < 296252)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (73836 < 296252)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (63360 < 296252)
+[08:20:48] [DEBUG] Breakout ABOVE rejected: Low volume (56887 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (69041 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (130770 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (64161 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (134152 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (181961 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (70033 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (80616 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (104795 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (40839 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (39463 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (32832 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (46670 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (51009 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (102506 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (53290 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (27525 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (26247 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (38165 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (24151 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (51505 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (39762 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (37993 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (37205 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (31877 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (35926 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (33477 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (45166 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (33057 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (26505 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (27173 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (31937 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (29846 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (29434 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (26408 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (21851 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (26171 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (20416 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (59713 < 296252)
+[08:20:48] [DEBUG] Breakout BELOW rejected: Low volume (24227 < 296252)
+[08:20:48] [DEBUG] Fetching 5-min candles for META on 2026-01-28
+[08:20:48] [DEBUG] Fetched 22 5-min candles for META
+[08:20:48] Opening range calculated for META: High=675.55, Low=672.6, Size=0.44%
+[08:20:48] [DEBUG] Fetching 2 daily candles for META
+[08:20:48] [DEBUG] Fetched 7 daily candles for META
+[08:20:48] [DEBUG] Pre-market gap: +0.69% (open: 674.5, prev close: 669.9034)
+[08:20:48] Opening range valid: 0.44% (within 0.15% - 1.5%)
+[08:20:48] [DEBUG] Opening range strength: 5.1/10 (size: 2.1, bias: 0, body: 0%)
+[08:20:48] [DEBUG] Fetching 1-min candles for META on 2026-01-28
+[08:20:49] [DEBUG] Fetched 110 1-min candles for META
+[08:20:49] [DEBUG] Breakout BELOW rejected: Low volume (54376 < 115505)
+[08:20:49] [DEBUG] Breakout BELOW rejected: Low volume (66524 < 115505)
+[08:20:49] [DEBUG] Breakout BELOW rejected: Low volume (48640 < 115505)
+[08:20:49] [DEBUG] Breakout BELOW rejected: Low volume (42281 < 115505)
+[08:20:49] [DEBUG] Breakout BELOW rejected: Low volume (56532 < 115505)
+[08:20:49] [DEBUG] Breakout BELOW detected: META broke 672.6 (low: 671.69, volume: 119734)
+[08:20:49] [DEBUG] Fetching 5-min candles for GME on 2026-01-28
+[08:20:49] [DEBUG] Fetched 22 5-min candles for GME
+[08:20:49] Opening range calculated for GME: High=24.25, Low=23.9103, Size=1.41%
+[08:20:49] [DEBUG] Fetching 2 daily candles for GME
+[08:20:49] [DEBUG] Fetched 7 daily candles for GME
+[08:20:49] [DEBUG] Pre-market gap: +3.09% (open: 24.2, prev close: 23.475)
+[08:20:49] Pre-market gap too large: +3.09% (max: 1%)
+[08:20:49] Opening range valid: 1.41% (within 0.15% - 1.5%)
+[08:20:49] [DEBUG] Opening range strength: 6.7/10 (size: 1.7, bias: 0, body: 50%)
+[08:20:57] [DEBUG] Waiting for 09:35 EST (current: 08:20)
+[08:21:27] [DEBUG] Waiting for 09:35 EST (current: 08:21)
+[08:21:57] [DEBUG] Waiting for 09:35 EST (current: 08:21)
+[08:22:27] [DEBUG] Waiting for 09:35 EST (current: 08:22)
+[08:22:57] [DEBUG] Waiting for 09:35 EST (current: 08:22)
+[08:23:27] [DEBUG] Waiting for 09:35 EST (current: 08:23)
+[08:23:57] [DEBUG] Waiting for 09:35 EST (current: 08:23)
+[08:24:27] [DEBUG] Waiting for 09:35 EST (current: 08:24)
+[08:24:57] [DEBUG] Waiting for 09:35 EST (current: 08:24)
+[08:25:27] [DEBUG] Waiting for 09:35 EST (current: 08:25)
+[08:25:57] [DEBUG] Waiting for 09:35 EST (current: 08:25)
+[08:26:27] [DEBUG] Waiting for 09:35 EST (current: 08:26)
+[08:26:57] [DEBUG] Waiting for 09:35 EST (current: 08:26)
+[08:27:27] [DEBUG] Waiting for 09:35 EST (current: 08:27)
+[08:27:57] [DEBUG] Waiting for 09:35 EST (current: 08:27)
+[08:37:55] [DEBUG] Waiting for 09:35 EST (current: 08:37)
+[08:42:21] [DEBUG] Waiting for 09:35 EST (current: 08:42)
+[09:34:58] [DEBUG] Waiting for 09:35 EST (current: 09:34)
+[09:52:43] Capturing opening range for SPY...
+[09:52:43] [DEBUG] Fetching 5-min candles for SPY on 2026-01-28
+[09:52:43] [DEBUG] Fetched 104 5-min candles for SPY
+[09:52:43] Opening range calculated for SPY: High=697.64, Low=697.46, Size=0.03%
+[09:52:43] [DEBUG] Opening range rejected: Too tight (0.03% < 0.3%). Market may be choppy.
+[09:52:43] Opening range rejected for SPY (size: 0.03%)
+[09:52:44] [DEBUG] Loaded daily state for SPY: Session=WAITING, Traded=false
+[09:52:44] [DEBUG] Saved daily state for SPY: Session=DONE, Traded=true
+[09:52:44] Marked trade executed for SPY
+[09:52:44] Capturing opening range for QQQ...
+[09:52:44] [DEBUG] Fetching 5-min candles for QQQ on 2026-01-28
+[09:52:44] [DEBUG] Fetched 104 5-min candles for QQQ
+[09:52:44] Opening range calculated for QQQ: High=636.36, Low=635.43, Size=0.15%
+[09:52:44] [DEBUG] Opening range rejected: Too tight (0.15% < 0.3%). Market may be choppy.
+[09:52:44] Opening range rejected for QQQ (size: 0.15%)
+[09:52:46] [DEBUG] Daily state file not found: /Users/billymiller/Desktop/signalFlow/data/state/QQQ-2026-01-28-state.json
+[09:52:46] [DEBUG] Saved daily state for QQQ: Session=WAITING, Traded=false
+[09:52:46] Created new daily state for QQQ
+[09:52:46] [DEBUG] Saved daily state for QQQ: Session=DONE, Traded=true
+[09:52:46] Marked trade executed for QQQ
+[09:52:46] Capturing opening range for AAPL...
+[09:52:46] [DEBUG] Fetching 5-min candles for AAPL on 2026-01-28
+[09:52:46] [DEBUG] Fetched 101 5-min candles for AAPL
+[09:52:46] Opening range calculated for AAPL: High=258.85, Low=258.51, Size=0.13%
+[09:52:46] [DEBUG] Opening range rejected: Too tight (0.13% < 0.3%). Market may be choppy.
+[09:52:46] Opening range rejected for AAPL (size: 0.13%)
+[09:52:46] [DEBUG] Loaded daily state for AAPL: Session=WAITING, Traded=false
+[09:52:46] [DEBUG] Saved daily state for AAPL: Session=DONE, Traded=true
+[09:52:46] Marked trade executed for AAPL
+[09:52:46] Capturing opening range for MSFT...
+[09:52:46] [DEBUG] Fetching 5-min candles for MSFT on 2026-01-28
+[09:52:46] [DEBUG] Fetched 104 5-min candles for MSFT
+[09:52:46] Opening range calculated for MSFT: High=482.86, Low=481.7, Size=0.24%
+[09:52:46] [DEBUG] Opening range rejected: Too tight (0.24% < 0.3%). Market may be choppy.
+[09:52:46] Opening range rejected for MSFT (size: 0.24%)
+[09:52:47] [DEBUG] Loaded daily state for MSFT: Session=WAITING, Traded=false
+[09:52:47] [DEBUG] Saved daily state for MSFT: Session=DONE, Traded=true
+[09:52:47] Marked trade executed for MSFT
+[09:52:47] Capturing opening range for NVDA...
+[09:52:47] [DEBUG] Fetching 5-min candles for NVDA on 2026-01-28
+[09:52:47] [DEBUG] Fetched 104 5-min candles for NVDA
+[09:52:47] Opening range calculated for NVDA: High=192.08, Low=190.8, Size=0.67%
+[09:52:47] Opening range valid: 0.67% (within 0.3% - 1.5%)
+[09:52:47] [DEBUG] Loaded daily state for NVDA: Session=WAITING, Traded=false
+[09:52:47] [DEBUG] Saved daily state for NVDA: Session=MONITORING, Traded=false
+[09:52:47] Updated opening range for NVDA: 192.08 / 190.8
+[09:52:47] 📊 OPENING RANGE: NVDA | High: $192.08 | Low: $190.80 | Size: 0.67%
+[09:52:48] Capturing opening range for TSLA...
+[09:52:48] [DEBUG] Fetching 5-min candles for TSLA on 2026-01-28
+[09:52:48] [DEBUG] Fetched 104 5-min candles for TSLA
+[09:52:48] Opening range calculated for TSLA: High=433.16, Low=431.91, Size=0.29%
+[09:52:48] [DEBUG] Opening range rejected: Too tight (0.29% < 0.3%). Market may be choppy.
+[09:52:48] Opening range rejected for TSLA (size: 0.29%)
+[09:52:48] [DEBUG] Daily state file not found: /Users/billymiller/Desktop/signalFlow/data/state/TSLA-2026-01-28-state.json
+[09:52:48] [DEBUG] Saved daily state for TSLA: Session=WAITING, Traded=false
+[09:52:48] Created new daily state for TSLA
+[09:52:48] [DEBUG] Saved daily state for TSLA: Session=DONE, Traded=true
+[09:52:48] Marked trade executed for TSLA
+[09:52:48] Starting main monitoring loop...
+[09:52:48] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[09:52:49] [DEBUG] Fetched 515 1-min candles for NVDA
+[09:52:49] [DEBUG] Skipping NVDA - already traded today
+[09:52:59] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[09:52:59] [DEBUG] Fetched 515 1-min candles for NVDA
+[09:53:09] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[09:53:09] [DEBUG] Fetched 516 1-min candles for NVDA
+[09:53:33] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[09:53:33] [DEBUG] Fetched 516 1-min candles for NVDA
+[09:53:43] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[09:58:09] [DEBUG] Fetched 521 1-min candles for NVDA
+[09:58:19] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[09:58:20] [DEBUG] Fetched 521 1-min candles for NVDA
+[09:58:30] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[09:58:30] [DEBUG] Fetched 521 1-min candles for NVDA
+[10:00:10] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[10:00:10] [DEBUG] Fetched 523 1-min candles for NVDA
+[10:00:20] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[10:00:21] [DEBUG] Fetched 523 1-min candles for NVDA
+[10:08:10] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[10:08:10] [DEBUG] Fetched 531 1-min candles for NVDA
+[10:08:20] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[10:08:21] [DEBUG] Fetched 531 1-min candles for NVDA
+[10:08:31] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[10:08:32] [DEBUG] Fetched 531 1-min candles for NVDA
+[10:11:12] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[10:11:12] [DEBUG] Fetched 534 1-min candles for NVDA
+[10:11:22] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[10:11:23] [DEBUG] Fetched 534 1-min candles for NVDA
+[10:11:33] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[10:11:34] [DEBUG] Fetched 534 1-min candles for NVDA
+[10:27:04] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[10:27:05] [DEBUG] Fetched 550 1-min candles for NVDA
+[10:29:12] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[10:29:12] [DEBUG] Fetched 552 1-min candles for NVDA
+[10:29:22] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[10:29:22] [DEBUG] Fetched 552 1-min candles for NVDA
+[10:29:32] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[10:29:33] [DEBUG] Fetched 552 1-min candles for NVDA
+[10:29:43] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[10:29:43] [DEBUG] Fetched 552 1-min candles for NVDA
+[10:46:52] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[10:46:53] [DEBUG] Fetched 569 1-min candles for NVDA
+[11:03:35] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[11:03:36] [DEBUG] Fetched 586 1-min candles for NVDA
+[11:14:14] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[11:14:15] [DEBUG] Fetched 597 1-min candles for NVDA
+[11:14:25] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[11:14:25] [DEBUG] Fetched 597 1-min candles for NVDA
+[11:14:35] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[11:14:35] [DEBUG] Fetched 597 1-min candles for NVDA
+[11:14:45] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[11:14:46] [DEBUG] Fetched 597 1-min candles for NVDA
+[11:14:56] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[11:14:56] [DEBUG] Fetched 597 1-min candles for NVDA
+[11:30:15] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[11:30:16] [DEBUG] Fetched 613 1-min candles for NVDA
+[11:30:26] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[11:30:27] [DEBUG] Fetched 613 1-min candles for NVDA
+[11:30:37] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[11:30:38] [DEBUG] Fetched 613 1-min candles for NVDA
+[11:38:15] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[11:38:15] [DEBUG] Fetched 621 1-min candles for NVDA
+[11:38:25] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[11:38:25] [DEBUG] Fetched 621 1-min candles for NVDA
+[11:38:35] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[11:38:36] [DEBUG] Fetched 621 1-min candles for NVDA
+[11:38:46] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[11:38:46] [DEBUG] Fetched 621 1-min candles for NVDA
+[11:56:29] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[11:56:29] [DEBUG] Fetched 639 1-min candles for NVDA
+[12:11:57] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:11:58] [DEBUG] Fetched 654 1-min candles for NVDA
+[12:26:55] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:26:56] [DEBUG] Fetched 669 1-min candles for NVDA
+[12:27:06] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:27:06] [DEBUG] Fetched 670 1-min candles for NVDA
+[12:31:11] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:31:12] [DEBUG] Fetched 674 1-min candles for NVDA
+[12:33:43] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:33:43] [DEBUG] Fetched 676 1-min candles for NVDA
+[12:38:05] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:38:06] [DEBUG] Fetched 681 1-min candles for NVDA
+[12:38:16] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:38:16] [DEBUG] Fetched 681 1-min candles for NVDA
+[12:38:26] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:38:26] [DEBUG] Fetched 681 1-min candles for NVDA
+[12:38:36] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:38:37] [DEBUG] Fetched 681 1-min candles for NVDA
+[12:38:47] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:38:47] [DEBUG] Fetched 681 1-min candles for NVDA
+[12:39:41] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:39:42] [DEBUG] Fetched 682 1-min candles for NVDA
+[12:39:52] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:39:52] [DEBUG] Fetched 682 1-min candles for NVDA
+[12:40:02] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:40:02] [DEBUG] Fetched 683 1-min candles for NVDA
+[12:40:12] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:40:13] [DEBUG] Fetched 683 1-min candles for NVDA
+[12:40:23] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:40:24] [DEBUG] Fetched 683 1-min candles for NVDA
+[12:40:34] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:40:34] [DEBUG] Fetched 683 1-min candles for NVDA
+[12:40:44] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:40:44] [DEBUG] Fetched 683 1-min candles for NVDA
+[12:40:54] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:40:55] [DEBUG] Fetched 683 1-min candles for NVDA
+[12:41:05] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:41:05] [DEBUG] Fetched 684 1-min candles for NVDA
+[12:41:15] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:41:15] [DEBUG] Fetched 684 1-min candles for NVDA
+[12:41:25] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:41:26] [DEBUG] Fetched 684 1-min candles for NVDA
+[12:41:36] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:41:36] [DEBUG] Fetched 684 1-min candles for NVDA
+[12:41:46] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:41:46] [DEBUG] Fetched 684 1-min candles for NVDA
+[12:41:56] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:41:57] [DEBUG] Fetched 684 1-min candles for NVDA
+[12:42:07] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:42:07] [DEBUG] Fetched 685 1-min candles for NVDA
+[12:42:17] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:42:17] [DEBUG] Fetched 685 1-min candles for NVDA
+[12:44:15] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:44:15] [DEBUG] Fetched 687 1-min candles for NVDA
+[12:51:25] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:51:25] [DEBUG] Fetched 694 1-min candles for NVDA
+[12:51:35] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:51:35] [DEBUG] Fetched 694 1-min candles for NVDA
+[12:51:45] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:51:46] [DEBUG] Fetched 694 1-min candles for NVDA
+[12:51:56] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:58:50] [DEBUG] Fetched 701 1-min candles for NVDA
+[12:59:00] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:59:01] [DEBUG] Fetched 702 1-min candles for NVDA
+[12:59:11] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:59:11] [DEBUG] Fetched 702 1-min candles for NVDA
+[12:59:21] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:59:21] [DEBUG] Fetched 702 1-min candles for NVDA
+[12:59:31] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:59:32] [DEBUG] Fetched 702 1-min candles for NVDA
+[12:59:42] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:59:42] [DEBUG] Fetched 702 1-min candles for NVDA
+[12:59:52] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[12:59:52] [DEBUG] Fetched 702 1-min candles for NVDA
+[13:00:02] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:00:03] [DEBUG] Fetched 703 1-min candles for NVDA
+[13:00:13] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:00:14] [DEBUG] Fetched 703 1-min candles for NVDA
+[13:00:24] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:00:24] [DEBUG] Fetched 703 1-min candles for NVDA
+[13:00:34] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:00:34] [DEBUG] Fetched 703 1-min candles for NVDA
+[13:00:44] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:00:45] [DEBUG] Fetched 703 1-min candles for NVDA
+[13:00:55] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:00:55] [DEBUG] Fetched 703 1-min candles for NVDA
+[13:01:05] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:01:06] [DEBUG] Fetched 704 1-min candles for NVDA
+[13:01:16] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:01:16] [DEBUG] Fetched 704 1-min candles for NVDA
+[13:01:26] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:01:26] [DEBUG] Fetched 704 1-min candles for NVDA
+[13:01:36] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:01:37] [DEBUG] Fetched 704 1-min candles for NVDA
+[13:01:47] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:01:47] [DEBUG] Fetched 704 1-min candles for NVDA
+[13:01:57] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:01:57] [DEBUG] Fetched 704 1-min candles for NVDA
+[13:02:07] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:02:08] [DEBUG] Fetched 705 1-min candles for NVDA
+[13:02:18] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:02:18] [DEBUG] Fetched 705 1-min candles for NVDA
+[13:02:28] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:02:28] [DEBUG] Fetched 705 1-min candles for NVDA
+[13:02:38] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:02:39] [DEBUG] Fetched 705 1-min candles for NVDA
+[13:02:49] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:02:49] [DEBUG] Fetched 705 1-min candles for NVDA
+[13:02:59] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:02:59] [DEBUG] Fetched 705 1-min candles for NVDA
+[13:03:09] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:03:10] [DEBUG] Fetched 706 1-min candles for NVDA
+[13:03:20] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:03:20] [DEBUG] Fetched 706 1-min candles for NVDA
+[13:03:30] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:03:30] [DEBUG] Fetched 706 1-min candles for NVDA
+[13:03:40] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:03:41] [DEBUG] Fetched 706 1-min candles for NVDA
+[13:03:51] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:03:51] [DEBUG] Fetched 706 1-min candles for NVDA
+[13:04:01] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:04:01] [DEBUG] Fetched 707 1-min candles for NVDA
+[13:04:11] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:04:12] [DEBUG] Fetched 707 1-min candles for NVDA
+[13:04:22] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:04:22] [DEBUG] Fetched 707 1-min candles for NVDA
+[13:04:32] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:04:32] [DEBUG] Fetched 707 1-min candles for NVDA
+[13:04:42] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:04:43] [DEBUG] Fetched 707 1-min candles for NVDA
+[13:04:53] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:04:53] [DEBUG] Fetched 707 1-min candles for NVDA
+[13:05:03] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:05:03] [DEBUG] Fetched 708 1-min candles for NVDA
+[13:05:13] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:05:14] [DEBUG] Fetched 708 1-min candles for NVDA
+[13:05:24] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:05:24] [DEBUG] Fetched 708 1-min candles for NVDA
+[13:05:34] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:05:34] [DEBUG] Fetched 708 1-min candles for NVDA
+[13:05:44] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:05:45] [DEBUG] Fetched 708 1-min candles for NVDA
+[13:05:55] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:05:55] [DEBUG] Fetched 708 1-min candles for NVDA
+[13:06:05] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:06:05] [DEBUG] Fetched 709 1-min candles for NVDA
+[13:06:15] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:06:16] [DEBUG] Fetched 709 1-min candles for NVDA
+[13:06:26] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:06:26] [DEBUG] Fetched 709 1-min candles for NVDA
+[13:06:36] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:06:37] [DEBUG] Fetched 709 1-min candles for NVDA
+[13:06:47] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:06:47] [DEBUG] Fetched 709 1-min candles for NVDA
+[13:06:57] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:06:57] [DEBUG] Fetched 709 1-min candles for NVDA
+[13:07:07] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:07:08] [DEBUG] Fetched 710 1-min candles for NVDA
+[13:07:18] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:07:18] [DEBUG] Fetched 710 1-min candles for NVDA
+[13:07:28] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:07:28] [DEBUG] Fetched 710 1-min candles for NVDA
+[13:07:38] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:07:39] [DEBUG] Fetched 710 1-min candles for NVDA
+[13:07:49] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:07:49] [DEBUG] Fetched 710 1-min candles for NVDA
+[13:07:59] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:07:59] [DEBUG] Fetched 710 1-min candles for NVDA
+[13:08:09] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:08:10] [DEBUG] Fetched 711 1-min candles for NVDA
+[13:08:20] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:08:20] [DEBUG] Fetched 711 1-min candles for NVDA
+[13:08:30] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:08:30] [DEBUG] Fetched 711 1-min candles for NVDA
+[13:08:40] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:08:41] [DEBUG] Fetched 711 1-min candles for NVDA
+[13:08:51] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:08:51] [DEBUG] Fetched 711 1-min candles for NVDA
+[13:09:01] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:09:01] [DEBUG] Fetched 712 1-min candles for NVDA
+[13:09:11] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:09:12] [DEBUG] Fetched 712 1-min candles for NVDA
+[13:09:22] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:09:22] [DEBUG] Fetched 712 1-min candles for NVDA
+[13:09:32] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:09:32] [DEBUG] Fetched 712 1-min candles for NVDA
+[13:09:42] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:09:43] [DEBUG] Fetched 712 1-min candles for NVDA
+[13:09:53] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:09:53] [DEBUG] Fetched 712 1-min candles for NVDA
+[13:10:03] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:10:04] [DEBUG] Fetched 713 1-min candles for NVDA
+[13:10:14] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:10:14] [DEBUG] Fetched 713 1-min candles for NVDA
+[13:10:24] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:10:24] [DEBUG] Fetched 713 1-min candles for NVDA
+[13:10:34] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:10:35] [DEBUG] Fetched 713 1-min candles for NVDA
+[13:10:45] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:10:45] [DEBUG] Fetched 713 1-min candles for NVDA
+[13:10:55] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:10:55] [DEBUG] Fetched 713 1-min candles for NVDA
+[13:11:05] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:11:06] [DEBUG] Fetched 714 1-min candles for NVDA
+[13:11:16] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:11:16] [DEBUG] Fetched 714 1-min candles for NVDA
+[13:11:26] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:11:26] [DEBUG] Fetched 714 1-min candles for NVDA
+[13:11:36] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:11:37] [DEBUG] Fetched 714 1-min candles for NVDA
+[13:11:47] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:11:47] [DEBUG] Fetched 714 1-min candles for NVDA
+[13:11:57] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:11:57] [DEBUG] Fetched 714 1-min candles for NVDA
+[13:12:07] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:12:08] [DEBUG] Fetched 715 1-min candles for NVDA
+[13:12:18] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:12:18] [DEBUG] Fetched 715 1-min candles for NVDA
+[13:12:28] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:12:28] [DEBUG] Fetched 715 1-min candles for NVDA
+[13:12:38] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:12:39] [DEBUG] Fetched 715 1-min candles for NVDA
+[13:12:49] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:12:49] [DEBUG] Fetched 715 1-min candles for NVDA
+[13:12:59] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:13:00] [DEBUG] Fetched 715 1-min candles for NVDA
+[13:13:10] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:13:10] [DEBUG] Fetched 716 1-min candles for NVDA
+[13:13:20] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:13:20] [DEBUG] Fetched 716 1-min candles for NVDA
+[13:13:30] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:13:30] [DEBUG] Fetched 716 1-min candles for NVDA
+[13:13:40] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:13:41] [DEBUG] Fetched 716 1-min candles for NVDA
+[13:13:51] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:13:51] [DEBUG] Fetched 716 1-min candles for NVDA
+[13:14:01] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:14:02] [DEBUG] Fetched 717 1-min candles for NVDA
+[13:14:12] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:14:12] [DEBUG] Fetched 717 1-min candles for NVDA
+[13:14:22] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:14:22] [DEBUG] Fetched 717 1-min candles for NVDA
+[13:14:32] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:14:33] [DEBUG] Fetched 717 1-min candles for NVDA
+[13:14:43] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:14:43] [DEBUG] Fetched 717 1-min candles for NVDA
+[13:14:53] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:14:53] [DEBUG] Fetched 717 1-min candles for NVDA
+[13:15:03] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:15:04] [DEBUG] Fetched 718 1-min candles for NVDA
+[13:15:14] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:15:14] [DEBUG] Fetched 718 1-min candles for NVDA
+[13:15:24] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:15:24] [DEBUG] Fetched 718 1-min candles for NVDA
+[13:15:34] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:15:35] [DEBUG] Fetched 718 1-min candles for NVDA
+[13:15:45] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:15:45] [DEBUG] Fetched 718 1-min candles for NVDA
+[13:15:55] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:15:56] [DEBUG] Fetched 718 1-min candles for NVDA
+[13:16:06] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:16:06] [DEBUG] Fetched 719 1-min candles for NVDA
+[13:16:16] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:16:16] [DEBUG] Fetched 719 1-min candles for NVDA
+[13:16:26] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:16:27] [DEBUG] Fetched 719 1-min candles for NVDA
+[13:16:37] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:16:37] [DEBUG] Fetched 719 1-min candles for NVDA
+[13:16:47] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:16:47] [DEBUG] Fetched 719 1-min candles for NVDA
+[13:16:57] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:16:58] [DEBUG] Fetched 719 1-min candles for NVDA
+[13:17:08] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:17:08] [DEBUG] Fetched 720 1-min candles for NVDA
+[13:17:18] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:17:18] [DEBUG] Fetched 720 1-min candles for NVDA
+[13:17:28] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:17:29] [DEBUG] Fetched 720 1-min candles for NVDA
+[13:17:39] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:17:39] [DEBUG] Fetched 720 1-min candles for NVDA
+[13:17:49] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:17:49] [DEBUG] Fetched 720 1-min candles for NVDA
+[13:17:59] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:18:00] [DEBUG] Fetched 720 1-min candles for NVDA
+[13:18:10] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:18:10] [DEBUG] Fetched 721 1-min candles for NVDA
+[13:18:20] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:18:20] [DEBUG] Fetched 721 1-min candles for NVDA
+[13:18:30] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:18:30] [DEBUG] Fetched 721 1-min candles for NVDA
+[13:18:40] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:18:41] [DEBUG] Fetched 721 1-min candles for NVDA
+[13:18:51] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:18:51] [DEBUG] Fetched 721 1-min candles for NVDA
+[13:19:01] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:19:01] [DEBUG] Fetched 722 1-min candles for NVDA
+[13:19:11] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:19:12] [DEBUG] Fetched 722 1-min candles for NVDA
+[13:19:22] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:19:22] [DEBUG] Fetched 722 1-min candles for NVDA
+[13:19:32] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:19:32] [DEBUG] Fetched 722 1-min candles for NVDA
+[13:19:42] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:19:43] [DEBUG] Fetched 722 1-min candles for NVDA
+[13:19:53] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:19:53] [DEBUG] Fetched 722 1-min candles for NVDA
+[13:20:03] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:20:03] [DEBUG] Fetched 723 1-min candles for NVDA
+[13:20:13] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:20:14] [DEBUG] Fetched 723 1-min candles for NVDA
+[13:20:24] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:20:24] [DEBUG] Fetched 723 1-min candles for NVDA
+[13:20:34] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:20:34] [DEBUG] Fetched 723 1-min candles for NVDA
+[13:20:44] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:20:45] [DEBUG] Fetched 723 1-min candles for NVDA
+[13:20:55] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:20:55] [DEBUG] Fetched 723 1-min candles for NVDA
+[13:21:05] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:21:05] [DEBUG] Fetched 724 1-min candles for NVDA
+[13:21:15] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:21:16] [DEBUG] Fetched 724 1-min candles for NVDA
+[13:21:26] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:21:26] [DEBUG] Fetched 724 1-min candles for NVDA
+[13:21:36] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:21:36] [DEBUG] Fetched 724 1-min candles for NVDA
+[13:21:46] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:21:47] [DEBUG] Fetched 724 1-min candles for NVDA
+[13:21:57] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:21:57] [DEBUG] Fetched 724 1-min candles for NVDA
+[13:22:07] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:22:07] [DEBUG] Fetched 725 1-min candles for NVDA
+[13:22:17] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:22:17] [DEBUG] Fetched 725 1-min candles for NVDA
+[13:22:27] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:22:28] [DEBUG] Fetched 725 1-min candles for NVDA
+[13:22:38] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:22:38] [DEBUG] Fetched 725 1-min candles for NVDA
+[13:22:48] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:22:48] [DEBUG] Fetched 725 1-min candles for NVDA
+[13:22:58] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:22:59] [DEBUG] Fetched 725 1-min candles for NVDA
+[13:23:09] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:23:09] [DEBUG] Fetched 726 1-min candles for NVDA
+[13:23:19] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:23:19] [DEBUG] Fetched 726 1-min candles for NVDA
+[13:23:29] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:23:30] [DEBUG] Fetched 726 1-min candles for NVDA
+[13:23:40] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:23:40] [DEBUG] Fetched 726 1-min candles for NVDA
+[13:23:50] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:23:51] [DEBUG] Fetched 726 1-min candles for NVDA
+[13:24:01] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:24:01] [DEBUG] Fetched 727 1-min candles for NVDA
+[13:24:11] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:24:11] [DEBUG] Fetched 727 1-min candles for NVDA
+[13:24:21] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:24:22] [DEBUG] Fetched 727 1-min candles for NVDA
+[13:24:32] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:24:32] [DEBUG] Fetched 727 1-min candles for NVDA
+[13:24:42] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:24:42] [DEBUG] Fetched 727 1-min candles for NVDA
+[13:24:52] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:24:53] [DEBUG] Fetched 727 1-min candles for NVDA
+[13:25:03] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:25:03] [DEBUG] Fetched 728 1-min candles for NVDA
+[13:25:13] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:25:13] [DEBUG] Fetched 728 1-min candles for NVDA
+[13:25:23] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:25:24] [DEBUG] Fetched 728 1-min candles for NVDA
+[13:25:34] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:25:34] [DEBUG] Fetched 728 1-min candles for NVDA
+[13:25:44] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:25:44] [DEBUG] Fetched 728 1-min candles for NVDA
+[13:25:54] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:25:55] [DEBUG] Fetched 728 1-min candles for NVDA
+[13:26:05] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:26:05] [DEBUG] Fetched 729 1-min candles for NVDA
+[13:26:15] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:26:15] [DEBUG] Fetched 729 1-min candles for NVDA
+[13:26:25] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:26:26] [DEBUG] Fetched 729 1-min candles for NVDA
+[13:26:36] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:26:36] [DEBUG] Fetched 729 1-min candles for NVDA
+[13:26:46] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:26:46] [DEBUG] Fetched 729 1-min candles for NVDA
+[13:26:56] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:26:57] [DEBUG] Fetched 729 1-min candles for NVDA
+[13:27:07] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:27:07] [DEBUG] Fetched 730 1-min candles for NVDA
+[13:27:17] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:27:17] [DEBUG] Fetched 730 1-min candles for NVDA
+[13:27:27] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:27:27] [DEBUG] Fetched 730 1-min candles for NVDA
+[13:27:37] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:27:38] [DEBUG] Fetched 730 1-min candles for NVDA
+[13:27:48] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:27:48] [DEBUG] Fetched 730 1-min candles for NVDA
+[13:27:58] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:27:58] [DEBUG] Fetched 730 1-min candles for NVDA
+[13:28:08] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:28:09] [DEBUG] Fetched 731 1-min candles for NVDA
+[13:28:19] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:28:19] [DEBUG] Fetched 731 1-min candles for NVDA
+[13:28:29] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:28:29] [DEBUG] Fetched 731 1-min candles for NVDA
+[13:28:39] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:28:40] [DEBUG] Fetched 731 1-min candles for NVDA
+[13:28:50] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:28:50] [DEBUG] Fetched 731 1-min candles for NVDA
+[13:29:00] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:29:00] [DEBUG] Fetched 732 1-min candles for NVDA
+[13:29:10] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:29:11] [DEBUG] Fetched 732 1-min candles for NVDA
+[13:29:21] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:29:21] [DEBUG] Fetched 732 1-min candles for NVDA
+[13:29:31] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:29:31] [DEBUG] Fetched 732 1-min candles for NVDA
+[13:29:41] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:29:42] [DEBUG] Fetched 732 1-min candles for NVDA
+[13:29:52] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:29:52] [DEBUG] Fetched 732 1-min candles for NVDA
+[13:30:02] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:30:02] [DEBUG] Fetched 733 1-min candles for NVDA
+[13:30:12] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:30:13] [DEBUG] Fetched 733 1-min candles for NVDA
+[13:30:23] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:30:23] [DEBUG] Fetched 733 1-min candles for NVDA
+[13:30:33] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:30:33] [DEBUG] Fetched 733 1-min candles for NVDA
+[13:30:43] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:30:44] [DEBUG] Fetched 733 1-min candles for NVDA
+[13:30:54] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:30:54] [DEBUG] Fetched 733 1-min candles for NVDA
+[13:31:04] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:31:04] [DEBUG] Fetched 734 1-min candles for NVDA
+[13:31:14] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:31:15] [DEBUG] Fetched 734 1-min candles for NVDA
+[13:31:25] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:31:25] [DEBUG] Fetched 734 1-min candles for NVDA
+[13:31:35] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:31:35] [DEBUG] Fetched 734 1-min candles for NVDA
+[13:31:45] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:31:46] [DEBUG] Fetched 734 1-min candles for NVDA
+[13:31:56] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:31:56] [DEBUG] Fetched 734 1-min candles for NVDA
+[13:32:06] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:32:06] [DEBUG] Fetched 735 1-min candles for NVDA
+[13:32:16] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:32:17] [DEBUG] Fetched 735 1-min candles for NVDA
+[13:32:27] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:32:27] [DEBUG] Fetched 735 1-min candles for NVDA
+[13:32:37] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:32:37] [DEBUG] Fetched 735 1-min candles for NVDA
+[13:32:47] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:32:48] [DEBUG] Fetched 735 1-min candles for NVDA
+[13:32:58] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:32:58] [DEBUG] Fetched 735 1-min candles for NVDA
+[13:33:08] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:33:08] [DEBUG] Fetched 736 1-min candles for NVDA
+[13:33:18] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:33:19] [DEBUG] Fetched 736 1-min candles for NVDA
+[13:33:29] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:33:29] [DEBUG] Fetched 736 1-min candles for NVDA
+[13:33:39] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:33:39] [DEBUG] Fetched 736 1-min candles for NVDA
+[13:33:49] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:33:49] [DEBUG] Fetched 736 1-min candles for NVDA
+[13:33:59] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:34:00] [DEBUG] Fetched 737 1-min candles for NVDA
+[13:34:10] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:34:10] [DEBUG] Fetched 737 1-min candles for NVDA
+[13:34:20] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:34:20] [DEBUG] Fetched 737 1-min candles for NVDA
+[13:34:30] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:34:31] [DEBUG] Fetched 737 1-min candles for NVDA
+[13:34:41] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:34:41] [DEBUG] Fetched 737 1-min candles for NVDA
+[13:34:51] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:34:51] [DEBUG] Fetched 737 1-min candles for NVDA
+[13:35:01] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:35:02] [DEBUG] Fetched 738 1-min candles for NVDA
+[13:35:12] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:35:12] [DEBUG] Fetched 738 1-min candles for NVDA
+[13:35:22] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:35:22] [DEBUG] Fetched 738 1-min candles for NVDA
+[13:35:32] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:35:33] [DEBUG] Fetched 738 1-min candles for NVDA
+[13:35:43] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:35:43] [DEBUG] Fetched 738 1-min candles for NVDA
+[13:35:53] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:35:53] [DEBUG] Fetched 738 1-min candles for NVDA
+[13:36:03] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:36:04] [DEBUG] Fetched 739 1-min candles for NVDA
+[13:36:14] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:36:14] [DEBUG] Fetched 739 1-min candles for NVDA
+[13:36:24] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:36:24] [DEBUG] Fetched 739 1-min candles for NVDA
+[13:36:34] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:36:35] [DEBUG] Fetched 739 1-min candles for NVDA
+[13:36:45] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:36:45] [DEBUG] Fetched 739 1-min candles for NVDA
+[13:36:55] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:36:55] [DEBUG] Fetched 739 1-min candles for NVDA
+[13:37:05] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:37:05] [DEBUG] Fetched 740 1-min candles for NVDA
+[13:37:15] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:37:16] [DEBUG] Fetched 740 1-min candles for NVDA
+[13:37:26] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:37:26] [DEBUG] Fetched 740 1-min candles for NVDA
+[13:37:36] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:37:36] [DEBUG] Fetched 740 1-min candles for NVDA
+[13:37:46] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:37:47] [DEBUG] Fetched 740 1-min candles for NVDA
+[13:37:57] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:37:57] [DEBUG] Fetched 740 1-min candles for NVDA
+[13:38:07] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:38:07] [DEBUG] Fetched 741 1-min candles for NVDA
+[13:38:17] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:38:18] [DEBUG] Fetched 741 1-min candles for NVDA
+[13:38:28] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:38:28] [DEBUG] Fetched 741 1-min candles for NVDA
+[13:38:38] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:38:38] [DEBUG] Fetched 741 1-min candles for NVDA
+[13:38:48] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:38:49] [DEBUG] Fetched 741 1-min candles for NVDA
+[13:39:02] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:39:02] [DEBUG] Fetched 742 1-min candles for NVDA
+[13:39:12] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:39:13] [DEBUG] Fetched 742 1-min candles for NVDA
+[13:39:23] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:39:23] [DEBUG] Fetched 742 1-min candles for NVDA
+[13:39:33] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:39:33] [DEBUG] Fetched 742 1-min candles for NVDA
+[13:39:43] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:39:43] [DEBUG] Fetched 742 1-min candles for NVDA
+[13:39:53] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:39:54] [DEBUG] Fetched 742 1-min candles for NVDA
+[13:40:04] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:40:04] [DEBUG] Fetched 743 1-min candles for NVDA
+[13:40:14] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:40:14] [DEBUG] Fetched 743 1-min candles for NVDA
+[13:40:24] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:40:25] [DEBUG] Fetched 743 1-min candles for NVDA
+[13:40:35] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:40:35] [DEBUG] Fetched 743 1-min candles for NVDA
+[13:40:45] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:40:45] [DEBUG] Fetched 743 1-min candles for NVDA
+[13:40:55] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:40:56] [DEBUG] Fetched 743 1-min candles for NVDA
+[13:41:06] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:41:06] [DEBUG] Fetched 744 1-min candles for NVDA
+[13:41:16] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:41:16] [DEBUG] Fetched 744 1-min candles for NVDA
+[13:41:26] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:41:27] [DEBUG] Fetched 744 1-min candles for NVDA
+[13:41:37] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:41:37] [DEBUG] Fetched 744 1-min candles for NVDA
+[13:41:47] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:41:47] [DEBUG] Fetched 744 1-min candles for NVDA
+[13:41:57] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:41:57] [DEBUG] Fetched 744 1-min candles for NVDA
+[13:42:07] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:42:08] [DEBUG] Fetched 745 1-min candles for NVDA
+[13:42:18] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:42:18] [DEBUG] Fetched 745 1-min candles for NVDA
+[13:42:28] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:42:28] [DEBUG] Fetched 745 1-min candles for NVDA
+[13:43:07] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:43:10] [DEBUG] Fetched 746 1-min candles for NVDA
+[13:43:20] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:43:20] [DEBUG] Fetched 746 1-min candles for NVDA
+[13:43:30] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:43:30] [DEBUG] Fetched 746 1-min candles for NVDA
+[13:43:40] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:43:40] [DEBUG] Fetched 746 1-min candles for NVDA
+[13:43:50] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:43:51] [DEBUG] Fetched 746 1-min candles for NVDA
+[13:47:33] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:47:34] [DEBUG] Fetched 750 1-min candles for NVDA
+[13:47:44] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:47:44] [DEBUG] Fetched 750 1-min candles for NVDA
+[13:47:54] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:47:55] [DEBUG] Fetched 750 1-min candles for NVDA
+[13:48:05] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:48:05] [DEBUG] Fetched 751 1-min candles for NVDA
+[13:48:15] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:48:15] [DEBUG] Fetched 751 1-min candles for NVDA
+[13:48:25] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:48:26] [DEBUG] Fetched 751 1-min candles for NVDA
+[13:48:36] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:48:36] [DEBUG] Fetched 751 1-min candles for NVDA
+[13:48:46] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:48:46] [DEBUG] Fetched 751 1-min candles for NVDA
+[13:48:56] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:48:57] [DEBUG] Fetched 751 1-min candles for NVDA
+[13:49:07] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:49:07] [DEBUG] Fetched 752 1-min candles for NVDA
+[13:49:17] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:49:17] [DEBUG] Fetched 752 1-min candles for NVDA
+[13:49:27] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:49:28] [DEBUG] Fetched 752 1-min candles for NVDA
+[13:49:38] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:49:38] [DEBUG] Fetched 752 1-min candles for NVDA
+[13:49:48] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:49:48] [DEBUG] Fetched 752 1-min candles for NVDA
+[13:49:58] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:49:58] [DEBUG] Fetched 752 1-min candles for NVDA
+[13:50:08] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:50:09] [DEBUG] Fetched 753 1-min candles for NVDA
+[13:50:19] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:50:19] [DEBUG] Fetched 753 1-min candles for NVDA
+[13:50:29] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:50:29] [DEBUG] Fetched 753 1-min candles for NVDA
+[13:52:32] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:52:33] [DEBUG] Fetched 755 1-min candles for NVDA
+[13:52:43] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:52:43] [DEBUG] Fetched 755 1-min candles for NVDA
+[13:52:53] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:52:53] [DEBUG] Fetched 755 1-min candles for NVDA
+[13:53:03] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:53:04] [DEBUG] Fetched 756 1-min candles for NVDA
+[13:53:14] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:53:14] [DEBUG] Fetched 756 1-min candles for NVDA
+[13:57:36] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:57:36] [DEBUG] Fetched 760 1-min candles for NVDA
+[13:57:46] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:57:47] [DEBUG] Fetched 760 1-min candles for NVDA
+[13:57:57] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:57:57] [DEBUG] Fetched 760 1-min candles for NVDA
+[13:58:07] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:58:07] [DEBUG] Fetched 761 1-min candles for NVDA
+[13:58:17] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[13:58:18] [DEBUG] Fetched 761 1-min candles for NVDA
+[14:02:32] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:02:35] [DEBUG] Fetched 765 1-min candles for NVDA
+[14:02:45] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:02:45] [DEBUG] Fetched 765 1-min candles for NVDA
+[14:02:55] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:02:55] [DEBUG] Fetched 765 1-min candles for NVDA
+[14:03:05] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:03:06] [DEBUG] Fetched 766 1-min candles for NVDA
+[14:03:16] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:03:16] [DEBUG] Fetched 766 1-min candles for NVDA
+[14:07:32] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:07:34] [DEBUG] Fetched 770 1-min candles for NVDA
+[14:07:44] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:07:44] [DEBUG] Fetched 770 1-min candles for NVDA
+[14:07:54] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:07:54] [DEBUG] Fetched 770 1-min candles for NVDA
+[14:08:04] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:08:04] [DEBUG] Fetched 771 1-min candles for NVDA
+[14:08:15] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:08:15] [DEBUG] Fetched 771 1-min candles for NVDA
+[14:08:25] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:08:25] [DEBUG] Fetched 771 1-min candles for NVDA
+[14:08:35] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:08:35] [DEBUG] Fetched 771 1-min candles for NVDA
+[14:08:45] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:08:46] [DEBUG] Fetched 771 1-min candles for NVDA
+[14:08:56] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:08:56] [DEBUG] Fetched 771 1-min candles for NVDA
+[14:09:06] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:09:06] [DEBUG] Fetched 772 1-min candles for NVDA
+[14:09:16] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:09:17] [DEBUG] Fetched 772 1-min candles for NVDA
+[14:10:19] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:10:19] [DEBUG] Fetched 773 1-min candles for NVDA
+[14:10:29] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:10:29] [DEBUG] Fetched 773 1-min candles for NVDA
+[14:10:39] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:10:40] [DEBUG] Fetched 773 1-min candles for NVDA
+[14:10:50] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:10:50] [DEBUG] Fetched 773 1-min candles for NVDA
+[14:11:00] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:11:00] [DEBUG] Fetched 774 1-min candles for NVDA
+[14:11:10] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:11:10] [DEBUG] Fetched 774 1-min candles for NVDA
+[14:11:20] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:11:21] [DEBUG] Fetched 774 1-min candles for NVDA
+[14:11:31] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:11:31] [DEBUG] Fetched 774 1-min candles for NVDA
+[14:11:41] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:11:41] [DEBUG] Fetched 774 1-min candles for NVDA
+[14:11:51] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:11:52] [DEBUG] Fetched 774 1-min candles for NVDA
+[14:12:02] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:12:02] [DEBUG] Fetched 775 1-min candles for NVDA
+[14:12:12] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:12:12] [DEBUG] Fetched 775 1-min candles for NVDA
+[14:12:22] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:12:23] [DEBUG] Fetched 775 1-min candles for NVDA
+[14:12:33] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:12:33] [DEBUG] Fetched 775 1-min candles for NVDA
+[14:12:43] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:12:43] [DEBUG] Fetched 775 1-min candles for NVDA
+[14:12:53] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:12:54] [DEBUG] Fetched 775 1-min candles for NVDA
+[14:13:04] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:13:04] [DEBUG] Fetched 776 1-min candles for NVDA
+[14:13:14] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:13:14] [DEBUG] Fetched 776 1-min candles for NVDA
+[14:13:24] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:13:25] [DEBUG] Fetched 776 1-min candles for NVDA
+[14:13:35] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:13:35] [DEBUG] Fetched 776 1-min candles for NVDA
+[14:13:45] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:13:45] [DEBUG] Fetched 776 1-min candles for NVDA
+[14:13:55] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:13:56] [DEBUG] Fetched 776 1-min candles for NVDA
+[14:14:06] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:14:06] [DEBUG] Fetched 777 1-min candles for NVDA
+[14:14:16] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:14:16] [DEBUG] Fetched 777 1-min candles for NVDA
+[14:14:26] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:14:26] [DEBUG] Fetched 777 1-min candles for NVDA
+[14:14:36] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:14:37] [DEBUG] Fetched 777 1-min candles for NVDA
+[14:14:47] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:14:47] [DEBUG] Fetched 777 1-min candles for NVDA
+[14:14:57] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:14:57] [DEBUG] Fetched 777 1-min candles for NVDA
+[14:15:07] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:15:08] [DEBUG] Fetched 778 1-min candles for NVDA
+[14:15:18] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:15:18] [DEBUG] Fetched 778 1-min candles for NVDA
+[14:15:28] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:15:28] [DEBUG] Fetched 778 1-min candles for NVDA
+[14:15:38] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:15:39] [DEBUG] Fetched 778 1-min candles for NVDA
+[14:15:49] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:15:49] [DEBUG] Fetched 778 1-min candles for NVDA
+[14:16:10] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:16:10] [DEBUG] Fetched 779 1-min candles for NVDA
+[14:16:20] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:16:20] [DEBUG] Fetched 779 1-min candles for NVDA
+[14:16:30] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:16:31] [DEBUG] Fetched 779 1-min candles for NVDA
+[14:16:41] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:16:41] [DEBUG] Fetched 779 1-min candles for NVDA
+[14:16:51] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:16:51] [DEBUG] Fetched 779 1-min candles for NVDA
+[14:17:35] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:17:36] [DEBUG] Fetched 780 1-min candles for NVDA
+[14:17:46] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:17:46] [DEBUG] Fetched 780 1-min candles for NVDA
+[14:17:56] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:17:57] [DEBUG] Fetched 780 1-min candles for NVDA
+[14:18:07] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:18:07] [DEBUG] Fetched 781 1-min candles for NVDA
+[14:18:17] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:18:17] [DEBUG] Fetched 781 1-min candles for NVDA
+[14:22:34] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:22:37] [DEBUG] Fetched 785 1-min candles for NVDA
+[14:22:47] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:22:47] [DEBUG] Fetched 785 1-min candles for NVDA
+[14:22:57] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:22:57] [DEBUG] Fetched 785 1-min candles for NVDA
+[14:23:07] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:23:08] [DEBUG] Fetched 786 1-min candles for NVDA
+[14:23:18] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:23:18] [DEBUG] Fetched 786 1-min candles for NVDA
+[14:27:34] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:27:35] [DEBUG] Fetched 790 1-min candles for NVDA
+[14:27:45] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:27:45] [DEBUG] Fetched 790 1-min candles for NVDA
+[14:27:55] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:27:55] [DEBUG] Fetched 790 1-min candles for NVDA
+[14:28:05] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:28:05] [DEBUG] Fetched 791 1-min candles for NVDA
+[14:28:16] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:28:16] [DEBUG] Fetched 791 1-min candles for NVDA
+[14:44:15] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:44:15] [DEBUG] Fetched 807 1-min candles for NVDA
+[14:44:25] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:44:26] [DEBUG] Fetched 807 1-min candles for NVDA
+[14:44:36] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:44:36] [DEBUG] Fetched 807 1-min candles for NVDA
+[14:44:46] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:44:46] [DEBUG] Fetched 807 1-min candles for NVDA
+[14:44:56] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:44:56] [DEBUG] Fetched 807 1-min candles for NVDA
+[14:45:06] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:45:07] [DEBUG] Fetched 808 1-min candles for NVDA
+[14:45:17] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:45:17] [DEBUG] Fetched 808 1-min candles for NVDA
+[14:45:27] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:45:27] [DEBUG] Fetched 808 1-min candles for NVDA
+[14:45:37] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:45:38] [DEBUG] Fetched 808 1-min candles for NVDA
+[14:45:48] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:45:48] [DEBUG] Fetched 808 1-min candles for NVDA
+[14:45:58] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:45:58] [DEBUG] Fetched 808 1-min candles for NVDA
+[14:46:08] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:46:09] [DEBUG] Fetched 809 1-min candles for NVDA
+[14:46:19] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:46:19] [DEBUG] Fetched 809 1-min candles for NVDA
+[14:46:29] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:46:29] [DEBUG] Fetched 809 1-min candles for NVDA
+[14:46:39] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:46:40] [DEBUG] Fetched 809 1-min candles for NVDA
+[14:46:50] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:46:50] [DEBUG] Fetched 809 1-min candles for NVDA
+[14:47:00] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:47:00] [DEBUG] Fetched 810 1-min candles for NVDA
+[14:47:10] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:47:11] [DEBUG] Fetched 810 1-min candles for NVDA
+[14:47:21] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:47:21] [DEBUG] Fetched 810 1-min candles for NVDA
+[14:47:31] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:47:31] [DEBUG] Fetched 810 1-min candles for NVDA
+[14:47:41] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:47:42] [DEBUG] Fetched 810 1-min candles for NVDA
+[14:47:52] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:47:52] [DEBUG] Fetched 810 1-min candles for NVDA
+[14:48:02] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:48:02] [DEBUG] Fetched 811 1-min candles for NVDA
+[14:48:12] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:48:12] [DEBUG] Fetched 811 1-min candles for NVDA
+[14:48:22] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:48:23] [DEBUG] Fetched 811 1-min candles for NVDA
+[14:48:33] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:48:33] [DEBUG] Fetched 811 1-min candles for NVDA
+[14:48:43] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:48:43] [DEBUG] Fetched 811 1-min candles for NVDA
+[14:48:53] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:48:54] [DEBUG] Fetched 811 1-min candles for NVDA
+[14:49:04] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:49:04] [DEBUG] Fetched 812 1-min candles for NVDA
+[14:49:14] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:49:14] [DEBUG] Fetched 812 1-min candles for NVDA
+[14:49:24] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:49:25] [DEBUG] Fetched 812 1-min candles for NVDA
+[14:49:35] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:49:35] [DEBUG] Fetched 812 1-min candles for NVDA
+[14:49:45] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:49:45] [DEBUG] Fetched 812 1-min candles for NVDA
+[14:49:55] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:49:56] [DEBUG] Fetched 812 1-min candles for NVDA
+[14:50:06] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:50:06] [DEBUG] Fetched 813 1-min candles for NVDA
+[14:50:16] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:50:16] [DEBUG] Fetched 813 1-min candles for NVDA
+[14:50:26] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[14:50:27] [DEBUG] Fetched 813 1-min candles for NVDA
+[15:06:18] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:06:18] [DEBUG] Fetched 829 1-min candles for NVDA
+[15:06:28] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:06:29] [DEBUG] Fetched 829 1-min candles for NVDA
+[15:06:39] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:06:39] [DEBUG] Fetched 829 1-min candles for NVDA
+[15:06:49] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:06:49] [DEBUG] Fetched 829 1-min candles for NVDA
+[15:06:59] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:07:00] [DEBUG] Fetched 830 1-min candles for NVDA
+[15:07:10] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:07:10] [DEBUG] Fetched 830 1-min candles for NVDA
+[15:07:20] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:07:20] [DEBUG] Fetched 830 1-min candles for NVDA
+[15:07:30] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:07:31] [DEBUG] Fetched 830 1-min candles for NVDA
+[15:07:41] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:07:41] [DEBUG] Fetched 830 1-min candles for NVDA
+[15:07:51] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:07:51] [DEBUG] Fetched 830 1-min candles for NVDA
+[15:08:01] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:08:02] [DEBUG] Fetched 831 1-min candles for NVDA
+[15:08:12] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:08:12] [DEBUG] Fetched 831 1-min candles for NVDA
+[15:08:22] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:08:22] [DEBUG] Fetched 831 1-min candles for NVDA
+[15:08:32] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:08:32] [DEBUG] Fetched 831 1-min candles for NVDA
+[15:08:42] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:08:43] [DEBUG] Fetched 831 1-min candles for NVDA
+[15:08:53] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:08:53] [DEBUG] Fetched 831 1-min candles for NVDA
+[15:09:03] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:09:03] [DEBUG] Fetched 832 1-min candles for NVDA
+[15:09:13] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:09:14] [DEBUG] Fetched 832 1-min candles for NVDA
+[15:09:24] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:09:24] [DEBUG] Fetched 832 1-min candles for NVDA
+[15:09:34] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:09:34] [DEBUG] Fetched 832 1-min candles for NVDA
+[15:09:44] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:09:45] [DEBUG] Fetched 832 1-min candles for NVDA
+[15:09:55] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:09:55] [DEBUG] Fetched 832 1-min candles for NVDA
+[15:10:05] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:10:05] [DEBUG] Fetched 833 1-min candles for NVDA
+[15:10:15] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:10:16] [DEBUG] Fetched 833 1-min candles for NVDA
+[15:10:26] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:10:26] [DEBUG] Fetched 833 1-min candles for NVDA
+[15:10:36] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:10:36] [DEBUG] Fetched 833 1-min candles for NVDA
+[15:10:46] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:10:47] [DEBUG] Fetched 833 1-min candles for NVDA
+[15:10:57] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:10:57] [DEBUG] Fetched 833 1-min candles for NVDA
+[15:11:07] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:11:07] [DEBUG] Fetched 834 1-min candles for NVDA
+[15:11:17] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:11:18] [DEBUG] Fetched 834 1-min candles for NVDA
+[15:11:28] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:11:28] [DEBUG] Fetched 834 1-min candles for NVDA
+[15:11:38] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:11:38] [DEBUG] Fetched 834 1-min candles for NVDA
+[15:11:48] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:11:49] [DEBUG] Fetched 834 1-min candles for NVDA
+[15:11:59] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:11:59] [DEBUG] Fetched 834 1-min candles for NVDA
+[15:12:09] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:12:09] [DEBUG] Fetched 835 1-min candles for NVDA
+[15:12:19] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:12:19] [DEBUG] Fetched 835 1-min candles for NVDA
+[15:12:29] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:12:30] [DEBUG] Fetched 835 1-min candles for NVDA
+[15:12:40] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:12:40] [DEBUG] Fetched 835 1-min candles for NVDA
+[15:12:50] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:12:50] [DEBUG] Fetched 835 1-min candles for NVDA
+[15:13:00] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:13:01] [DEBUG] Fetched 836 1-min candles for NVDA
+[15:13:11] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:13:11] [DEBUG] Fetched 836 1-min candles for NVDA
+[15:13:21] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:13:21] [DEBUG] Fetched 836 1-min candles for NVDA
+[15:13:31] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:13:32] [DEBUG] Fetched 836 1-min candles for NVDA
+[15:13:42] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:13:42] [DEBUG] Fetched 836 1-min candles for NVDA
+[15:13:52] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:13:52] [DEBUG] Fetched 836 1-min candles for NVDA
+[15:14:02] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:14:03] [DEBUG] Fetched 837 1-min candles for NVDA
+[15:14:13] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:14:13] [DEBUG] Fetched 837 1-min candles for NVDA
+[15:14:23] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:14:23] [DEBUG] Fetched 837 1-min candles for NVDA
+[15:14:33] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:14:34] [DEBUG] Fetched 837 1-min candles for NVDA
+[15:14:44] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:14:44] [DEBUG] Fetched 837 1-min candles for NVDA
+[15:14:54] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:14:54] [DEBUG] Fetched 837 1-min candles for NVDA
+[15:15:04] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:15:04] [DEBUG] Fetched 838 1-min candles for NVDA
+[15:15:14] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:15:15] [DEBUG] Fetched 838 1-min candles for NVDA
+[15:15:25] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:15:25] [DEBUG] Fetched 838 1-min candles for NVDA
+[15:15:35] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:15:35] [DEBUG] Fetched 838 1-min candles for NVDA
+[15:15:45] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:15:46] [DEBUG] Fetched 838 1-min candles for NVDA
+[15:15:56] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:15:56] [DEBUG] Fetched 838 1-min candles for NVDA
+[15:16:06] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:16:06] [DEBUG] Fetched 839 1-min candles for NVDA
+[15:16:16] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:16:17] [DEBUG] Fetched 839 1-min candles for NVDA
+[15:16:27] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:16:27] [DEBUG] Fetched 839 1-min candles for NVDA
+[15:16:37] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:16:37] [DEBUG] Fetched 839 1-min candles for NVDA
+[15:16:47] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:16:48] [DEBUG] Fetched 839 1-min candles for NVDA
+[15:16:58] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:16:58] [DEBUG] Fetched 839 1-min candles for NVDA
+[15:17:08] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:17:08] [DEBUG] Fetched 840 1-min candles for NVDA
+[15:17:18] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:17:19] [DEBUG] Fetched 840 1-min candles for NVDA
+[15:17:29] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:17:29] [DEBUG] Fetched 840 1-min candles for NVDA
+[15:17:39] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:17:39] [DEBUG] Fetched 840 1-min candles for NVDA
+[15:17:49] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:17:49] [DEBUG] Fetched 840 1-min candles for NVDA
+[15:17:59] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:18:00] [DEBUG] Fetched 841 1-min candles for NVDA
+[15:18:10] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:18:10] [DEBUG] Fetched 841 1-min candles for NVDA
+[15:18:20] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:18:20] [DEBUG] Fetched 841 1-min candles for NVDA
+[15:18:30] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:18:31] [DEBUG] Fetched 841 1-min candles for NVDA
+[15:18:41] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:18:41] [DEBUG] Fetched 841 1-min candles for NVDA
+[15:18:51] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:18:51] [DEBUG] Fetched 841 1-min candles for NVDA
+[15:19:01] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:19:02] [DEBUG] Fetched 842 1-min candles for NVDA
+[15:19:12] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:19:12] [DEBUG] Fetched 842 1-min candles for NVDA
+[15:19:22] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:19:22] [DEBUG] Fetched 842 1-min candles for NVDA
+[15:19:32] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:19:33] [DEBUG] Fetched 842 1-min candles for NVDA
+[15:19:43] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:19:43] [DEBUG] Fetched 842 1-min candles for NVDA
+[15:19:53] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:19:53] [DEBUG] Fetched 842 1-min candles for NVDA
+[15:20:03] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:20:04] [DEBUG] Fetched 843 1-min candles for NVDA
+[15:20:14] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:20:14] [DEBUG] Fetched 843 1-min candles for NVDA
+[15:20:43] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:20:43] [DEBUG] Fetched 843 1-min candles for NVDA
+[15:20:53] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:20:54] [DEBUG] Fetched 843 1-min candles for NVDA
+[15:21:04] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:21:04] [DEBUG] Fetched 844 1-min candles for NVDA
+[15:21:14] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:21:14] [DEBUG] Fetched 844 1-min candles for NVDA
+[15:21:24] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:21:25] [DEBUG] Fetched 844 1-min candles for NVDA
+[15:32:17] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:32:17] [DEBUG] Fetched 855 1-min candles for NVDA
+[15:32:27] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:32:27] [DEBUG] Fetched 855 1-min candles for NVDA
+[15:32:37] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:32:37] [DEBUG] Fetched 855 1-min candles for NVDA
+[15:32:47] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:32:48] [DEBUG] Fetched 855 1-min candles for NVDA
+[15:32:58] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:32:58] [DEBUG] Fetched 855 1-min candles for NVDA
+[15:49:04] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:49:06] [DEBUG] Fetched 872 1-min candles for NVDA
+[15:49:16] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:49:16] [DEBUG] Fetched 872 1-min candles for NVDA
+[15:49:26] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:49:26] [DEBUG] Fetched 872 1-min candles for NVDA
+[15:49:36] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:49:37] [DEBUG] Fetched 872 1-min candles for NVDA
+[15:49:47] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:49:47] [DEBUG] Fetched 872 1-min candles for NVDA
+[15:49:57] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:49:57] [DEBUG] Fetched 872 1-min candles for NVDA
+[15:50:07] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:50:08] [DEBUG] Fetched 873 1-min candles for NVDA
+[15:50:18] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:50:18] [DEBUG] Fetched 873 1-min candles for NVDA
+[15:50:28] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:50:28] [DEBUG] Fetched 873 1-min candles for NVDA
+[15:50:38] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:50:38] [DEBUG] Fetched 873 1-min candles for NVDA
+[15:50:48] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:50:49] [DEBUG] Fetched 873 1-min candles for NVDA
+[15:50:59] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:50:59] [DEBUG] Fetched 873 1-min candles for NVDA
+[15:51:09] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:51:09] [DEBUG] Fetched 874 1-min candles for NVDA
+[15:51:19] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:51:20] [DEBUG] Fetched 874 1-min candles for NVDA
+[15:51:30] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:51:30] [DEBUG] Fetched 874 1-min candles for NVDA
+[15:51:40] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:51:40] [DEBUG] Fetched 874 1-min candles for NVDA
+[15:51:50] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:51:51] [DEBUG] Fetched 874 1-min candles for NVDA
+[15:52:01] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:52:01] [DEBUG] Fetched 875 1-min candles for NVDA
+[15:52:11] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:52:11] [DEBUG] Fetched 875 1-min candles for NVDA
+[15:52:21] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:52:22] [DEBUG] Fetched 875 1-min candles for NVDA
+[15:52:32] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:52:32] [DEBUG] Fetched 875 1-min candles for NVDA
+[15:52:42] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:52:42] [DEBUG] Fetched 875 1-min candles for NVDA
+[15:52:52] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:52:53] [DEBUG] Fetched 875 1-min candles for NVDA
+[15:53:03] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:53:03] [DEBUG] Fetched 876 1-min candles for NVDA
+[15:53:13] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:53:13] [DEBUG] Fetched 876 1-min candles for NVDA
+[15:53:23] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:53:24] [DEBUG] Fetched 876 1-min candles for NVDA
+[15:53:34] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:53:34] [DEBUG] Fetched 876 1-min candles for NVDA
+[15:53:44] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:53:44] [DEBUG] Fetched 876 1-min candles for NVDA
+[15:53:54] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:53:54] [DEBUG] Fetched 876 1-min candles for NVDA
+[15:54:04] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:54:05] [DEBUG] Fetched 877 1-min candles for NVDA
+[15:54:15] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:54:15] [DEBUG] Fetched 877 1-min candles for NVDA
+[15:54:25] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:54:25] [DEBUG] Fetched 877 1-min candles for NVDA
+[15:54:35] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:54:36] [DEBUG] Fetched 877 1-min candles for NVDA
+[15:54:46] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:54:46] [DEBUG] Fetched 877 1-min candles for NVDA
+[15:54:56] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:54:56] [DEBUG] Fetched 877 1-min candles for NVDA
+[15:55:06] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:55:07] [DEBUG] Fetched 878 1-min candles for NVDA
+[15:55:17] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:55:17] [DEBUG] Fetched 878 1-min candles for NVDA
+[15:55:27] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:55:27] [DEBUG] Fetched 878 1-min candles for NVDA
+[15:55:37] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:55:38] [DEBUG] Fetched 878 1-min candles for NVDA
+[15:55:48] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:55:48] [DEBUG] Fetched 878 1-min candles for NVDA
+[15:55:58] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:55:58] [DEBUG] Fetched 878 1-min candles for NVDA
+[15:56:08] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:56:09] [DEBUG] Fetched 879 1-min candles for NVDA
+[15:56:19] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:56:19] [DEBUG] Fetched 879 1-min candles for NVDA
+[15:56:29] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:56:29] [DEBUG] Fetched 879 1-min candles for NVDA
+[15:56:39] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:56:39] [DEBUG] Fetched 879 1-min candles for NVDA
+[15:56:49] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:56:50] [DEBUG] Fetched 879 1-min candles for NVDA
+[15:57:00] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:57:00] [DEBUG] Fetched 880 1-min candles for NVDA
+[15:57:10] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:57:10] [DEBUG] Fetched 880 1-min candles for NVDA
+[15:57:20] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:57:21] [DEBUG] Fetched 880 1-min candles for NVDA
+[15:57:31] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:57:31] [DEBUG] Fetched 880 1-min candles for NVDA
+[15:57:41] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:57:41] [DEBUG] Fetched 880 1-min candles for NVDA
+[15:57:51] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:57:52] [DEBUG] Fetched 880 1-min candles for NVDA
+[15:58:02] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:58:02] [DEBUG] Fetched 881 1-min candles for NVDA
+[15:58:12] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:58:12] [DEBUG] Fetched 881 1-min candles for NVDA
+[15:58:22] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:58:23] [DEBUG] Fetched 881 1-min candles for NVDA
+[15:58:33] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:58:33] [DEBUG] Fetched 881 1-min candles for NVDA
+[15:58:43] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:58:43] [DEBUG] Fetched 881 1-min candles for NVDA
+[15:58:53] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:58:54] [DEBUG] Fetched 881 1-min candles for NVDA
+[15:59:04] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:59:04] [DEBUG] Fetched 882 1-min candles for NVDA
+[15:59:14] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:59:14] [DEBUG] Fetched 882 1-min candles for NVDA
+[15:59:24] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:59:25] [DEBUG] Fetched 882 1-min candles for NVDA
+[15:59:35] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:59:35] [DEBUG] Fetched 882 1-min candles for NVDA
+[15:59:45] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:59:45] [DEBUG] Fetched 882 1-min candles for NVDA
+[15:59:55] [DEBUG] Fetching 1-min candles for NVDA on 2026-01-28
+[15:59:55] [DEBUG] Fetched 882 1-min candles for NVDA
+[16:00:05] Market closing - ending monitoring loop
+[16:00:05] ════════════════════════════════════════════════════════════════════════════════
+[16:00:05] Performing end-of-day shutdown...
+[16:00:05] [DEBUG] No all-time stats file found, creating new
+[16:00:05] [DEBUG] No trade history file for 2026-01-28
+[16:00:06] 🌙 SignalFlow Shutdown | End of trading day
+[16:00:06] ════════════════════════════════════════════════════════════════════════════════
