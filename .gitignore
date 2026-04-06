@@ -1,7 +1,10 @@
 /dist
 /node_modules
-env
-package-lock.json
-projectOverview.txt
-projectPlan.txt
+.env
 .DS_Store
+data/logs/
+data/state/
+data/trades/
+data/rejections/
+data/backtest-*.json
+data/all-time-stats.json

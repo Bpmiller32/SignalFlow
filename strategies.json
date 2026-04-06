@@ -1,0 +1,74 @@
+{
+  "strategies": [
+    {
+      "id": "orb-fvg-default",
+      "type": "opening-range-breakout",
+      "enabled": true,
+      "symbols": ["SPY", "AAPL", "MSFT", "NVDA", "GOOGL", "META", "GME"],
+      "maxTradesPerDay": 1,
+
+      "schedule": {
+        "openingRangeStart": "09:30",
+        "openingRangeEnd": "09:35",
+        "tradingCutoff": "11:30",
+        "marketClose": "16:00",
+        "pollingIntervalMs": 10000,
+        "openingRangePollMs": 5000
+      },
+
+      "openingRange": {
+        "minSize": 0.15,
+        "maxSize": 1.5,
+        "minStrength": 5.0,
+        "maxPremarketGap": 1.0,
+        "skipEarningsDays": true
+      },
+
+      "breakout": {
+        "volumeMultiplier": 1.2,
+        "minAbsoluteVolume": 10000,
+        "maxStaleDataMinutes": 2,
+        "maxFvgWindowMinutes": 5
+      },
+
+      "fvg": {
+        "bodyPercent": 55,
+        "minRangePercent": 0.15,
+        "overlapTolerance": 1.5,
+        "closePositionPercent": 25,
+        "requireVolumeConfirmation": true,
+        "volumeMultiplier": 1.5
+      },
+
+      "positionSizing": {
+        "mode": "FIXED",
+        "fixedSize": 1000,
+        "accountRiskPercent": 1.0,
+        "maxValue": 10000,
+        "minValue": 100,
+        "useAdaptive": true,
+        "weakSignalSizePercent": 50
+      },
+
+      "riskManagement": {
+        "riskRewardRatio": 2.0,
+        "stopLossBufferPercent": 0.05,
+        "useAtrStops": false,
+        "atrPeriod": 14,
+        "atrStopMultiplier": 1.5,
+        "useTrailingStops": true,
+        "trailingStopActivation": 1.0,
+        "trailingStopAtrMultiple": 1.5,
+        "usePartialExits": true,
+        "partialExitAtRMultiple": 1.0,
+        "partialExitPercent": 50
+      },
+
+      "notifications": {
+        "trades": "DISCORD_WEBHOOK_TRADES",
+        "system": "DISCORD_WEBHOOK_SYSTEM",
+        "errors": "DISCORD_WEBHOOK_ERRORS"
+      }
+    }
+  ]
+}

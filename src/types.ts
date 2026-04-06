@@ -364,3 +364,130 @@ export interface RejectionLog {
   date: string; // Trading date
   rejections: Rejection[]; // All rejections for this date
 }
+
+//==============================================================================
+// STRATEGY CONFIG TYPES (loaded from strategies.json)
+//==============================================================================
+
+// Schedule settings - when the strategy runs
+export interface StrategySchedule {
+  openingRangeStart: string; // HH:MM EST, when opening range window starts
+  openingRangeEnd: string; // HH:MM EST, when opening range window ends
+  tradingCutoff: string; // HH:MM EST, no new entries after this time
+  marketClose: string; // HH:MM EST, market close time
+  pollingIntervalMs: number; // ms between candle polls during monitoring
+  openingRangePollMs: number; // ms between polls during OR capture
+}
+
+// Opening range filter settings
+export interface ORFilterConfig {
+  minSize: number; // minimum range as % of price
+  maxSize: number; // maximum range as % of price
+  minStrength: number; // minimum strength score 0-10
+  maxPremarketGap: number; // max pre-market gap as % from prev close
+  skipEarningsDays: boolean; // skip trading on earnings days
+}
+
+// Breakout detection settings
+export interface BreakoutConfig {
+  volumeMultiplier: number; // required volume vs OR avg (e.g. 1.2 = 20% above)
+  minAbsoluteVolume: number; // minimum volume per candle
+  maxStaleDataMinutes: number; // reject candles older than this
+  maxFvgWindowMinutes: number; // max time after breakout to find FVG
+}
+
+// FVG (Fair Value Gap) pattern settings
+export interface FVGConfig {
+  bodyPercent: number; // required body size as % of candle range
+  minRangePercent: number; // minimum candle range as % of price
+  overlapTolerance: number; // allowed gap overlap as %
+  closePositionPercent: number; // where close must be in candle range
+  requireVolumeConfirmation: boolean; // require volume spike on FVG
+  volumeMultiplier: number; // volume multiplier for FVG confirmation
+}
+
+// Position sizing settings
+export interface PositionSizingConfig {
+  mode: "FIXED" | "RISK_BASED"; // sizing mode
+  fixedSize: number; // dollar amount for FIXED mode
+  accountRiskPercent: number; // % of account for RISK_BASED mode
+  maxValue: number; // max position dollar value
+  minValue: number; // min position dollar value
+  useAdaptive: boolean; // reduce size for weak signals
+  weakSignalSizePercent: number; // size % for weak signals (e.g. 50 = half)
+}
+
+// Risk management settings
+export interface RiskManagementConfig {
+  riskRewardRatio: number; // target R:R (e.g. 2.0 = 2:1)
+  stopLossBufferPercent: number; // buffer added to stop loss
+  useAtrStops: boolean; // use ATR for stop calc instead of OR
+  atrPeriod: number; // ATR lookback period
+  atrStopMultiplier: number; // ATR multiplier for stop distance
+  useTrailingStops: boolean; // enable trailing stops
+  trailingStopActivation: number; // R-multiple to activate trailing
+  trailingStopAtrMultiple: number; // ATR multiple for trailing distance
+  usePartialExits: boolean; // enable partial profit taking
+  partialExitAtRMultiple: number; // R-multiple to trigger partial exit
+  partialExitPercent: number; // % of position to exit
+}
+
+// Discord notification routing - env var names for webhook URLs
+export interface NotificationConfig {
+  trades: string; // env var name for trades channel (e.g. "DISCORD_WEBHOOK_TRADES")
+  system: string; // env var name for system channel (e.g. "DISCORD_WEBHOOK_SYSTEM")
+  errors: string; // env var name for errors channel (e.g. "DISCORD_WEBHOOK_ERRORS")
+}
+
+// Full strategy configuration - one entry in strategies.json
+export interface StrategyConfig {
+  id: string; // unique strategy identifier
+  type: string; // strategy type key (e.g. "opening-range-breakout")
+  enabled: boolean; // whether this strategy is active
+  symbols: string[]; // symbols this strategy trades
+  maxTradesPerDay: number; // max trades per symbol per day
+  schedule: StrategySchedule; // timing config
+  openingRange: ORFilterConfig; // opening range filter config
+  breakout: BreakoutConfig; // breakout detection config
+  fvg: FVGConfig; // FVG pattern config
+  positionSizing: PositionSizingConfig; // position sizing config
+  riskManagement: RiskManagementConfig; // risk management config
+  notifications: NotificationConfig; // discord channel routing
+}
+
+// Root structure of strategies.json file
+export interface StrategiesFile {
+  strategies: StrategyConfig[];
+}
+
+//==============================================================================
+// STRATEGY RESULT TYPES (returned by IStrategy methods)
+//==============================================================================
+
+// Result from evaluating opening range candle
+export interface OpeningRangeResult {
+  accepted: boolean; // true if range qualifies for trading
+  openingRange: OpeningRange | null; // the calculated range (null if rejected)
+  rejectReason: string; // why it was rejected (empty if accepted)
+  strength: number; // strength score 0-10
+}
+
+// Result from processing a monitoring candle
+export interface CandleResult {
+  signal: Signal | null; // trading signal if generated
+  fvgPattern: FVGPattern | null; // FVG pattern if detected
+  done: boolean; // true if strategy is done with this symbol today
+  rejectReason: string; // why no signal (empty if signal generated)
+}
+
+// What the strategy wants done with an open position
+export interface PositionUpdate {
+  doPartialExit: boolean; // execute a partial exit this candle
+  partialExitPrice: number; // price for partial exit
+  partialExitPercent: number; // % of position to exit
+  activateTrailing: boolean; // activate trailing stop
+  newStopLoss: number | null; // updated stop loss (null = no change)
+  closePosition: boolean; // close the entire position
+  closePrice: number; // price to close at
+  closeReason: string; // reason for closing (STOP_LOSS, TAKE_PROFIT, etc.)
+}

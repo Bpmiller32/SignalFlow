@@ -33,6 +33,7 @@ async function sendWebhook(webhookUrl: string, content: string): Promise<void> {
 //==============================================================================
 
 // Send trade entry notification
+// webhookUrl: optional override, falls back to global config
 export async function sendTradeEntry(
   symbol: string,
   side: "LONG" | "SHORT",
@@ -42,6 +43,7 @@ export async function sendTradeEntry(
   targetPrice: number,
   risk: number,
   reward: number,
+  webhookUrl?: string,
 ): Promise<void> {
   const emoji = side === "LONG" ? "🟢" : "🔴";
   const dollarValue = entryPrice * quantity;
@@ -64,10 +66,11 @@ export async function sendTradeEntry(
 ──────────────────────────
 **Time:** ${formatEstTime(new Date())} EST`;
 
-  await sendWebhook(config.discordWebhookTrades, message);
+  await sendWebhook(webhookUrl || config.discordWebhookTrades, message);
 }
 
 // Send trade exit notification
+// webhookUrl: optional override, falls back to global config
 export async function sendTradeExit(
   symbol: string,
   exitPrice: number,
@@ -75,6 +78,7 @@ export async function sendTradeExit(
   pnlPercent: number,
   reason: string,
   duration: string,
+  webhookUrl?: string,
 ): Promise<void> {
   const emoji = pnl >= 0 ? "🎯" : "🛑";
   const pnlFormatted =
@@ -92,10 +96,11 @@ export async function sendTradeExit(
 ──────────────────────────
 **Time:** ${formatEstTime(new Date())} EST`;
 
-  await sendWebhook(config.discordWebhookTrades, message);
+  await sendWebhook(webhookUrl || config.discordWebhookTrades, message);
 }
 
 // Send daily summary notification
+// webhookUrl: optional override, falls back to global config
 export async function sendDailySummary(
   date: string,
   symbols: string[],
@@ -107,6 +112,7 @@ export async function sendDailySummary(
   bestTradePnL: number | null,
   worstTradePnL: number | null,
   currentStreak: { type: "win" | "loss" | "none"; count: number },
+  webhookUrl?: string,
 ): Promise<void> {
   const winRate =
     totalTrades > 0 ? ((wins / totalTrades) * 100).toFixed(1) : "0.0";
@@ -144,7 +150,7 @@ ${emoji} **Daily P&L:** ${pnlFormatted}
 **Worst Trade:** ${worstTradeText}
 ══════════════════════════════════════`;
 
-  await sendWebhook(config.discordWebhookTrades, message);
+  await sendWebhook(webhookUrl || config.discordWebhookTrades, message);
 }
 
 //==============================================================================
@@ -152,9 +158,11 @@ ${emoji} **Daily P&L:** ${pnlFormatted}
 //==============================================================================
 
 // Send app startup notification
+// webhookUrl: optional override, falls back to global config
 export async function sendStartup(
   mode: string,
   symbols: string[],
+  webhookUrl?: string,
 ): Promise<void> {
   const message = `🚀 **SignalFlow Started**
 **Mode:** ${mode}
@@ -162,24 +170,27 @@ export async function sendStartup(
 **Time:** ${formatEstTime(new Date())} EST
 **Status:** Initializing...`;
 
-  await sendWebhook(config.discordWebhookSystem, message);
+  await sendWebhook(webhookUrl || config.discordWebhookSystem, message);
 }
 
 // Send app shutdown notification
-export async function sendShutdown(reason: string): Promise<void> {
+// webhookUrl: optional override, falls back to global config
+export async function sendShutdown(reason: string, webhookUrl?: string): Promise<void> {
   const message = `🌙 **SignalFlow Shutdown**
 **Reason:** ${reason}
 **Time:** ${formatEstTime(new Date())} EST`;
 
-  await sendWebhook(config.discordWebhookSystem, message);
+  await sendWebhook(webhookUrl || config.discordWebhookSystem, message);
 }
 
 // Send opening range calculated notification
+// webhookUrl: optional override, falls back to global config
 export async function sendOpeningRange(
   symbol: string,
   high: number,
   low: number,
   sizePercent: number,
+  webhookUrl?: string,
 ): Promise<void> {
   const sizeInDollars = high - low;
 
@@ -195,13 +206,15 @@ export async function sendOpeningRange(
 ✅ Range qualifies for trading
 🔍 Monitoring for breakout...`;
 
-  await sendWebhook(config.discordWebhookSystem, message);
+  await sendWebhook(webhookUrl || config.discordWebhookSystem, message);
 }
 
 // Send opening range skipped notification
+// webhookUrl: optional override, falls back to global config
 export async function sendOpeningRangeSkipped(
   symbol: string,
   reason: string,
+  webhookUrl?: string,
 ): Promise<void> {
   // Add explanation based on rejection type
   let explanation = "";
@@ -221,16 +234,18 @@ export async function sendOpeningRangeSkipped(
 **Reason:** ${reason}${explanation}
 **Status:** No trades will be taken today for ${symbol}`;
 
-  await sendWebhook(config.discordWebhookSystem, message);
+  await sendWebhook(webhookUrl || config.discordWebhookSystem, message);
 }
 
 // Send monitoring status update
+// webhookUrl: optional override, falls back to global config
 export async function sendMonitoringUpdate(
   symbol: string,
   currentPrice: number,
   rangeHigh: number,
   rangeLow: number,
   tradesToday: number,
+  webhookUrl?: string,
 ): Promise<void> {
   const distanceToHigh = rangeHigh - currentPrice;
   const distanceToLow = currentPrice - rangeLow;
@@ -244,24 +259,27 @@ export async function sendMonitoringUpdate(
 **Trades Today:** ${tradesToday}
 **Time:** ${formatEstTime(new Date())} EST`;
 
-  await sendWebhook(config.discordWebhookSystem, message);
+  await sendWebhook(webhookUrl || config.discordWebhookSystem, message);
 }
 
 // Send market status notification
-export async function sendMarketStatus(status: string): Promise<void> {
+// webhookUrl: optional override, falls back to global config
+export async function sendMarketStatus(status: string, webhookUrl?: string): Promise<void> {
   const message = `🕐 **MARKET STATUS**
 ${status}`;
 
-  await sendWebhook(config.discordWebhookSystem, message);
+  await sendWebhook(webhookUrl || config.discordWebhookSystem, message);
 }
 
 // Send market open summary (mobile-friendly overview)
+// webhookUrl: optional override, falls back to global config
 export async function sendMarketOpenSummary(
   date: string,
   symbolCount: number,
   symbols: string[],
   maxTradesPerDay: number,
   cutoffTime: string,
+  webhookUrl?: string,
 ): Promise<void> {
   const message = `🌅 **MARKET OPEN - ${date}**
 ═══════════════════════
@@ -272,7 +290,7 @@ export async function sendMarketOpenSummary(
 ═══════════════════════
 📊 Waiting for opening range...`;
 
-  await sendWebhook(config.discordWebhookSystem, message);
+  await sendWebhook(webhookUrl || config.discordWebhookSystem, message);
 }
 
 //==============================================================================
@@ -280,9 +298,11 @@ export async function sendMarketOpenSummary(
 //==============================================================================
 
 // Send error notification
+// webhookUrl: optional override, falls back to global config
 export async function sendError(
   errorMessage: string,
   details?: string,
+  webhookUrl?: string,
 ): Promise<void> {
   let message = `🚨 **ERROR**
 ──────────────────────────
@@ -295,13 +315,15 @@ ${errorMessage}`;
   message += `\n──────────────────────────
 **Time:** ${formatEstTime(new Date())} EST`;
 
-  await sendWebhook(config.discordWebhookErrors, message);
+  await sendWebhook(webhookUrl || config.discordWebhookErrors, message);
 }
 
 // Send API failure notification
+// webhookUrl: optional override, falls back to global config
 export async function sendApiFailure(
   service: string,
   error: string,
+  webhookUrl?: string,
 ): Promise<void> {
   const message = `🚨 **API FAILURE**
 ──────────────────────────
@@ -310,14 +332,16 @@ export async function sendApiFailure(
 ──────────────────────────
 **Time:** ${formatEstTime(new Date())} EST`;
 
-  await sendWebhook(config.discordWebhookErrors, message);
+  await sendWebhook(webhookUrl || config.discordWebhookErrors, message);
 }
 
 // Send order rejection notification
+// webhookUrl: optional override, falls back to global config
 export async function sendOrderRejection(
   symbol: string,
   side: string,
   reason: string,
+  webhookUrl?: string,
 ): Promise<void> {
   const message = `🚨 **ORDER REJECTED**
 ──────────────────────────
@@ -327,13 +351,15 @@ export async function sendOrderRejection(
 ──────────────────────────
 **Time:** ${formatEstTime(new Date())} EST`;
 
-  await sendWebhook(config.discordWebhookErrors, message);
+  await sendWebhook(webhookUrl || config.discordWebhookErrors, message);
 }
 
 // Send position sync issue notification
+// webhookUrl: optional override, falls back to global config
 export async function sendPositionSyncIssue(
   symbol: string,
   issue: string,
+  webhookUrl?: string,
 ): Promise<void> {
   const message = `⚠️ **POSITION SYNC ISSUE**
 ──────────────────────────
@@ -343,5 +369,5 @@ export async function sendPositionSyncIssue(
 **Action:** Syncing with broker...
 **Time:** ${formatEstTime(new Date())} EST`;
 
-  await sendWebhook(config.discordWebhookErrors, message);
+  await sendWebhook(webhookUrl || config.discordWebhookErrors, message);
 }

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "ts-node src/main.ts",
+    "backtest": "ts-node src/backtester.ts",
     "build": "tsc"
   },
   "dependencies": {
