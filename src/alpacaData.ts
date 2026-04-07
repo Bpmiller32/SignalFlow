@@ -169,20 +169,23 @@ export async function fetch1MinCandles(
 
 // Fetch daily candles for a symbol (used for previous close and gap detection)
 // Returns the most recent N daily candles
+// asOfDate: optional date string (YYYY-MM-DD) to fetch candles relative to
+//           (used by backtester to get historical previous close instead of today's)
 export async function fetchDailyCandles(
   symbol: string,
   numDays: number,
+  asOfDate?: string,
 ): Promise<Candle[]> {
   try {
     await applyRateLimit();
 
-    logger.debug(`Fetching ${numDays} daily candles for ${symbol}`);
+    logger.debug(`Fetching ${numDays} daily candles for ${symbol}${asOfDate ? ` as of ${asOfDate}` : ""}`);
 
     const client = getAlpacaClient();
 
-    // Calculate date range (from N days ago to today)
-    const toDate = new Date();
-    const fromDate = new Date();
+    // Calculate date range - use asOfDate if provided (backtesting), otherwise today
+    const toDate = asOfDate ? new Date(`${asOfDate}T00:00:00-05:00`) : new Date();
+    const fromDate = new Date(toDate);
     fromDate.setDate(fromDate.getDate() - numDays - 10); // Extra buffer for weekends
 
     const startTime = fromDate.toISOString();

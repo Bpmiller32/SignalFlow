@@ -40,6 +40,7 @@ import * as path from "path";
 // ORB-specific parameters extracted from config.params
 // these map to the "params" object in strategies.json
 interface ORBParams {
+  inverseMode?: boolean; // if true, flip LONG↔SHORT — trade against the detected breakout direction
   openingRange: ORFilterConfig;
   breakout: BreakoutConfig;
   fvg: FVGConfig;
@@ -54,8 +55,10 @@ interface ORBSymbolState {
   openingRangeAvgVolume: number; // avg volume per minute from OR candle
   openingRangeStrength: number; // strength score 0-10
   breakoutDetected: boolean; // has a breakout been detected
+  breakoutDirection: "ABOVE" | "BELOW" | null; // direction of the breakout (locked at detection time)
   breakoutCandleWindow: Candle[]; // 3-candle FVG window [breakout, momentum, gap]
   breakoutTimestamp: Date | null; // when breakout was first detected
+  fvgAttempts: number; // how many FVG window attempts we've made (for retry)
   recentCandlesBuffer: Candle[]; // rolling buffer of last 20 candles for ATR
   done: boolean; // true when done trading this symbol today
 }
@@ -101,13 +104,15 @@ export class ORBStrategy implements IStrategy {
         openingRangeAvgVolume: 0,
         openingRangeStrength: 0,
         breakoutDetected: false,
+        breakoutDirection: null,
         breakoutCandleWindow: [],
         breakoutTimestamp: null,
+        fvgAttempts: 0,
         recentCandlesBuffer: [],
         done: false,
       });
     }
-    logger.normal(`ORBStrategy [${this.name}] initialized for ${symbols.length} symbols`);
+    logger.normal(`ORBStrategy [${this.name}] initialized for ${symbols.length} symbols${this.orbParams.inverseMode ? " 🔄 INVERSE MODE ENABLED" : ""}`);
   }
 
   // called at session start - fetches opening range data for all symbols
@@ -124,10 +129,12 @@ export class ORBStrategy implements IStrategy {
         }
 
         // fetch previous day close for gap detection
+        // pass the session date so backtesting gets the correct historical close
         let prevClose: number | null = null;
         try {
-          const dailyCandles = await alpacaData.fetchDailyCandles(symbol, 2);
+          const dailyCandles = await alpacaData.fetchDailyCandles(symbol, 5, date);
           if (dailyCandles.length >= 1) {
+            // take the last candle before the current date (most recent previous close)
             prevClose = dailyCandles[dailyCandles.length - 1].close;
           }
         } catch (_e) {
@@ -172,6 +179,29 @@ export class ORBStrategy implements IStrategy {
     // sizing failed - done for this symbol
     if (!posSize) {
       return { type: "DONE", positionSize: null, signal: null, reason: "sizing failed" };
+    }
+
+    // INVERSE MODE: flip direction AFTER sizing so the same trades fire but reversed
+    // Normal: breakout ABOVE → LONG, breakout BELOW → SHORT
+    // Inverse: breakout ABOVE → SHORT, breakout BELOW → LONG (fade the breakout)
+    if (this.orbParams.inverseMode) {
+      const origDir = result.signal.direction;
+      const newDir = origDir === "LONG" ? "SHORT" : "LONG";
+      result.signal.direction = newDir;
+
+      // swap stop and target so the trade makes sense in the opposite direction
+      const origStop = posSize.stopPrice;
+      const origTarget = posSize.targetPrice;
+      posSize.stopPrice = origTarget;
+      posSize.targetPrice = origStop;
+
+      // recalculate risk/reward for the swapped levels
+      posSize.riskPerShare = Math.abs(posSize.entryPrice - posSize.stopPrice);
+      posSize.potentialProfit = posSize.quantity * Math.abs(posSize.targetPrice - posSize.entryPrice);
+      posSize.totalRisk = posSize.quantity * posSize.riskPerShare;
+
+      result.signal.reason = `🔄 INVERSE: ${result.signal.reason}`;
+      logger.normal(`🔄 INVERSE MODE: Flipped ${origDir} → ${newDir} for ${symbol} | Stop: $${posSize.stopPrice.toFixed(2)} Target: $${posSize.targetPrice.toFixed(2)}`);
     }
 
     // return entry action with everything the runner needs to execute
@@ -496,8 +526,10 @@ export class ORBStrategy implements IStrategy {
       openingRangeAvgVolume: 0,
       openingRangeStrength: 0,
       breakoutDetected: false,
+      breakoutDirection: null,
       breakoutCandleWindow: [],
       breakoutTimestamp: null,
+      fvgAttempts: 0,
       recentCandlesBuffer: [],
       done: false,
     });
@@ -525,19 +557,22 @@ export class ORBStrategy implements IStrategy {
       return { signal: null, fvgPattern: null, done: false, rejectReason: "no breakout" };
     }
 
-    // breakout found - start collecting FVG window candles
+    // breakout found - lock the direction and start collecting FVG window candles
     logger.normal(`Breakout detected for ${symbol}: ${breakout.direction}`);
     symbolState.breakoutDetected = true;
+    symbolState.breakoutDirection = breakout.direction;
     symbolState.breakoutTimestamp = candle.timestamp;
     symbolState.breakoutCandleWindow = [candle];
+    symbolState.fvgAttempts = 0;
 
     return { signal: null, fvgPattern: null, done: false, rejectReason: "breakout detected, waiting for FVG" };
   }
 
   // check FVG pattern with the 3 collected candles
   private checkFVGPattern(symbol: string, candle: Candle, symbolState: ORBSymbolState): CandleResult {
-    // determine direction from price relative to opening range
-    const direction = candle.close > symbolState.openingRange!.high ? "BULLISH" : "BEARISH";
+    // use the LOCKED breakout direction, not the current candle's position
+    // this prevents the bug where a bullish breakout gets a bearish FVG check
+    const direction = symbolState.breakoutDirection === "ABOVE" ? "BULLISH" : "BEARISH";
 
     // check FVG using the pure function
     const fvgPattern = strategy.detectFVG(
@@ -545,16 +580,30 @@ export class ORBStrategy implements IStrategy {
     );
 
     if (!fvgPattern.detected) {
-      // FVG not confirmed - done for this symbol today
-      logger.normal(`FVG not confirmed for ${symbol}`);
+      // FVG not confirmed - try sliding the window forward (up to 3 retry attempts)
+      symbolState.fvgAttempts++;
+      const MAX_FVG_RETRIES = 3;
+      if (symbolState.fvgAttempts < MAX_FVG_RETRIES) {
+        // slide window: drop candle 1, shift 2→1 and 3→2, next candle will be new 3
+        logger.normal(`FVG attempt ${symbolState.fvgAttempts}/${MAX_FVG_RETRIES} failed for ${symbol}: ${fvgPattern.details || "FVG not met"} - retrying with next candle`);
+        symbolState.breakoutCandleWindow = [
+          symbolState.breakoutCandleWindow[1],
+          symbolState.breakoutCandleWindow[2],
+        ];
+        return { signal: null, fvgPattern: null, done: false, rejectReason: fvgPattern.details || "FVG not met, retrying" };
+      }
+
+      // all retries exhausted - done for this symbol today
+      logger.normal(`FVG not confirmed for ${symbol} after ${MAX_FVG_RETRIES} attempts`);
       symbolState.done = true;
       return { signal: null, fvgPattern: null, done: true, rejectReason: fvgPattern.details || "FVG not met" };
     }
 
-    // FVG confirmed - generate trading signal
+    // FVG confirmed - generate trading signal using the ORIGINAL breakout direction
+    // (inverse mode flips AFTER sizing so all 73 trades still fire with same stops/targets)
     const breakoutResult = {
       detected: true as const,
-      direction: (direction === "BULLISH" ? "ABOVE" : "BELOW") as "ABOVE" | "BELOW",
+      direction: symbolState.breakoutDirection as "ABOVE" | "BELOW",
       candle,
       openingRange: symbolState.openingRange!,
     };

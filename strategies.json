@@ -5,7 +5,7 @@
       "type": "opening-range-breakout",
       "enabled": true,
       "symbols": ["SPY", "AAPL", "MSFT", "NVDA", "GOOGL", "META", "GME"],
-      "maxTradesPerDay": 1,
+      "maxTradesPerDay": 2,
       "holdOvernight": false,
 
       "schedule": {
@@ -23,25 +23,26 @@
       },
 
       "params": {
+        "inverseMode": true,
         "openingRange": {
-          "minSize": 0.15,
-          "maxSize": 1.5,
-          "minStrength": 5.0,
-          "maxPremarketGap": 1.0,
+          "minSize": 0.10,
+          "maxSize": 2.0,
+          "minStrength": 3.0,
+          "maxPremarketGap": 3.0,
           "skipEarningsDays": true
         },
         "breakout": {
           "volumeMultiplier": 1.2,
-          "minAbsoluteVolume": 10000,
-          "maxFvgWindowMinutes": 5
+          "minAbsoluteVolume": 5000,
+          "maxFvgWindowMinutes": 15
         },
         "fvg": {
-          "bodyPercent": 55,
-          "minRangePercent": 0.15,
-          "overlapTolerance": 1.5,
-          "closePositionPercent": 25,
-          "requireVolumeConfirmation": true,
-          "volumeMultiplier": 1.5
+          "bodyPercent": 40,
+          "minRangePercent": 0.08,
+          "overlapTolerance": 2.0,
+          "closePositionPercent": 35,
+          "requireVolumeConfirmation": false,
+          "volumeMultiplier": 1.0
         },
         "positionSizing": {
           "mode": "FIXED",
@@ -50,7 +51,7 @@
           "maxValue": 10000,
           "minValue": 100,
           "useAdaptive": true,
-          "weakSignalSizePercent": 50
+          "weakSignalSizePercent": 75
         },
         "riskManagement": {
           "riskRewardRatio": 2.0,

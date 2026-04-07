@@ -16,6 +16,7 @@ import * as fs from "fs";
 import * as path from "path";
 import { addDays, isWeekend } from "date-fns";
 import config from "./config";
+import * as logger from "./logger";
 import * as alpacaData from "./alpacaData";
 import { IStrategy } from "./strategies/IStrategy";
 import { ORBStrategy } from "./strategies/orbStrategy";
@@ -394,15 +395,19 @@ async function executeBacktest(
   strategyId: string | null,
   printOutput: boolean,
 ): Promise<{ stats: any; trades: BacktestTrade[] }> {
+  // always log to logger so backtest activity is recorded
+  logger.normal(`📊 Starting backtest: ${fromDate} to ${toDate}`);
   if (printOutput) console.log(`\nStarting backtest: ${fromDate} to ${toDate}`);
 
   // load the strategy from strategies.json
   const { strategy, stratConfig } = loadStrategy(strategyId);
+  logger.normal(`Backtest strategy: ${stratConfig.id} (${stratConfig.type}) | Symbols: ${stratConfig.symbols.join(", ")}`);
   if (printOutput) console.log(`Strategy: ${stratConfig.id} (${stratConfig.type})`);
   if (printOutput) console.log(`Symbols: ${stratConfig.symbols.join(", ")}`);
 
   // get trading days in range (weekdays only)
   const tradingDays = getTradingDays(fromDate, toDate);
+  logger.normal(`Backtest trading days: ${tradingDays.length}`);
   if (printOutput) console.log(`Trading days: ${tradingDays.length}`);
 
   // collect all trades across all days
@@ -411,6 +416,7 @@ async function executeBacktest(
 
   // replay each trading day through the strategy
   for (const date of tradingDays) {
+    logger.normal(`[${date}] Processing trading day...`);
     if (printOutput) process.stdout.write(`\r  Processing ${date}...`);
 
     // initialize strategy for this day (reset all internal state)
@@ -424,10 +430,14 @@ async function executeBacktest(
       try {
         // fetch 1-min candles for the trading day
         const candles1min = await alpacaData.fetch1MinCandles(symbol, date);
-        if (candles1min.length === 0) continue;
+        if (candles1min.length === 0) {
+          logger.normal(`[${date}] ${symbol} - No candle data, skipping`);
+          continue;
+        }
 
         // at least one symbol had data for this day
         daysWithData++;
+        logger.normal(`[${date}] ${symbol} - ${candles1min.length} candles loaded`);
 
         // track simulated position and whether we've entered a trade
         let simPos: SimPosition | null = null;
@@ -447,6 +457,8 @@ async function executeBacktest(
             const update = strategy.evaluatePosition(symbol, candle, pos);
             const trade = applyUpdate(simPos, update, candle);
             if (trade) {
+              const tSign = trade.pnl >= 0 ? "+" : "";
+              logger.normal(`[${date}] ${symbol} - EXIT @ ${candleTime} | ${trade.exitReason} | ${tSign}$${trade.pnl.toFixed(2)}`);
               allTrades.push(trade);
               simPos = null;
             }
@@ -464,8 +476,10 @@ async function executeBacktest(
             // strategy wants to enter a trade - create simulated position
             simPos = createSimPosition(action.positionSize, candle.timestamp);
             tradeExecuted = true;
+            logger.normal(`[${date}] ${symbol} - ENTRY @ ${candleTime} | ${simPos.side} ${simPos.quantity} shares @ $${simPos.entryPrice.toFixed(2)} | Stop: $${simPos.stopLoss.toFixed(2)} Target: $${simPos.takeProfit.toFixed(2)}`);
           } else if (action.type === "DONE") {
             // strategy is done with this symbol for today
+            logger.normal(`[${date}] ${symbol} - DONE @ ${candleTime} | ${action.reason}`);
             break;
           }
         }
@@ -482,6 +496,8 @@ async function executeBacktest(
           // add any partial exit profits
           pnl += simPos.partialPnL;
           const holdingMs = lastCandle.timestamp.getTime() - simPos.entryTime.getTime();
+          const eodSign = pnl >= 0 ? "+" : "";
+          logger.normal(`[${date}] ${symbol} - EOD CLOSE @ $${lastCandle.close.toFixed(2)} | ${eodSign}$${pnl.toFixed(2)}`);
 
           allTrades.push({
             date,
@@ -497,8 +513,14 @@ async function executeBacktest(
             partialPnL: simPos.partialPnL,
           });
         }
+
+        // log if no trade happened for this symbol today
+        if (!tradeExecuted) {
+          logger.normal(`[${date}] ${symbol} - No trade executed`);
+        }
       } catch (error) {
         // skip symbols/days with data errors
+        logger.normal(`[${date}] ${symbol} - ERROR: ${(error as Error).message}`);
         if (printOutput) console.log(`\n  Error on ${symbol} ${date}: ${(error as Error).message}`);
       }
     }
@@ -516,14 +538,20 @@ async function executeBacktest(
 
   const stats = computeStats(allTrades, totalCalendarDays, tradingDays.length);
 
-  // print results and save to file if CLI mode
+  // always log summary to logger
+  const pnlSign = stats.totalPnL >= 0 ? "+" : "";
+  logger.normal(`📊 Backtest complete: ${stats.totalTrades} trades | ${stats.wins}W/${stats.losses}L | ${pnlSign}$${stats.totalPnL.toFixed(2)} | ${stats.winRate.toFixed(1)}% win rate`);
+
+  // always save results to JSON file (both CLI and programmatic)
+  const outputPath = path.join(process.cwd(), "data", `backtest-${fromDate}-to-${toDate}.json`);
+  const output = { config: stratConfig, stats, trades: allTrades, runDate: new Date().toISOString() };
+  fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+  fs.writeFileSync(outputPath, JSON.stringify(output, null, 2));
+  logger.normal(`Backtest results saved to: ${outputPath}`);
+
+  // print formatted table to console if CLI mode
   if (printOutput) {
     printResults(stats, allTrades, stratConfig);
-    // save results to JSON file
-    const outputPath = path.join(process.cwd(), "data", `backtest-${fromDate}-to-${toDate}.json`);
-    const output = { config: stratConfig, stats, trades: allTrades, runDate: new Date().toISOString() };
-    fs.mkdirSync(path.dirname(outputPath), { recursive: true });
-    fs.writeFileSync(outputPath, JSON.stringify(output, null, 2));
     console.log(`Results saved to: ${outputPath}`);
   }
 

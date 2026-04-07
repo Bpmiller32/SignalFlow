@@ -71,9 +71,20 @@ export async function startBot(): Promise<void> {
     }
   });
 
-  // log when ready
-  client.once(Events.ClientReady, (c) => {
+  // log when ready and set avatar if available
+  client.once(Events.ClientReady, async (c) => {
     logger.normal(`Discord bot logged in as ${c.user.tag}`);
+
+    // try to set bot avatar from data/avatar.png (supports png, jpg, gif)
+    const avatarPath = path.join(process.cwd(), "data", "avatar.png");
+    if (fs.existsSync(avatarPath)) {
+      try {
+        await c.user.setAvatar(avatarPath);
+        logger.normal("Discord bot avatar updated from data/avatar.png");
+      } catch (error) {
+        logger.debug(`Could not set avatar: ${(error as Error).message}`);
+      }
+    }
   });
 
   // login
