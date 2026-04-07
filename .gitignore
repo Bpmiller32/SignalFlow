@@ -3,8 +3,9 @@
 .env
 .DS_Store
 data/logs/
-data/state/
-data/trades/
-data/rejections/
+data/*-state.json
+data/*-current-position.json
+data/*-trades.json
+data/*-rejections.json
 data/backtest-*.json
 data/all-time-stats.json

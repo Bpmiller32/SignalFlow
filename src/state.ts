@@ -1,11 +1,12 @@
 // state.ts - File-based state management and persistence
 // All critical state is persisted to JSON files so the system survives crashes.
 // The broker API is always the source of truth - files are a cache/journal.
-// File structure:
-//   data/state/{SYMBOL}-{DATE}-state.json       (daily state per symbol)
-//   data/state/{SYMBOL}-current-position.json   (current position if open)
-//   data/trades/{DATE}-trades.json              (trade history for day)
-//   data/trades/all-time-stats.json             (lifetime statistics)
+// Everything lives flat in data/ (only logs/ gets its own subfolder):
+//   data/{SYMBOL}-{DATE}-state.json         (daily state per symbol)
+//   data/{SYMBOL}-current-position.json     (current position if open)
+//   data/{DATE}-trades.json                 (trade history for day)
+//   data/{DATE}-rejections.json             (rejection log for day)
+//   data/all-time-stats.json                (lifetime statistics)
 
 import * as fs from "fs";
 import * as path from "path";
@@ -23,23 +24,19 @@ import * as logger from "./logger";
 
 // ---- DIRECTORY SETUP ----
 
-// paths for all data directories
+// everything lives flat in data/ (filenames are unique enough)
+// only logs/ gets its own subfolder because log files pile up fast
 const DATA_DIR = path.join(process.cwd(), "data");
-const STATE_DIR = path.join(DATA_DIR, "state");
-const TRADES_DIR = path.join(DATA_DIR, "trades");
-const REJECTIONS_DIR = path.join(DATA_DIR, "rejections");
 
-// ensure all required directories exist
+// ensure data directory exists
 function ensureDirectories(): void {
-  [DATA_DIR, STATE_DIR, TRADES_DIR, REJECTIONS_DIR].forEach((dir) => {
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-      logger.debug(`Created directory: ${dir}`);
-    }
-  });
+  if (!fs.existsSync(DATA_DIR)) {
+    fs.mkdirSync(DATA_DIR, { recursive: true });
+    logger.debug(`Created directory: ${DATA_DIR}`);
+  }
 }
 
-// create directories on module load
+// create directory on module load
 ensureDirectories();
 
 // ---- DATE UTILITIES ----
@@ -58,7 +55,7 @@ function getCurrentDateString(): string {
 // get file path for a symbol's daily state
 function getDailyStateFilePath(symbol: string, date?: string): string {
   const dateStr = date || getCurrentDateString();
-  return path.join(STATE_DIR, `${symbol}-${dateStr}-state.json`);
+  return path.join(DATA_DIR, `${symbol}-${dateStr}-state.json`);
 }
 
 // load daily state for a symbol, returns null if not found
@@ -163,7 +160,7 @@ export function markTradeExecuted(symbol: string): void {
 
 // get file path for a symbol's current position
 function getCurrentPositionFilePath(symbol: string): string {
-  return path.join(STATE_DIR, `${symbol}-current-position.json`);
+  return path.join(DATA_DIR, `${symbol}-current-position.json`);
 }
 
 // load current position for a symbol, returns null if no position
@@ -240,7 +237,7 @@ export function deleteCurrentPosition(symbol: string): void {
 // get file path for a date's trade history
 function getTradeHistoryFilePath(date?: string): string {
   const dateStr = date || getCurrentDateString();
-  return path.join(TRADES_DIR, `${dateStr}-trades.json`);
+  return path.join(DATA_DIR, `${dateStr}-trades.json`);
 }
 
 // load trade history for a specific date
@@ -524,7 +521,7 @@ export function logRejection(
 ): void {
   try {
     const date = getCurrentDateString();
-    const filePath = path.join(REJECTIONS_DIR, `${date}.json`);
+    const filePath = path.join(DATA_DIR, `${date}-rejections.json`);
 
     // load existing or create new
     let log: import("./types").RejectionLog;
@@ -549,7 +546,7 @@ export function getRejectionSummary(date: string): {
   bySymbol: { [key: string]: number };
 } {
   try {
-    const filePath = path.join(REJECTIONS_DIR, `${date}.json`);
+    const filePath = path.join(DATA_DIR, `${date}-rejections.json`);
     if (!fs.existsSync(filePath)) {
       return { total: 0, byStage: {}, bySymbol: {} };
     }

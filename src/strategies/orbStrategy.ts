@@ -10,6 +10,7 @@
 // 5. Manages open positions with trailing stops and partial exits
 
 import { IStrategy } from "./IStrategy";
+import * as orbHelpers from "./orbHelpers";
 import {
   Candle,
   Signal,
@@ -30,9 +31,6 @@ import {
   RiskManagementConfig,
 } from "../types";
 import * as alpacaData from "../alpacaData";
-import * as strategy from "../strategy";
-import * as filters from "../filters";
-import * as positionSizer from "../positionSizer";
 import * as logger from "../logger";
 import * as fs from "fs";
 import * as path from "path";
@@ -75,24 +73,15 @@ export class ORBStrategy implements IStrategy {
   // ORB-specific params extracted from config.params
   private orbParams: ORBParams;
 
-  // global config from .env (needed for legacy pure function compatibility)
-  private globalConfig: Config;
-
   // per-symbol internal state
   private symbolStates: Map<string, ORBSymbolState>;
 
-  // cached Config-shaped object for calling existing pure functions
-  private legacyConfig: Config;
-
-  constructor(config: StrategyConfig, globalConfig: Config) {
+  constructor(config: StrategyConfig, _globalConfig: Config) {
     this.name = config.id;
     this.config = config;
     // extract ORB-specific params from the generic params object
     this.orbParams = config.params as ORBParams;
-    this.globalConfig = globalConfig;
     this.symbolStates = new Map();
-    // build a Config-shaped object so legacy pure functions work unchanged
-    this.legacyConfig = this.buildLegacyConfig();
   }
 
   // set up internal state for each symbol
@@ -261,7 +250,7 @@ export class ORBStrategy implements IStrategy {
       const symbolState = this.symbolStates.get(symbol);
       let trailingDistance: number;
       if (rm.useAtrStops && symbolState && symbolState.recentCandlesBuffer.length > rm.atrPeriod + 1) {
-        const atr = positionSizer.calculateATR(symbolState.recentCandlesBuffer, rm.atrPeriod);
+        const atr = orbHelpers.calculateATR(symbolState.recentCandlesBuffer, rm.atrPeriod);
         trailingDistance = atr * rm.trailingStopAtrMultiple;
       } else {
         // fallback: 1% of price
@@ -338,12 +327,12 @@ export class ORBStrategy implements IStrategy {
     const orConfig = this.orbParams.openingRange;
 
     // calculate the opening range from the 5-min candle
-    const openingRange = strategy.calculateOpeningRange(candle);
+    const openingRange = orbHelpers.calculateOpeningRange(candle);
 
     // check pre-market gap filter
     if (previousDayClose !== null) {
-      const gapPercent = strategy.calculatePreMarketGap(candle, previousDayClose);
-      if (strategy.isPreMarketGapTooLarge(gapPercent, orConfig.maxPremarketGap)) {
+      const gapPercent = orbHelpers.calculatePreMarketGap(candle, previousDayClose);
+      if (orbHelpers.isPreMarketGapTooLarge(gapPercent, orConfig.maxPremarketGap)) {
         const reason = `Pre-market gap ${gapPercent >= 0 ? "+" : ""}${gapPercent.toFixed(2)}% exceeds ${orConfig.maxPremarketGap}% limit`;
         symbolState.done = true;
         return { accepted: false, openingRange: null, rejectReason: reason, strength: 0 };
@@ -359,8 +348,8 @@ export class ORBStrategy implements IStrategy {
       }
     }
 
-    // check range size validity using legacy config
-    const isValid = strategy.isOpeningRangeValid(openingRange, candle.close, this.legacyConfig);
+    // check range size validity
+    const isValid = orbHelpers.isOpeningRangeValid(openingRange, orConfig);
     if (!isValid) {
       const reason = `Range size ${openingRange.size.toFixed(2)}% outside ${orConfig.minSize}%-${orConfig.maxSize}% limits`;
       symbolState.done = true;
@@ -368,7 +357,7 @@ export class ORBStrategy implements IStrategy {
     }
 
     // score opening range strength
-    const strength = strategy.scoreOpeningRangeStrength(openingRange, candle, this.legacyConfig);
+    const strength = orbHelpers.scoreOpeningRangeStrength(openingRange, candle, orConfig);
     if (strength < orConfig.minStrength) {
       const reason = `Strength ${strength.toFixed(1)}/10 below minimum ${orConfig.minStrength}`;
       symbolState.done = true;
@@ -381,7 +370,7 @@ export class ORBStrategy implements IStrategy {
     // all filters passed - save state and accept
     symbolState.openingRange = openingRange;
     symbolState.openingRangeCandle = candle;
-    symbolState.openingRangeAvgVolume = strategy.calculateOpeningRangeAvgVolume(candle);
+    symbolState.openingRangeAvgVolume = orbHelpers.calculateOpeningRangeAvgVolume(candle);
     symbolState.openingRangeStrength = strength;
 
     return { accepted: true, openingRange, rejectReason: "", strength };
@@ -458,16 +447,16 @@ export class ORBStrategy implements IStrategy {
     // grade signal quality for adaptive sizing
     let signalQuality: "STRONG" | "WEAK" = "STRONG";
     if (sizingConfig.useAdaptive) {
-      signalQuality = filters.gradeSignalQuality(fvgPattern, this.legacyConfig);
+      signalQuality = orbHelpers.gradeSignalQuality(fvgPattern, this.orbParams.fvg);
     }
 
-    // calculate base position size using existing pure functions
+    // calculate base position size
     const recentCandles = symbolState.recentCandlesBuffer.length >= riskConfig.atrPeriod + 1
       ? symbolState.recentCandlesBuffer
       : [];
 
-    let posSize = positionSizer.calculatePositionSize(
-      signal, openingRange, accountEquity, this.legacyConfig, recentCandles,
+    let posSize = orbHelpers.calculatePositionSize(
+      signal, openingRange, accountEquity, sizingConfig, riskConfig, recentCandles,
     );
 
     if (!posSize) {
@@ -476,7 +465,7 @@ export class ORBStrategy implements IStrategy {
     }
 
     // apply opening range strength adjustment (weaker ranges get smaller positions)
-    const strengthMultiplier = filters.adjustSizeForOpeningRangeStrength(symbolState.openingRangeStrength);
+    const strengthMultiplier = orbHelpers.adjustSizeForOpeningRangeStrength(symbolState.openingRangeStrength);
     if (strengthMultiplier === 0) {
       logger.normal(`Trade rejected for ${symbol}: OR strength too low`);
       return null;
@@ -508,7 +497,7 @@ export class ORBStrategy implements IStrategy {
     }
 
     // validate position against min/max limits
-    if (!positionSizer.validatePositionSize(posSize, this.legacyConfig)) {
+    if (!orbHelpers.validatePositionSize(posSize, sizingConfig)) {
       logger.normal(`Position validation failed for ${symbol}`);
       return null;
     }
@@ -547,7 +536,7 @@ export class ORBStrategy implements IStrategy {
   // check for breakout on a candle (called when no breakout detected yet)
   private checkForBreakout(symbol: string, candle: Candle, symbolState: ORBSymbolState): CandleResult {
     // use the pure function to detect breakout above/below the opening range
-    const breakout = strategy.detectBreakout(candle, symbolState.openingRange!, symbolState.openingRangeAvgVolume);
+    const breakout = orbHelpers.detectBreakout(candle, symbolState.openingRange!, symbolState.openingRangeAvgVolume);
 
     if (!breakout.detected) {
       return { signal: null, fvgPattern: null, done: false, rejectReason: "no breakout" };
@@ -571,8 +560,8 @@ export class ORBStrategy implements IStrategy {
     const direction = symbolState.breakoutDirection === "ABOVE" ? "BULLISH" : "BEARISH";
 
     // check FVG using the pure function
-    const fvgPattern = strategy.detectFVG(
-      symbolState.breakoutCandleWindow, direction, this.legacyConfig, symbolState.openingRangeAvgVolume,
+    const fvgPattern = orbHelpers.detectFVG(
+      symbolState.breakoutCandleWindow, direction, this.orbParams.fvg, symbolState.openingRangeAvgVolume,
     );
 
     if (!fvgPattern.detected) {
@@ -596,7 +585,7 @@ export class ORBStrategy implements IStrategy {
     }
 
     // FVG confirmed - generate trading signal using the ORIGINAL breakout direction
-    // (inverse mode flips AFTER sizing so all 73 trades still fire with same stops/targets)
+    // (inverse mode flips AFTER sizing so all trades still fire with same stops/targets)
     const breakoutResult = {
       detected: true as const,
       direction: symbolState.breakoutDirection as "ABOVE" | "BELOW",
@@ -604,7 +593,7 @@ export class ORBStrategy implements IStrategy {
       openingRange: symbolState.openingRange!,
     };
 
-    const signal = strategy.generateSignal(symbol, breakoutResult, fvgPattern, candle.close);
+    const signal = orbHelpers.generateSignal(symbol, breakoutResult, fvgPattern, candle.close);
     if (!signal) {
       symbolState.done = true;
       return { signal: null, fvgPattern: null, done: true, rejectReason: "signal generation failed" };
@@ -656,7 +645,7 @@ export class ORBStrategy implements IStrategy {
 
     // gap filter result
     if (previousDayClose !== null) {
-      const gap = strategy.calculatePreMarketGap(candle, previousDayClose);
+      const gap = orbHelpers.calculatePreMarketGap(candle, previousDayClose);
       const passed = Math.abs(gap) <= orConfig.maxPremarketGap;
       logger.normal(`${passed ? "✅" : "❌"} Gap: ${gap >= 0 ? "+" : ""}${gap.toFixed(2)}% (limit: ${orConfig.maxPremarketGap}%)`);
     } else {
@@ -674,60 +663,5 @@ export class ORBStrategy implements IStrategy {
     logger.normal(`${strPassed ? "✅" : "❌"} Strength: ${strength.toFixed(1)}/10 (need ${orConfig.minStrength})`);
 
     logger.normal(`${"═".repeat(60)}\n`);
-  }
-
-  // build a Config-compatible object from JSON config + global config
-  // needed because existing pure functions (strategy.ts, positionSizer.ts, filters.ts) expect Config type
-  private buildLegacyConfig(): Config {
-    const p = this.orbParams;
-    return {
-      // global values from .env
-      mode: this.globalConfig.mode,
-      alpacaApiKey: this.globalConfig.alpacaApiKey,
-      alpacaSecretKey: this.globalConfig.alpacaSecretKey,
-      alpacaBaseUrl: this.globalConfig.alpacaBaseUrl,
-      discordBotToken: this.globalConfig.discordBotToken,
-      discordGuildId: this.globalConfig.discordGuildId,
-      discordChannelTrades: this.globalConfig.discordChannelTrades,
-      discordChannelSystem: this.globalConfig.discordChannelSystem,
-      discordChannelErrors: this.globalConfig.discordChannelErrors,
-      logLevel: this.globalConfig.logLevel,
-      saveCandleData: this.globalConfig.saveCandleData,
-      // strategy values from JSON params
-      symbols: this.config.symbols,
-      maxTradesPerDay: this.config.maxTradesPerDay,
-      strategyCutoffTime: this.config.schedule.tradingCutoff,
-      positionSizeMode: p.positionSizing.mode,
-      fixedPositionSize: p.positionSizing.fixedSize,
-      accountRiskPercent: p.positionSizing.accountRiskPercent,
-      maxPositionValue: p.positionSizing.maxValue,
-      minPositionValue: p.positionSizing.minValue,
-      riskRewardRatio: p.riskManagement.riskRewardRatio,
-      stopLossBufferPercent: p.riskManagement.stopLossBufferPercent,
-      useAtrStops: p.riskManagement.useAtrStops,
-      atrPeriod: p.riskManagement.atrPeriod,
-      atrStopMultiplier: p.riskManagement.atrStopMultiplier,
-      useTrailingStops: p.riskManagement.useTrailingStops,
-      trailingStopActivation: p.riskManagement.trailingStopActivation,
-      trailingStopAtrMultiple: p.riskManagement.trailingStopAtrMultiple,
-      usePartialExits: p.riskManagement.usePartialExits,
-      partialExitAtRMultiple: p.riskManagement.partialExitAtRMultiple,
-      partialExitPercent: p.riskManagement.partialExitPercent,
-      useAdaptivePositionSizing: p.positionSizing.useAdaptive,
-      weakSignalSizePercent: p.positionSizing.weakSignalSizePercent,
-      openingRangeMinSize: p.openingRange.minSize,
-      openingRangeMaxSize: p.openingRange.maxSize,
-      fvgBodyPercent: p.fvg.bodyPercent,
-      fvgMinRangePercent: p.fvg.minRangePercent,
-      fvgOverlapTolerance: p.fvg.overlapTolerance,
-      fvgClosePositionPercent: p.fvg.closePositionPercent,
-      requireVolumeConfirmation: p.fvg.requireVolumeConfirmation,
-      volumeMultiplier: p.fvg.volumeMultiplier,
-      skipEarningsDays: p.openingRange.skipEarningsDays,
-      openingRangeMinStrength: p.openingRange.minStrength,
-      minAbsoluteVolumePerMinute: p.breakout.minAbsoluteVolume,
-      maxFvgWindowMinutes: p.breakout.maxFvgWindowMinutes,
-      maxPremarketGapPercent: p.openingRange.maxPremarketGap,
-    };
   }
 }

@@ -78,8 +78,36 @@ interface BacktestStats {
   profitFactor: number; // gross wins / gross losses
   averageHoldingMinutes: number;
   tradesPerDay: number;
-  // per-symbol breakdown
-  symbolStats: { [symbol: string]: { trades: number; pnl: number; winRate: number } };
+  // capital requirements
+  peakCapitalRequired: number; // most money tied up in positions at once on any single day
+  totalCapitalDeployed: number; // sum of all position sizes across all trades
+  returnOnCapital: number; // total P&L as % of peak capital required
+  simulatedAccountSize: number; // the account size used in the simulation
+  // per-symbol detailed breakdown
+  symbolStats: { [symbol: string]: SymbolStats };
+}
+
+// detailed per-symbol statistics for evaluating which tickers to keep or drop
+interface SymbolStats {
+  trades: number; // total signals that triggered
+  wins: number; // winning trades
+  losses: number; // losing trades
+  winRate: number; // win percentage
+  totalPnL: number; // total dollar P&L
+  avgPnL: number; // average P&L per trade
+  bestTrade: number; // best single trade
+  worstTrade: number; // worst single trade
+  avgWin: number; // average winning trade P&L
+  avgLoss: number; // average losing trade P&L
+  profitFactor: number; // gross wins / gross losses
+  longs: number; // how many long trades
+  shorts: number; // how many short trades
+  longWinRate: number; // win rate on longs
+  shortWinRate: number; // win rate on shorts
+  avgHoldingMinutes: number; // average trade duration
+  signalRate: number; // % of trading days that generated a trade
+  // exit reason breakdown
+  exitReasons: { [reason: string]: number };
 }
 
 // parse command line args
@@ -271,26 +299,25 @@ function computeStats(trades: BacktestTrade[], totalDays: number, tradingDays: n
     if (drawdown > maxDrawdown) maxDrawdown = drawdown;
   }
 
-  // per-symbol stats
-  const symbolStats: { [key: string]: { trades: number; pnl: number; wins: number } } = {};
-  for (const trade of trades) {
-    if (!symbolStats[trade.symbol]) {
-      symbolStats[trade.symbol] = { trades: 0, pnl: 0, wins: 0 };
-    }
-    symbolStats[trade.symbol].trades++;
-    symbolStats[trade.symbol].pnl += trade.pnl;
-    if (trade.pnl > 0) symbolStats[trade.symbol].wins++;
-  }
+  // build detailed per-symbol stats
+  const symbolStats = computeSymbolStats(trades, tradingDays);
 
-  // format symbol stats with win rate
-  const symbolStatsFormatted: { [key: string]: { trades: number; pnl: number; winRate: number } } = {};
-  for (const [sym, s] of Object.entries(symbolStats)) {
-    symbolStatsFormatted[sym] = {
-      trades: s.trades,
-      pnl: s.pnl,
-      winRate: s.trades > 0 ? (s.wins / s.trades) * 100 : 0,
-    };
+  // calculate capital requirements from actual trade data
+  // group trades by date and sum position values to find peak daily capital
+  const tradesByDate: { [date: string]: number } = {};
+  let totalCapitalDeployed = 0;
+  for (const trade of trades) {
+    const posValue = trade.entryPrice * trade.quantity;
+    totalCapitalDeployed += posValue;
+    tradesByDate[trade.date] = (tradesByDate[trade.date] || 0) + posValue;
   }
+  // peak capital = most money tied up in positions on any single day
+  const peakCapitalRequired = Object.values(tradesByDate).length > 0
+    ? Math.max(...Object.values(tradesByDate))
+    : 0;
+
+  const totalPnL = trades.reduce((sum, t) => sum + t.pnl, 0);
+  const returnOnCapital = peakCapitalRequired > 0 ? (totalPnL / peakCapitalRequired) * 100 : 0;
 
   return {
     totalDays,
@@ -299,16 +326,80 @@ function computeStats(trades: BacktestTrade[], totalDays: number, tradingDays: n
     wins: wins.length,
     losses: losses.length,
     winRate: trades.length > 0 ? (wins.length / trades.length) * 100 : 0,
-    totalPnL: trades.reduce((sum, t) => sum + t.pnl, 0),
-    averagePnL: trades.length > 0 ? trades.reduce((sum, t) => sum + t.pnl, 0) / trades.length : 0,
+    totalPnL,
+    averagePnL: trades.length > 0 ? totalPnL / trades.length : 0,
     bestTrade: trades.length > 0 ? Math.max(...trades.map((t) => t.pnl)) : 0,
     worstTrade: trades.length > 0 ? Math.min(...trades.map((t) => t.pnl)) : 0,
     maxDrawdown,
     profitFactor: grossLosses > 0 ? grossWins / grossLosses : grossWins > 0 ? Infinity : 0,
     averageHoldingMinutes: trades.length > 0 ? trades.reduce((sum, t) => sum + t.holdingMinutes, 0) / trades.length : 0,
     tradesPerDay: tradingDays > 0 ? trades.length / tradingDays : 0,
-    symbolStats: symbolStatsFormatted,
+    peakCapitalRequired,
+    totalCapitalDeployed,
+    returnOnCapital,
+    simulatedAccountSize: 100000,
+    symbolStats,
   };
+}
+
+// compute detailed per-symbol stats from all trades
+function computeSymbolStats(trades: BacktestTrade[], tradingDays: number): { [symbol: string]: SymbolStats } {
+  // group trades by symbol
+  const bySymbol: { [symbol: string]: BacktestTrade[] } = {};
+  for (const trade of trades) {
+    if (!bySymbol[trade.symbol]) {
+      bySymbol[trade.symbol] = [];
+    }
+    bySymbol[trade.symbol].push(trade);
+  }
+
+  // compute stats for each symbol
+  const result: { [symbol: string]: SymbolStats } = {};
+
+  for (const [symbol, symbolTrades] of Object.entries(bySymbol)) {
+    const symWins = symbolTrades.filter((t) => t.pnl > 0);
+    const symLosses = symbolTrades.filter((t) => t.pnl <= 0);
+    const symGrossWins = symWins.reduce((sum, t) => sum + t.pnl, 0);
+    const symGrossLosses = Math.abs(symLosses.reduce((sum, t) => sum + t.pnl, 0));
+
+    // long vs short breakdown
+    const longTrades = symbolTrades.filter((t) => t.side === "LONG");
+    const shortTrades = symbolTrades.filter((t) => t.side === "SHORT");
+    const longWins = longTrades.filter((t) => t.pnl > 0).length;
+    const shortWins = shortTrades.filter((t) => t.pnl > 0).length;
+
+    // exit reason breakdown
+    const exitReasons: { [reason: string]: number } = {};
+    for (const t of symbolTrades) {
+      exitReasons[t.exitReason] = (exitReasons[t.exitReason] || 0) + 1;
+    }
+
+    // average holding time
+    const totalHoldingMinutes = symbolTrades.reduce((sum, t) => sum + t.holdingMinutes, 0);
+
+    result[symbol] = {
+      trades: symbolTrades.length,
+      wins: symWins.length,
+      losses: symLosses.length,
+      winRate: symbolTrades.length > 0 ? (symWins.length / symbolTrades.length) * 100 : 0,
+      totalPnL: symbolTrades.reduce((sum, t) => sum + t.pnl, 0),
+      avgPnL: symbolTrades.length > 0 ? symbolTrades.reduce((sum, t) => sum + t.pnl, 0) / symbolTrades.length : 0,
+      bestTrade: symbolTrades.length > 0 ? Math.max(...symbolTrades.map((t) => t.pnl)) : 0,
+      worstTrade: symbolTrades.length > 0 ? Math.min(...symbolTrades.map((t) => t.pnl)) : 0,
+      avgWin: symWins.length > 0 ? symGrossWins / symWins.length : 0,
+      avgLoss: symLosses.length > 0 ? -symGrossLosses / symLosses.length : 0,
+      profitFactor: symGrossLosses > 0 ? symGrossWins / symGrossLosses : symGrossWins > 0 ? Infinity : 0,
+      longs: longTrades.length,
+      shorts: shortTrades.length,
+      longWinRate: longTrades.length > 0 ? (longWins / longTrades.length) * 100 : 0,
+      shortWinRate: shortTrades.length > 0 ? (shortWins / shortTrades.length) * 100 : 0,
+      avgHoldingMinutes: symbolTrades.length > 0 ? totalHoldingMinutes / symbolTrades.length : 0,
+      signalRate: tradingDays > 0 ? (symbolTrades.length / tradingDays) * 100 : 0,
+      exitReasons,
+    };
+  }
+
+  return result;
 }
 
 // print results to console in a formatted table
@@ -341,17 +432,75 @@ function printResults(stats: BacktestStats, trades: BacktestTrade[], stratConfig
   console.log(`Max Drawdown:     -$${stats.maxDrawdown.toFixed(2)}`);
   console.log(`Profit Factor:    ${stats.profitFactor === Infinity ? "∞" : stats.profitFactor.toFixed(2)}`);
 
+  // capital requirements
+  console.log(`\nCAPITAL`);
+  console.log(`${"─".repeat(40)}`);
+  console.log(`Peak Capital:     $${stats.peakCapitalRequired.toFixed(2)} (most $ in positions on one day)`);
+  console.log(`Total Deployed:   $${stats.totalCapitalDeployed.toFixed(2)} (sum of all position sizes)`);
+  console.log(`Return on Capital: ${stats.returnOnCapital >= 0 ? "+" : ""}${stats.returnOnCapital.toFixed(2)}% (P&L / peak capital)`);
+  console.log(`Simulated Acct:   $${stats.simulatedAccountSize.toLocaleString()}`);
+
   // timing
   console.log(`\nTIMING`);
   console.log(`${"─".repeat(40)}`);
   console.log(`Avg Hold Time:    ${stats.averageHoldingMinutes.toFixed(0)} minutes`);
 
-  // per-symbol breakdown
-  console.log(`\nPER-SYMBOL BREAKDOWN`);
-  console.log(`${"─".repeat(40)}`);
-  for (const [sym, s] of Object.entries(stats.symbolStats)) {
-    const symPnlSign = s.pnl >= 0 ? "+" : "";
-    console.log(`${sym.padEnd(8)} ${String(s.trades).padStart(3)} trades  ${(symPnlSign + "$" + s.pnl.toFixed(2)).padStart(12)}  ${s.winRate.toFixed(0)}% win`);
+  // ticker scorecard - detailed per-symbol analysis for keep/drop decisions
+  console.log(`\nTICKER SCORECARD`);
+  console.log(`${"═".repeat(70)}`);
+
+  // sort symbols by total P&L (best performers first)
+  const sortedSymbols = Object.entries(stats.symbolStats)
+    .sort((a, b) => b[1].totalPnL - a[1].totalPnL);
+
+  for (const [sym, s] of sortedSymbols) {
+    const pSign = s.totalPnL >= 0 ? "+" : "";
+    const emoji = s.totalPnL > 0 ? "🟢" : s.totalPnL < 0 ? "🔴" : "⚪";
+    const pfStr = s.profitFactor === Infinity ? "∞" : s.profitFactor.toFixed(2);
+
+    console.log(`\n${emoji} ${sym}`);
+    console.log(`${"─".repeat(50)}`);
+
+    // core performance
+    console.log(`  Trades: ${s.trades} (${s.wins}W / ${s.losses}L) | Win Rate: ${s.winRate.toFixed(0)}%`);
+    console.log(`  P&L:   ${pSign}$${s.totalPnL.toFixed(2)} | Avg: ${s.avgPnL >= 0 ? "+" : ""}$${s.avgPnL.toFixed(2)}/trade`);
+    console.log(`  Best:  +$${s.bestTrade.toFixed(2)} | Worst: $${s.worstTrade.toFixed(2)}`);
+
+    // edge quality
+    console.log(`  Avg Win: +$${s.avgWin.toFixed(2)} | Avg Loss: $${s.avgLoss.toFixed(2)} | PF: ${pfStr}`);
+
+    // direction breakdown
+    if (s.longs > 0 || s.shorts > 0) {
+      const longStr = s.longs > 0 ? `${s.longs}L (${s.longWinRate.toFixed(0)}% win)` : "0L";
+      const shortStr = s.shorts > 0 ? `${s.shorts}S (${s.shortWinRate.toFixed(0)}% win)` : "0S";
+      console.log(`  Sides: ${longStr} | ${shortStr}`);
+    }
+
+    // timing and activity
+    console.log(`  Avg Hold: ${s.avgHoldingMinutes.toFixed(0)} min | Signal Rate: ${s.signalRate.toFixed(1)}% of days`);
+
+    // exit reasons
+    const reasonParts: string[] = [];
+    for (const [reason, count] of Object.entries(s.exitReasons)) {
+      reasonParts.push(`${reason}: ${count}`);
+    }
+    if (reasonParts.length > 0) {
+      console.log(`  Exits: ${reasonParts.join(" | ")}`);
+    }
+  }
+
+  // summary ranking table (compact one-line-per-symbol for quick scanning)
+  console.log(`\n\nRANKING (sorted by P&L)`);
+  console.log(`${"─".repeat(70)}`);
+  console.log(`${"Symbol".padEnd(8)} ${"Trades".padStart(6)} ${"Win%".padStart(5)} ${"P&L".padStart(12)} ${"Avg P&L".padStart(10)} ${"PF".padStart(6)} ${"Signal%".padStart(8)}`);
+  console.log(`${"─".repeat(70)}`);
+  for (const [sym, s] of sortedSymbols) {
+    const pSign = s.totalPnL >= 0 ? "+" : "";
+    const aSign = s.avgPnL >= 0 ? "+" : "";
+    const pfStr = s.profitFactor === Infinity ? "∞" : s.profitFactor.toFixed(2);
+    console.log(
+      `${sym.padEnd(8)} ${String(s.trades).padStart(6)} ${(s.winRate.toFixed(0) + "%").padStart(5)} ${(pSign + "$" + s.totalPnL.toFixed(2)).padStart(12)} ${(aSign + "$" + s.avgPnL.toFixed(2)).padStart(10)} ${pfStr.padStart(6)} ${(s.signalRate.toFixed(1) + "%").padStart(8)}`,
+    );
   }
 
   // trade log

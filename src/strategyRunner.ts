@@ -19,18 +19,10 @@ import {
   StrategiesFile,
 } from "./types";
 
-// resolved channel IDs for a strategy (resolved from env var names)
-interface ResolvedChannels {
-  trades: string; // resolved channel ID for trades
-  system: string; // resolved channel ID for system
-  errors: string; // resolved channel ID for errors
-}
-
 // entry in the strategies list
 interface StrategyEntry {
   strategy: IStrategy; // the strategy instance
   config: StrategyConfig; // its JSON config
-  channels: ResolvedChannels; // resolved discord channel IDs
 }
 
 // per-symbol tracking state managed by the runner (not the strategy)
@@ -79,9 +71,7 @@ export class StrategyRunner {
 
       // create the right strategy class based on type
       const strategyInstance = this.createStrategy(stratConfig);
-      // resolve discord channel env var names to actual channel IDs
-      const channels = this.resolveChannels(stratConfig);
-      this.strategies.push({ strategy: strategyInstance, config: stratConfig, channels });
+      this.strategies.push({ strategy: strategyInstance, config: stratConfig });
       logger.normal(`Loaded strategy: ${stratConfig.id} (${stratConfig.type}) for ${stratConfig.symbols.length} symbols`);
     }
 
@@ -335,7 +325,7 @@ export class StrategyRunner {
     state.saveCurrentPosition(position);
     state.markTradeExecuted(symbol);
 
-    // send discord notification to this strategy's trades channel
+    // send discord notification
     await discord.sendTradeEntry(
       symbol,
       signal.direction,
@@ -345,7 +335,6 @@ export class StrategyRunner {
       posSize.targetPrice,
       posSize.totalRisk,
       posSize.potentialProfit,
-      entry.channels.trades,
     );
 
     logger.normal(`🟢 TRADE ENTRY: ${signal.direction} ${posSize.quantity} shares of ${symbol} @ $${posSize.entryPrice.toFixed(2)}`);
@@ -426,9 +415,9 @@ export class StrategyRunner {
       track.position = null;
       track.done = true;
 
-      // send discord to this strategy's trades channel
+      // send discord notification
       const duration = `${Math.floor(trade.holdingTime / 60)} minutes`;
-      await discord.sendTradeExit(symbol, update.closePrice, pnl, trade.pnlPercent, update.closeReason, duration, entry.channels.trades);
+      await discord.sendTradeExit(symbol, update.closePrice, pnl, trade.pnlPercent, update.closeReason, duration);
 
       const pnlSign = pnl >= 0 ? "+" : "";
       logger.normal(`Position closed for ${symbol}: ${update.closeReason} | P&L: ${pnlSign}$${pnl.toFixed(2)}`);
@@ -573,17 +562,6 @@ export class StrategyRunner {
       logger.debug(`Waiting for ${targetTime} EST (current: ${currentTime} EST)`);
       await this.sleep(30000);
     }
-  }
-
-  // resolve notification config env var names to actual channel IDs
-  // falls back to global config if env var not found
-  private resolveChannels(stratConfig: StrategyConfig): ResolvedChannels {
-    const notifications = stratConfig.notifications;
-    return {
-      trades: process.env[notifications.trades] || this.globalConfig.discordChannelTrades,
-      system: process.env[notifications.system] || this.globalConfig.discordChannelSystem,
-      errors: process.env[notifications.errors] || this.globalConfig.discordChannelErrors,
-    };
   }
 
   // stop the runner gracefully (called by /restart command)

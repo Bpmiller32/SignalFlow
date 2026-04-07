@@ -55,7 +55,10 @@ export async function startBot(): Promise<void> {
       await handleCommand(interaction);
     } catch (error) {
       logger.error("Error handling discord command", error as Error);
-      const reply = { content: `❌ Error: ${(error as Error).message}`, ephemeral: true };
+      const reply = {
+        content: `❌ Error: ${(error as Error).message}`,
+        ephemeral: true,
+      };
       if (interaction.replied || interaction.deferred) {
         await interaction.followUp(reply).catch(() => {});
       } else {
@@ -83,7 +86,10 @@ export async function startBot(): Promise<void> {
 }
 
 // send a message to a discord channel by ID
-export async function sendToChannel(channelId: string, content: string): Promise<void> {
+export async function sendToChannel(
+  channelId: string,
+  content: string,
+): Promise<void> {
   if (!client || !channelId) return;
   try {
     const channel = await client.channels.fetch(channelId);
@@ -108,9 +114,24 @@ async function registerCommands(token: string, guildId: string): Promise<void> {
     new SlashCommandBuilder()
       .setName("backtest")
       .setDescription("Run a historical backtest")
-      .addStringOption((opt) => opt.setName("from").setDescription("Start date (YYYY-MM-DD)").setRequired(true))
-      .addStringOption((opt) => opt.setName("to").setDescription("End date (YYYY-MM-DD)").setRequired(true))
-      .addStringOption((opt) => opt.setName("strategy").setDescription("Strategy ID (optional)").setRequired(false)),
+      .addStringOption((opt) =>
+        opt
+          .setName("from")
+          .setDescription("Start date (YYYY-MM-DD)")
+          .setRequired(true),
+      )
+      .addStringOption((opt) =>
+        opt
+          .setName("to")
+          .setDescription("End date (YYYY-MM-DD)")
+          .setRequired(true),
+      )
+      .addStringOption((opt) =>
+        opt
+          .setName("strategy")
+          .setDescription("Strategy ID (optional)")
+          .setRequired(false),
+      ),
 
     new SlashCommandBuilder()
       .setName("balance")
@@ -131,11 +152,15 @@ async function registerCommands(token: string, guildId: string): Promise<void> {
     body: commands.map((c) => c.toJSON()),
   });
 
-  logger.normal(`Registered ${commands.length} slash commands in guild ${guildId}`);
+  logger.normal(
+    `Registered ${commands.length} slash commands in guild ${guildId}`,
+  );
 }
 
 // route a slash command to the right handler
-async function handleCommand(interaction: ChatInputCommandInteraction): Promise<void> {
+async function handleCommand(
+  interaction: ChatInputCommandInteraction,
+): Promise<void> {
   switch (interaction.commandName) {
     case "backtest":
       await handleBacktest(interaction);
@@ -155,29 +180,48 @@ async function handleCommand(interaction: ChatInputCommandInteraction): Promise<
 // ---- COMMAND HANDLERS ----
 
 // /backtest - run a historical backtest
-async function handleBacktest(interaction: ChatInputCommandInteraction): Promise<void> {
+async function handleBacktest(
+  interaction: ChatInputCommandInteraction,
+): Promise<void> {
   const fromDate = interaction.options.getString("from", true);
   const toDate = interaction.options.getString("to", true);
   const strategyId = interaction.options.getString("strategy") || undefined;
 
-  await interaction.reply(`🔄 Running backtest: ${fromDate} to ${toDate}${strategyId ? ` (${strategyId})` : ""}...`);
+  await interaction.reply(
+    `🔄 Running backtest: ${fromDate} to ${toDate}${strategyId ? ` (${strategyId})` : ""}...`,
+  );
 
   try {
     const result = await runBacktestProgrammatic(fromDate, toDate, strategyId);
     const msg = formatBacktestResults(result);
-    await interaction.editReply(msg);
+
+    // discord has a 2000 char limit per message
+    // send first chunk as editReply, rest as followUp messages
+    const chunks = splitMessage(msg, 2000);
+    await interaction.editReply(chunks[0]);
+    for (let i = 1; i < chunks.length; i++) {
+      await interaction.followUp(chunks[i]);
+    }
   } catch (error) {
-    await interaction.editReply(`❌ Backtest failed: ${(error as Error).message}`);
+    await interaction.editReply(
+      `❌ Backtest failed: ${(error as Error).message}`,
+    );
   }
 }
 
 // /balance - show P&L summary
-async function handleBalance(interaction: ChatInputCommandInteraction): Promise<void> {
+async function handleBalance(
+  interaction: ChatInputCommandInteraction,
+): Promise<void> {
   const stats = state.loadAllTimeStats();
-  const accountInfo = config.mode === "PAPER" ? paperBroker.getAccountInfo() : null;
+  const accountInfo =
+    config.mode === "PAPER" ? paperBroker.getAccountInfo() : null;
   const allTime = stats.allTimeStats;
   const pnlSign = allTime.totalPnL >= 0 ? "+" : "";
-  const winRate = allTime.totalTrades > 0 ? ((allTime.wins / allTime.totalTrades) * 100).toFixed(1) : "0.0";
+  const winRate =
+    allTime.totalTrades > 0
+      ? ((allTime.wins / allTime.totalTrades) * 100).toFixed(1)
+      : "0.0";
 
   let msg = `💰 **BALANCE & P&L**\n`;
   msg += `══════════════════════════\n`;
@@ -207,7 +251,8 @@ async function handleBalance(interaction: ChatInputCommandInteraction): Promise<
     for (const sym of symbolKeys) {
       const s = stats.symbolStats[sym];
       const sPnlSign = s.totalPnL >= 0 ? "+" : "";
-      const sWinRate = s.totalTrades > 0 ? ((s.wins / s.totalTrades) * 100).toFixed(0) : "0";
+      const sWinRate =
+        s.totalTrades > 0 ? ((s.wins / s.totalTrades) * 100).toFixed(0) : "0";
       msg += `${sym}: ${s.totalTrades} trades | ${sPnlSign}$${s.totalPnL.toFixed(2)} | ${sWinRate}% win\n`;
     }
   }
@@ -216,7 +261,9 @@ async function handleBalance(interaction: ChatInputCommandInteraction): Promise<
 }
 
 // /status - show what bot is doing
-async function handleStatus(interaction: ChatInputCommandInteraction): Promise<void> {
+async function handleStatus(
+  interaction: ChatInputCommandInteraction,
+): Promise<void> {
   let msg = `🤖 **BOT STATUS**\n`;
   msg += `══════════════════════════\n`;
   msg += `**Mode:** ${config.mode}\n`;
@@ -245,16 +292,15 @@ async function handleStatus(interaction: ChatInputCommandInteraction): Promise<v
 }
 
 // /help - show all commands
-async function handleHelp(interaction: ChatInputCommandInteraction): Promise<void> {
+async function handleHelp(
+  interaction: ChatInputCommandInteraction,
+): Promise<void> {
   const msg = `🤖 **SignalFlow Bot Commands**
 ══════════════════════════════
 
-📊 **/backtest** \`from\
+📊 **/backtest**
 Run a historical backtest on past market data.
 Example: \`/backtest from:2026-03-01 to:2026-04-01\`
-
-🔄**/br
-start**Stop the trading loop, reload strategies.json, and start fresh.
 
 💰 **/balance**
 Show total P&L, win rate, per-symbol breakdown, and account balance.
@@ -277,6 +323,7 @@ Strategies are defined in code (src/strategies/) and configured via strategies.j
 // ---- HELPERS ----
 
 // format backtest results for discord
+// returns an array of messages since the full output exceeds 2000 chars
 function formatBacktestResults(result: any): string {
   const s = result.stats;
   const pnlSign = s.totalPnL >= 0 ? "+" : "";
@@ -289,14 +336,60 @@ function formatBacktestResults(result: any): string {
   msg += `**Profit Factor:** ${s.profitFactor === Infinity ? "∞" : s.profitFactor.toFixed(2)}\n`;
   msg += `**Avg Hold:** ${s.averageHoldingMinutes.toFixed(0)} min\n`;
 
-  if (result.trades && result.trades.length > 0) {
-    msg += `\n**TRADES:**\n`;
-    for (const t of result.trades.slice(0, 20)) {
-      const tSign = t.pnl >= 0 ? "+" : "";
-      msg += `${t.date} ${t.symbol} ${t.side} ${tSign}$${t.pnl.toFixed(2)} (${t.exitReason})\n`;
-    }
-    if (result.trades.length > 20) {
-      msg += `... and ${result.trades.length - 20} more trades\n`;
+  // capital requirements
+  if (s.peakCapitalRequired) {
+    msg += `\n**CAPITAL**\n`;
+    msg += `──────────────────────────\n`;
+    msg += `**Peak Capital Needed:** $${s.peakCapitalRequired.toFixed(2)}\n`;
+    msg += `**Return on Capital:** ${s.returnOnCapital >= 0 ? "+" : ""}${s.returnOnCapital.toFixed(2)}%\n`;
+    msg += `**Total Deployed:** $${s.totalCapitalDeployed.toFixed(2)}\n`;
+  }
+
+  // detailed per-symbol scorecard (sorted by P&L, best first)
+  if (s.symbolStats && Object.keys(s.symbolStats).length > 0) {
+    const sorted = Object.entries(s.symbolStats)
+      .sort((a: any, b: any) => b[1].totalPnL - a[1].totalPnL);
+
+    msg += `\n**TICKER SCORECARD**\n`;
+    msg += `══════════════════════════\n`;
+
+    for (const [sym, ss] of sorted) {
+      const t = ss as any;
+      const emoji = t.totalPnL > 0 ? "🟢" : t.totalPnL < 0 ? "🔴" : "⚪";
+      const sp = t.totalPnL >= 0 ? "+" : "";
+      const pfStr = t.profitFactor === Infinity ? "∞" : t.profitFactor.toFixed(2);
+
+      msg += `\n${emoji} **${sym}**\n`;
+      msg += `──────────────────────────\n`;
+
+      // core performance
+      msg += `**Trades:** ${t.trades} (${t.wins}W / ${t.losses}L) | **Win Rate:** ${t.winRate.toFixed(0)}%\n`;
+      msg += `**P&L:** ${sp}$${t.totalPnL.toFixed(2)} | **Avg:** ${t.avgPnL >= 0 ? "+" : ""}$${t.avgPnL.toFixed(2)}/trade\n`;
+      msg += `**Best:** +$${t.bestTrade.toFixed(2)} | **Worst:** $${t.worstTrade.toFixed(2)}\n`;
+
+      // edge quality
+      msg += `**Avg Win:** +$${t.avgWin.toFixed(2)} | **Avg Loss:** $${t.avgLoss.toFixed(2)} | **PF:** ${pfStr}\n`;
+
+      // direction breakdown
+      if (t.longs > 0 || t.shorts > 0) {
+        const longStr = t.longs > 0 ? `${t.longs}L (${t.longWinRate.toFixed(0)}% win)` : "0L";
+        const shortStr = t.shorts > 0 ? `${t.shorts}S (${t.shortWinRate.toFixed(0)}% win)` : "0S";
+        msg += `**Sides:** ${longStr} | ${shortStr}\n`;
+      }
+
+      // timing and activity
+      msg += `**Avg Hold:** ${t.avgHoldingMinutes.toFixed(0)} min | **Signal Rate:** ${t.signalRate.toFixed(1)}% of days\n`;
+
+      // exit reasons
+      if (t.exitReasons) {
+        const reasonParts: string[] = [];
+        for (const [reason, count] of Object.entries(t.exitReasons)) {
+          reasonParts.push(`${reason}: ${count}`);
+        }
+        if (reasonParts.length > 0) {
+          msg += `**Exits:** ${reasonParts.join(" | ")}\n`;
+        }
+      }
     }
   }
 

@@ -4,7 +4,8 @@
 
 // ---- CONFIGURATION TYPES ----
 
-// main application configuration loaded from .env file
+// global application configuration loaded from .env file
+// strategy-specific settings live in strategies.json, not here
 export interface Config {
   mode: "PAPER" | "LIVE"; // trading mode
   // api credentials (alpaca for both data and trading)
@@ -14,60 +15,9 @@ export interface Config {
   // discord bot
   discordBotToken: string;
   discordGuildId: string;
-  discordChannelTrades: string;
-  discordChannelSystem: string;
-  discordChannelErrors: string;
-  // trading settings
-  symbols: string[]; // array of stock symbols to trade
-  maxTradesPerDay: number; // maximum trades per day per symbol
-  strategyCutoffTime: string; // time to stop entering new trades (EST)
-  // position sizing
-  positionSizeMode: "FIXED" | "RISK_BASED";
-  fixedPositionSize: number; // dollar amount for FIXED mode
-  accountRiskPercent: number; // percentage for RISK_BASED mode
-  maxPositionValue: number; // maximum position size in dollars
-  minPositionValue: number; // minimum position size in dollars
-  // risk management
-  riskRewardRatio: number; // target profit vs risk ratio (e.g., 2.0 = 2:1)
-  stopLossBufferPercent: number; // buffer added to stop loss
-  // ATR-based stops
-  useAtrStops: boolean; // use ATR for stops instead of opening range
-  atrPeriod: number; // ATR calculation period (e.g., 14)
-  atrStopMultiplier: number; // ATR multiplier for stops (e.g., 1.5)
-  // trailing stops
-  useTrailingStops: boolean; // enable trailing stops
-  trailingStopActivation: number; // R-multiple to activate trailing (e.g., 1.0 = 1R)
-  trailingStopAtrMultiple: number; // ATR distance for trailing stop
-  // partial exits
-  usePartialExits: boolean; // enable partial profit taking
-  partialExitAtRMultiple: number; // R-multiple to take partial profit (e.g., 1.0)
-  partialExitPercent: number; // percentage to exit (e.g., 50 = 50%)
-  // adaptive position sizing (size based on signal quality)
-  useAdaptivePositionSizing: boolean; // enable signal-based sizing
-  weakSignalSizePercent: number; // position size for weak signals (e.g., 50 = 50%)
-  // opening range filters
-  openingRangeMinSize: number; // minimum range as % of price
-  openingRangeMaxSize: number; // maximum range as % of price
-  // fair value gap (FVG) rules
-  fvgBodyPercent: number; // required body size as % of candle range
-  fvgMinRangePercent: number; // minimum candle range as % of price
-  fvgOverlapTolerance: number; // allowed gap overlap as %
-  fvgClosePositionPercent: number; // where close must be in candle range
-  requireVolumeConfirmation: boolean; // require volume spike
-  volumeMultiplier: number; // volume multiplier for confirmation
+  discordChannelId: string; // single channel for all bot notifications
   // logging
   logLevel: "normal" | "debug";
-  saveCandleData: boolean; // save candles to JSON files
-  // earnings filter
-  skipEarningsDays: boolean; // skip trading on earnings days
-  // opening range strength filter
-  openingRangeMinStrength: number; // minimum OR strength score (0-10)
-  // volume safety threshold
-  minAbsoluteVolumePerMinute: number; // minimum volume per minute (prevents low liquidity)
-  // stale breakout timeout
-  maxFvgWindowMinutes: number; // max time to complete FVG after breakout
-  // pre-market gap filter
-  maxPremarketGapPercent: number; // maximum pre-market gap allowed
 }
 
 // ---- MARKET DATA TYPES ----
@@ -394,13 +344,6 @@ export interface RiskManagementConfig {
   partialExitPercent: number; // % of position to exit
 }
 
-// discord notification routing - env var names for channel IDs
-export interface NotificationConfig {
-  trades: string; // env var name for trades channel
-  system: string; // env var name for system channel
-  errors: string; // env var name for errors channel
-}
-
 // full strategy configuration - one entry in strategies.json
 // generic fields live here, strategy-specific settings go in the params object
 export interface StrategyConfig {
@@ -411,7 +354,6 @@ export interface StrategyConfig {
   maxTradesPerDay: number; // max trades per symbol per day
   holdOvernight: boolean; // if true, positions survive across sessions
   schedule: StrategySchedule; // timing config
-  notifications: NotificationConfig; // discord channel routing
   params: Record<string, any>; // strategy-specific config
 }
 

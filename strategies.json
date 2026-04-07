@@ -16,12 +16,6 @@
         "maxStaleDataMinutes": 2
       },
 
-      "notifications": {
-        "trades": "DISCORD_CHANNEL_TRADES",
-        "system": "DISCORD_CHANNEL_SYSTEM",
-        "errors": "DISCORD_CHANNEL_ERRORS"
-      },
-
       "params": {
         "inverseMode": true,
         "openingRange": {
