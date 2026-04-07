@@ -20,10 +20,12 @@ export interface Config {
   alpacaSecretKey: string;
   alpacaBaseUrl: string;
 
-  // Discord webhooks
-  discordWebhookTrades: string;
-  discordWebhookSystem: string;
-  discordWebhookErrors: string;
+  // Discord bot
+  discordBotToken: string;
+  discordGuildId: string;
+  discordChannelTrades: string;
+  discordChannelSystem: string;
+  discordChannelErrors: string;
 
   // Trading settings
   symbols: string[]; // Array of stock symbols to trade
@@ -369,15 +371,21 @@ export interface RejectionLog {
 // STRATEGY CONFIG TYPES (loaded from strategies.json)
 //==============================================================================
 
-// Schedule settings - when the strategy runs
+// Schedule settings - when the strategy runs (generic, works for any strategy type)
 export interface StrategySchedule {
-  openingRangeStart: string; // HH:MM EST, when opening range window starts
-  openingRangeEnd: string; // HH:MM EST, when opening range window ends
+  sessionSetupEnd: string; // HH:MM EST, when the setup phase ends (runner waits until this)
   tradingCutoff: string; // HH:MM EST, no new entries after this time
   marketClose: string; // HH:MM EST, market close time
   pollingIntervalMs: number; // ms between candle polls during monitoring
-  openingRangePollMs: number; // ms between polls during OR capture
+  maxStaleDataMinutes: number; // reject candles older than this many minutes
 }
+
+//==============================================================================
+// ORB STRATEGY PARAMETER TYPES
+//==============================================================================
+// These types define the params for the Opening Range Breakout strategy.
+// They live here (not in orbStrategy.ts) so they're easy to find and reuse.
+// In strategies.json, these go inside the strategy's "params" object.
 
 // Opening range filter settings
 export interface ORFilterConfig {
@@ -392,7 +400,6 @@ export interface ORFilterConfig {
 export interface BreakoutConfig {
   volumeMultiplier: number; // required volume vs OR avg (e.g. 1.2 = 20% above)
   minAbsoluteVolume: number; // minimum volume per candle
-  maxStaleDataMinutes: number; // reject candles older than this
   maxFvgWindowMinutes: number; // max time after breakout to find FVG
 }
 
@@ -440,19 +447,18 @@ export interface NotificationConfig {
 }
 
 // Full strategy configuration - one entry in strategies.json
+// Generic fields live here. Strategy-specific settings go in the params object.
+// Each strategy implementation reads what it needs from params.
 export interface StrategyConfig {
   id: string; // unique strategy identifier
   type: string; // strategy type key (e.g. "opening-range-breakout")
   enabled: boolean; // whether this strategy is active
   symbols: string[]; // symbols this strategy trades
   maxTradesPerDay: number; // max trades per symbol per day
-  schedule: StrategySchedule; // timing config
-  openingRange: ORFilterConfig; // opening range filter config
-  breakout: BreakoutConfig; // breakout detection config
-  fvg: FVGConfig; // FVG pattern config
-  positionSizing: PositionSizingConfig; // position sizing config
-  riskManagement: RiskManagementConfig; // risk management config
+  holdOvernight: boolean; // if true, positions survive across sessions
+  schedule: StrategySchedule; // timing config (generic)
   notifications: NotificationConfig; // discord channel routing
+  params: Record<string, any>; // strategy-specific config (each strategy reads what it needs)
 }
 
 // Root structure of strategies.json file
@@ -480,7 +486,15 @@ export interface CandleResult {
   rejectReason: string; // why no signal (empty if signal generated)
 }
 
-// What the strategy wants done with an open position
+// what the strategy wants to do on a candle (returned by onCandle)
+export interface StrategyAction {
+  type: "NONE" | "ENTRY" | "DONE"; // nothing, open a trade, or stop for day
+  positionSize: PositionSize | null; // the trade to execute (for ENTRY)
+  signal: Signal | null; // signal details for notifications (for ENTRY)
+  reason: string; // why done/rejected (for DONE), or signal reason (for ENTRY)
+}
+
+// what the strategy wants done with an open position
 export interface PositionUpdate {
   doPartialExit: boolean; // execute a partial exit this candle
   partialExitPrice: number; // price for partial exit

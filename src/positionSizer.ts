@@ -391,7 +391,7 @@ export function calculateRiskBasedPositionSize(
 
 function calculateWithQuantity(
   signal: Signal,
-  openingRange: OpeningRange,
+  _openingRange: OpeningRange,
   quantity: number,
   entryPrice: number,
   stopPrice: number,

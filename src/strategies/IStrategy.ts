@@ -1,17 +1,13 @@
-// IStrategy.ts - Strategy interface that all trading strategies must implement
-// The runner calls these methods. The strategy returns decisions. The runner executes them.
-// To add a new strategy: implement this interface, register in strategyRunner.ts createStrategy()
+// IStrategy.ts - Generic strategy interface
+// Any trading strategy must implement this interface.
+// The runner feeds candles. The strategy makes ALL decisions.
+// No assumptions about strategy type (day trade, swing, multi-day, etc.)
 
 import {
   Candle,
-  Signal,
-  FVGPattern,
   Position,
-  PositionSize,
-  OpeningRange,
   StrategyConfig,
-  OpeningRangeResult,
-  CandleResult,
+  StrategyAction,
   PositionUpdate,
 } from "../types";
 
@@ -19,41 +15,32 @@ export interface IStrategy {
   // human-readable name (from config id)
   readonly name: string;
 
-  // strategy type key (e.g. "opening-range-breakout")
+  // strategy type key (e.g. "opening-range-breakout", "mean-reversion")
   readonly type: string;
 
-  // called once at startup, sets up internal state for each symbol
+  // if true, positions survive overnight (not force-closed at EOD)
+  readonly holdOvernight: boolean;
+
+  // called once at startup or start of each trading day, resets internal state
   initialize(symbols: string[]): void;
 
-  // called with the opening range candle, returns accept/reject with details
-  evaluateOpeningRange(
-    symbol: string,
-    candle: Candle,
-    previousDayClose: number | null,
-  ): OpeningRangeResult;
+  // called at start of each trading session after the setup window ends
+  // date is the trading date (YYYY-MM-DD) - live passes today, backtester passes historical
+  // strategy fetches whatever data it needs internally (opening range candles, daily data, etc.)
+  onSessionStart(date: string): Promise<void>;
 
-  // called on each new candle during monitoring, returns signal or null
-  processCandle(symbol: string, candle: Candle): CandleResult;
+  // called on each new 1-min candle during the monitoring phase
+  // strategy handles everything: setup checks, signal detection, position sizing
+  // returns what it wants to do: nothing, enter a trade, or stop for the day
+  onCandle(symbol: string, candle: Candle, accountEquity: number): StrategyAction;
 
-  // called when a signal is generated, returns position sizing or null to skip
-  calculatePositionSize(
-    symbol: string,
-    signal: Signal,
-    openingRange: OpeningRange,
-    fvgPattern: FVGPattern,
-    accountEquity: number,
-  ): PositionSize | null;
+  // called on each candle when a position is open for this symbol
+  // returns what to do: hold, partial exit, update stop, close position
+  evaluatePosition(symbol: string, candle: Candle, position: Position): PositionUpdate;
 
-  // called on each candle when position is open, returns what to do
-  evaluatePosition(
-    symbol: string,
-    candle: Candle,
-    position: Position,
-  ): PositionUpdate;
+  // called at end of each trading session (market close)
+  onSessionEnd(): void;
 
-  // called end of day, resets internal state for next session
-  reset(symbol: string): void;
-
-  // returns the strategy config from JSON
+  // returns the strategy config loaded from strategies.json
   getConfig(): StrategyConfig;
 }

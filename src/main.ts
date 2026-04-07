@@ -1,33 +1,71 @@
 // main.ts - Entry point for SignalFlow
-// Creates a StrategyRunner, loads strategies from JSON, and runs the trading session.
-// All strategy logic is in src/strategies/. All orchestration is in strategyRunner.ts.
-// This file is intentionally tiny - it just wires things together and starts.
+// The Discord bot is the main process. It starts first, then manages the trading loop.
+// Slash commands (/backtest, /strategies, /restart, /balance, /status) are always available.
+// The StrategyRunner runs in the background as a managed task.
 
 import * as path from "path";
 import * as logger from "./logger";
+import { startBot, setRunnerControls } from "./discordBot";
 import { StrategyRunner } from "./strategyRunner";
 
-// path to the strategies JSON config
+// path to strategies JSON config
 const STRATEGIES_PATH = path.join(process.cwd(), "strategies.json");
+
+// current runner instance (null when stopped)
+let runner: StrategyRunner | null = null;
+let runnerPromise: Promise<void> | null = null;
+
+// start the trading loop (called on startup and by /restart)
+async function startRunner(): Promise<void> {
+  runner = new StrategyRunner();
+  runner.loadStrategies(STRATEGIES_PATH);
+  runnerPromise = runner.run();
+  // don't await - let it run in background
+  runnerPromise.catch((err) => {
+    logger.error("Runner error", err);
+  });
+}
+
+// stop the trading loop (called by /restart)
+function stopRunner(): void {
+  if (runner) {
+    runner.stop();
+    runner = null;
+    runnerPromise = null;
+  }
+}
+
+// get runner status (called by /status)
+function getRunnerStatus(): string {
+  if (!runner) return "Not running";
+  return runner.getStatus();
+}
 
 async function main(): Promise<void> {
   try {
-    // create the runner
-    const runner = new StrategyRunner();
+    // start the discord bot first (always-on process)
+    logger.normal("Starting Discord bot...");
+    await startBot();
 
-    // load strategies from JSON
-    runner.loadStrategies(STRATEGIES_PATH);
+    // give the bot access to runner controls for slash commands
+    setRunnerControls({
+      start: startRunner,
+      stop: stopRunner,
+      getStatus: getRunnerStatus,
+    });
 
-    // run the full trading session (blocks until market close)
-    await runner.run();
+    // start the trading loop
+    await startRunner();
+
+    logger.normal("SignalFlow is running. Use Discord slash commands to control.");
   } catch (error) {
-    logger.error("Unhandled error in main", error as Error);
+    logger.error("Fatal error in main", error as Error);
     process.exit(1);
   }
 }
 
 // start
 main().catch((error) => {
-  logger.error("Fatal error", error as Error);
+  logger.error("Unhandled error", error as Error);
   process.exit(1);
 });

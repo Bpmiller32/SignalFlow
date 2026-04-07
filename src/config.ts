@@ -68,10 +68,12 @@ export function loadConfig(): Config {
     "https://paper-api.alpaca.markets",
   );
 
-  // Load Discord webhooks
-  const discordWebhookTrades = getRequiredEnv("DISCORD_WEBHOOK_TRADES");
-  const discordWebhookSystem = getRequiredEnv("DISCORD_WEBHOOK_SYSTEM");
-  const discordWebhookErrors = getRequiredEnv("DISCORD_WEBHOOK_ERRORS");
+  // Load Discord bot config
+  const discordBotToken = getRequiredEnv("DISCORD_BOT_TOKEN");
+  const discordGuildId = getRequiredEnv("DISCORD_GUILD_ID");
+  const discordChannelTrades = getOptionalEnv("DISCORD_CHANNEL_TRADES", "");
+  const discordChannelSystem = getOptionalEnv("DISCORD_CHANNEL_SYSTEM", "");
+  const discordChannelErrors = getOptionalEnv("DISCORD_CHANNEL_ERRORS", "");
 
   // Load trading settings
   const symbolsString = getOptionalEnv("SYMBOLS", "SPY");
@@ -169,9 +171,11 @@ export function loadConfig(): Config {
     alpacaApiKey,
     alpacaSecretKey,
     alpacaBaseUrl,
-    discordWebhookTrades,
-    discordWebhookSystem,
-    discordWebhookErrors,
+    discordBotToken,
+    discordGuildId,
+    discordChannelTrades,
+    discordChannelSystem,
+    discordChannelErrors,
     symbols,
     maxTradesPerDay,
     strategyCutoffTime,

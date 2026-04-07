@@ -4,11 +4,10 @@
 // Strategies are pure decision-makers. This runner executes their decisions.
 
 import * as fs from "fs";
-import * as path from "path";
 import config from "./config";
 import * as logger from "./logger";
 import * as timeUtils from "./timeUtils";
-import * as discord from "./discord";
+import * as discord from "./discordMessages";
 import * as alpacaData from "./alpacaData";
 import * as paperBroker from "./paperBroker";
 import * as state from "./state";
@@ -18,21 +17,20 @@ import {
   Position,
   StrategyConfig,
   StrategiesFile,
-  OpeningRange,
 } from "./types";
 
-// resolved webhook URLs for a strategy (resolved from env var names)
-interface ResolvedWebhooks {
-  trades: string; // resolved webhook URL for trades
-  system: string; // resolved webhook URL for system
-  errors: string; // resolved webhook URL for errors
+// resolved channel IDs for a strategy (resolved from env var names)
+interface ResolvedChannels {
+  trades: string; // resolved channel ID for trades
+  system: string; // resolved channel ID for system
+  errors: string; // resolved channel ID for errors
 }
 
 // entry in the strategies list
 interface StrategyEntry {
   strategy: IStrategy; // the strategy instance
   config: StrategyConfig; // its JSON config
-  webhooks: ResolvedWebhooks; // resolved discord webhook URLs
+  channels: ResolvedChannels; // resolved discord channel IDs
 }
 
 // per-symbol tracking state managed by the runner (not the strategy)
@@ -43,7 +41,6 @@ interface SymbolTracking {
   done: boolean; // done trading this symbol today
   tradeExecutedToday: boolean; // has a trade been executed
   lastCandleTimestamp: Date | null; // last candle we processed (dedup)
-  openingRange: OpeningRange | null; // stored opening range for position sizing
 }
 
 export class StrategyRunner {
@@ -55,6 +52,12 @@ export class StrategyRunner {
 
   // per strategy+symbol tracking (key: "strategyId:symbol")
   private tracking: Map<string, SymbolTracking> = new Map();
+
+  // stop flag for graceful shutdown via /restart command
+  private stopRequested = false;
+
+  // current status string for /status command
+  private currentStatus = "Initializing";
 
   // load strategies from JSON file, create strategy instances
   loadStrategies(jsonPath: string): void {
@@ -76,9 +79,9 @@ export class StrategyRunner {
 
       // create the right strategy class based on type
       const strategyInstance = this.createStrategy(stratConfig);
-      // resolve discord webhook env var names to actual URLs
-      const webhooks = this.resolveWebhooks(stratConfig);
-      this.strategies.push({ strategy: strategyInstance, config: stratConfig, webhooks });
+      // resolve discord channel env var names to actual channel IDs
+      const channels = this.resolveChannels(stratConfig);
+      this.strategies.push({ strategy: strategyInstance, config: stratConfig, channels });
       logger.normal(`Loaded strategy: ${stratConfig.id} (${stratConfig.type}) for ${stratConfig.symbols.length} symbols`);
     }
 
@@ -95,7 +98,13 @@ export class StrategyRunner {
       await this.startup();
       await this.waitForMarketOpen();
       await this.sendMarketOpenSummary();
-      await this.captureAllOpeningRanges();
+      // let each strategy do its session setup (fetch data, evaluate conditions)
+      const today = timeUtils.getTodayDateString();
+      for (const entry of this.strategies) {
+        // wait until this strategy's setup window ends before starting
+        await this.waitUntilTime(entry.config.schedule.sessionSetupEnd);
+        await entry.strategy.onSessionStart(today);
+      }
       await this.monitoringLoop();
       await this.shutdown();
     } catch (error) {
@@ -137,7 +146,7 @@ export class StrategyRunner {
           brokerPosition = paperBroker.getPosition(symbol);
         }
 
-        // perform startup recovery
+        // perform startup recovery (reconcile file state with broker state)
         const recovery = state.performStartupRecovery(symbol, brokerPosition);
 
         // create tracking entry
@@ -149,7 +158,6 @@ export class StrategyRunner {
           done: recovery.dailyState.sessionStatus === "DONE",
           tradeExecutedToday: recovery.dailyState.tradeExecutedToday,
           lastCandleTimestamp: null,
-          openingRange: null,
         });
 
         logger.normal(`${symbol} initialized: session=${recovery.dailyState.sessionStatus}, position=${recovery.position ? "YES" : "NO"}`);
@@ -161,7 +169,9 @@ export class StrategyRunner {
 
   // wait for market to open
   private async waitForMarketOpen(): Promise<void> {
+    this.currentStatus = "Waiting for market open";
     while (true) {
+      if (this.stopRequested) return;
       const marketHours = timeUtils.getMarketHours();
       if (marketHours.isOpen) {
         logger.normal("Market is open - starting trading session");
@@ -192,78 +202,12 @@ export class StrategyRunner {
     );
   }
 
-  // capture opening ranges for all strategies and symbols
-  private async captureAllOpeningRanges(): Promise<void> {
-    for (const entry of this.strategies) {
-      // wait until this strategy's opening range end time
-      await this.waitUntilTime(entry.config.schedule.openingRangeEnd);
-
-      // capture for each symbol
-      for (const symbol of entry.config.symbols) {
-        await this.captureOpeningRange(entry, symbol);
-      }
-    }
-  }
-
-  // capture opening range for one symbol in one strategy
-  private async captureOpeningRange(entry: StrategyEntry, symbol: string): Promise<void> {
-    logger.normal(`Capturing opening range for ${symbol}...`);
-    const key = this.trackingKey(entry.config.id, symbol);
-    const track = this.tracking.get(key)!;
-
-    try {
-      // fetch the 5-min opening candle
-      const today = timeUtils.getTodayDateString();
-      const candles = await alpacaData.fetch5MinCandles(symbol, today);
-      if (candles.length === 0) {
-        logger.error(`No opening range data for ${symbol}`);
-        await discord.sendError(`Failed to capture opening range for ${symbol}`, "No data");
-        return;
-      }
-      const openingCandle = candles[0];
-
-      // fetch previous day close for gap detection
-      let prevClose: number | null = null;
-      try {
-        const dailyCandles = await alpacaData.fetchDailyCandles(symbol, 2);
-        if (dailyCandles.length >= 1) {
-          prevClose = dailyCandles[dailyCandles.length - 1].close;
-        }
-      } catch (e) {
-        logger.debug(`Could not fetch previous close for ${symbol}`);
-      }
-
-      // ask the strategy to evaluate the opening range
-      const result = entry.strategy.evaluateOpeningRange(symbol, openingCandle, prevClose);
-
-      if (!result.accepted) {
-        // rejected - send discord and mark done
-        logger.normal(`Opening range rejected for ${symbol}: ${result.rejectReason}`);
-        await discord.sendOpeningRangeSkipped(symbol, result.rejectReason, entry.webhooks.system);
-        state.logRejection(symbol, "OPENING_RANGE_SIZE", result.rejectReason);
-        state.markTradeExecuted(symbol);
-        track.done = true;
-        return;
-      }
-
-      // accepted - save state and notify
-      track.openingRange = result.openingRange!;
-      state.updateOpeningRange(symbol, result.openingRange!);
-
-      logger.normal(`📊 OPENING RANGE: ${symbol} | High: $${result.openingRange!.high.toFixed(2)} | Low: $${result.openingRange!.low.toFixed(2)} | Size: ${result.openingRange!.size.toFixed(2)}%`);
-      await discord.sendOpeningRange(symbol, result.openingRange!.high, result.openingRange!.low, result.openingRange!.size, entry.webhooks.system);
-
-    } catch (error) {
-      logger.error(`Failed to capture opening range for ${symbol}`, error as Error);
-      await discord.sendError(`Error capturing opening range for ${symbol}`, (error as Error).message);
-    }
-  }
-
   // main monitoring loop - polls candles and feeds them to strategies
   private async monitoringLoop(): Promise<void> {
+    this.currentStatus = "Monitoring for signals";
     logger.normal("Starting main monitoring loop...");
 
-    while (!this.isMarketClosing()) {
+    while (!this.isMarketClosing() && !this.stopRequested) {
       try {
         // process each strategy
         for (const entry of this.strategies) {
@@ -293,21 +237,21 @@ export class StrategyRunner {
             // use the most recent candle
             const candle = candles[candles.length - 1];
 
-            // check for stale data
+            // check for stale data (candle too old to be useful)
             const now = new Date();
             const ageMinutes = (now.getTime() - candle.timestamp.getTime()) / 60000;
-            if (ageMinutes > entry.config.breakout.maxStaleDataMinutes) {
+            if (ageMinutes > entry.config.schedule.maxStaleDataMinutes) {
               logger.debug(`Stale data for ${symbol}: ${ageMinutes.toFixed(1)} min old`);
               continue;
             }
 
-            // skip duplicate candles
+            // skip duplicate candles (same timestamp as last processed)
             if (track.lastCandleTimestamp && candle.timestamp.getTime() === track.lastCandleTimestamp.getTime()) {
               continue;
             }
             track.lastCandleTimestamp = candle.timestamp;
 
-            // process this candle
+            // process this candle through the strategy
             await this.processSymbolCandle(entry, symbol, candle, track);
           }
         }
@@ -339,55 +283,40 @@ export class StrategyRunner {
       return; // don't look for new signals while in a position
     }
 
-    // STEP 2: if no position and not past cutoff, process candle for signals
+    // STEP 2: if no position, process candle for signals
     if (track.tradeExecutedToday) return; // already traded today
 
-    const result = entry.strategy.processCandle(symbol, candle);
+    // get account equity for sizing
+    const accountInfo = this.globalConfig.mode === "PAPER"
+      ? paperBroker.getAccountInfo()
+      : { equity: 100000 };
 
-    // if strategy generated a signal, try to execute it
-    if (result.signal && result.fvgPattern && track.openingRange) {
-      await this.handleSignal(entry, symbol, result.signal, result.fvgPattern, track);
-    }
+    // ask strategy what to do with this candle
+    const action = entry.strategy.onCandle(symbol, candle, accountInfo.equity);
 
-    // if strategy says done, mark it
-    if (result.done) {
+    // handle the strategy's decision
+    if (action.type === "ENTRY" && action.positionSize && action.signal) {
+      await this.handleSignal(entry, symbol, action.signal, action.positionSize, track);
+    } else if (action.type === "DONE") {
       track.done = true;
-      if (!result.signal) {
-        // rejected - log it
-        state.logRejection(symbol, "FVG_PATTERN", result.rejectReason);
+      if (action.reason) {
+        state.logRejection(symbol, "FVG_PATTERN", action.reason);
       }
     }
   }
 
-  // handle a trading signal - calculate size and execute
+  // handle a trading signal - execute the trade with provided position size
   private async handleSignal(
     entry: StrategyEntry,
     symbol: string,
     signal: any,
-    fvgPattern: any,
+    posSize: any,
     track: SymbolTracking,
   ): Promise<void> {
     const emoji = signal.direction === "LONG" ? "⬆️" : "⬇️";
     logger.normal(`${emoji} SIGNAL: ${signal.direction} ${symbol} | ${signal.reason}`);
 
-    // get account equity
-    const accountInfo = this.globalConfig.mode === "PAPER"
-      ? paperBroker.getAccountInfo()
-      : { equity: 100000 };
-
-    // ask strategy for position sizing
-    const posSize = entry.strategy.calculatePositionSize(
-      symbol, signal, track.openingRange!, fvgPattern, accountInfo.equity,
-    );
-
-    if (!posSize) {
-      logger.normal(`Position sizing failed for ${symbol} - skipping trade`);
-      track.done = true;
-      state.markTradeExecuted(symbol);
-      return;
-    }
-
-    // execute the trade
+    // execute the trade via broker
     let position: Position | null = null;
     if (this.globalConfig.mode === "PAPER") {
       position = paperBroker.openPosition(posSize);
@@ -402,7 +331,7 @@ export class StrategyRunner {
       return;
     }
 
-    // update tracking
+    // update tracking state
     track.position = position;
     track.tradeExecutedToday = true;
     state.saveCurrentPosition(position);
@@ -418,7 +347,7 @@ export class StrategyRunner {
       posSize.targetPrice,
       posSize.totalRisk,
       posSize.potentialProfit,
-      entry.webhooks.trades,
+      entry.channels.trades,
     );
 
     logger.normal(`🟢 TRADE ENTRY: ${signal.direction} ${posSize.quantity} shares of ${symbol} @ $${posSize.entryPrice.toFixed(2)}`);
@@ -449,7 +378,7 @@ export class StrategyRunner {
     // 3. update stop loss if trailing moved it
     if (update.newStopLoss !== null) {
       position.stopLoss = update.newStopLoss;
-      // update highest/lowest price tracking
+      // update highest/lowest price tracking for trailing stops
       if (position.side === "LONG") {
         position.highestPrice = Math.max(candle.high, position.highestPrice || position.entryPrice);
       } else {
@@ -473,7 +402,7 @@ export class StrategyRunner {
         pnl = (position.entryPrice - update.closePrice) * position.quantity;
       }
 
-      // create trade record
+      // create trade record for history
       const trade = {
         id: `TRADE-${Date.now()}`,
         symbol,
@@ -501,7 +430,7 @@ export class StrategyRunner {
 
       // send discord to this strategy's trades channel
       const duration = `${Math.floor(trade.holdingTime / 60)} minutes`;
-      await discord.sendTradeExit(symbol, update.closePrice, pnl, trade.pnlPercent, update.closeReason, duration, entry.webhooks.trades);
+      await discord.sendTradeExit(symbol, update.closePrice, pnl, trade.pnlPercent, update.closeReason, duration, entry.channels.trades);
 
       const pnlSign = pnl >= 0 ? "+" : "";
       logger.normal(`Position closed for ${symbol}: ${update.closeReason} | P&L: ${pnlSign}$${pnl.toFixed(2)}`);
@@ -513,9 +442,19 @@ export class StrategyRunner {
     logger.separator();
     logger.normal("Performing end-of-day shutdown...");
 
-    // close any remaining positions
-    for (const [key, track] of this.tracking) {
+    // call onSessionEnd for each strategy
+    for (const entry of this.strategies) {
+      entry.strategy.onSessionEnd();
+    }
+
+    // close remaining positions (skip strategies that hold overnight)
+    for (const [_key, track] of this.tracking) {
       if (track.position) {
+        // find the strategy that owns this tracking entry
+        const ownerEntry = this.strategies.find(e => e.config.id === track.strategyId);
+        // skip closing if this strategy holds positions overnight
+        if (ownerEntry && ownerEntry.strategy.holdOvernight) continue;
+
         logger.normal(`Closing end-of-day position for ${track.symbol}`);
         const today = timeUtils.getTodayDateString();
         const candles = await alpacaData.fetch1MinCandles(track.symbol, today);
@@ -532,7 +471,7 @@ export class StrategyRunner {
       }
     }
 
-    // load final stats
+    // load final stats for daily summary
     const stats = state.loadAllTimeStats();
     const accountBalance = this.globalConfig.mode === "PAPER"
       ? paperBroker.getAccountInfo().equity
@@ -548,7 +487,7 @@ export class StrategyRunner {
       worstPnL = Math.min(...pnls);
     }
 
-    // log rejections
+    // log rejections for the day
     const rejections = state.getRejectionSummary(timeUtils.getTodayDateString());
     logger.normal(`Rejection summary: ${rejections.total} total`);
     if (rejections.total > 0) {
@@ -556,7 +495,7 @@ export class StrategyRunner {
       logger.normal(`  By symbol: ${JSON.stringify(rejections.bySymbol)}`);
     }
 
-    // format streak
+    // format streak for daily summary
     const streak = {
       type: stats.allTimeStats.currentStreak.type === "WIN"
         ? "win" as const
@@ -566,7 +505,7 @@ export class StrategyRunner {
       count: stats.allTimeStats.currentStreak.count,
     };
 
-    // send daily summary
+    // send daily summary to discord
     await discord.sendDailySummary(
       timeUtils.getTodayDateString(),
       this.getAllSymbols(),
@@ -589,16 +528,17 @@ export class StrategyRunner {
   //============================================================================
 
   // create a strategy instance from config type
-  private createStrategy(config: StrategyConfig): IStrategy {
-    switch (config.type) {
+  // add new strategy types here (e.g. "mean-reversion", "vwap-bounce")
+  private createStrategy(stratConfig: StrategyConfig): IStrategy {
+    switch (stratConfig.type) {
       case "opening-range-breakout":
-        return new ORBStrategy(config, this.globalConfig);
+        return new ORBStrategy(stratConfig, this.globalConfig);
       default:
-        throw new Error(`Unknown strategy type: ${config.type}. Register new types in createStrategy().`);
+        throw new Error(`Unknown strategy type: ${stratConfig.type}. Register new types in createStrategy().`);
     }
   }
 
-  // build a tracking map key
+  // build a tracking map key from strategy id and symbol
   private trackingKey(strategyId: string, symbol: string): string {
     return `${strategyId}:${symbol}`;
   }
@@ -644,15 +584,27 @@ export class StrategyRunner {
     }
   }
 
-  // resolve notification config env var names to actual webhook URLs
+  // resolve notification config env var names to actual channel IDs
   // falls back to global config if env var not found
-  private resolveWebhooks(stratConfig: StrategyConfig): ResolvedWebhooks {
+  private resolveChannels(stratConfig: StrategyConfig): ResolvedChannels {
     const notifications = stratConfig.notifications;
     return {
-      trades: process.env[notifications.trades] || this.globalConfig.discordWebhookTrades,
-      system: process.env[notifications.system] || this.globalConfig.discordWebhookSystem,
-      errors: process.env[notifications.errors] || this.globalConfig.discordWebhookErrors,
+      trades: process.env[notifications.trades] || this.globalConfig.discordChannelTrades,
+      system: process.env[notifications.system] || this.globalConfig.discordChannelSystem,
+      errors: process.env[notifications.errors] || this.globalConfig.discordChannelErrors,
     };
+  }
+
+  // stop the runner gracefully (called by /restart command)
+  stop(): void {
+    this.stopRequested = true;
+    this.currentStatus = "Stopped";
+    logger.normal("Stop requested");
+  }
+
+  // get current status (called by /status command)
+  getStatus(): string {
+    return this.currentStatus;
   }
 
   // sleep helper

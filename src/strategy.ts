@@ -59,7 +59,7 @@ export function calculateOpeningRange(candle: Candle): OpeningRange {
 
 export function isOpeningRangeValid(
   openingRange: OpeningRange,
-  currentPrice: number,
+  _currentPrice: number,
   config: Config,
 ): boolean {
   const size = openingRange.size;

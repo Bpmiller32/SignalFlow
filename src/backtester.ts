@@ -104,7 +104,7 @@ function loadStrategy(strategyId: string | null): { strategy: IStrategy; stratCo
   }
   const file: StrategiesFile = JSON.parse(fs.readFileSync(jsonPath, "utf8"));
 
-  // find the strategy config
+  // find the strategy config by id, or use first enabled
   let stratConfig: StrategyConfig | undefined;
   if (strategyId) {
     stratConfig = file.strategies.find((s) => s.id === strategyId);
@@ -112,14 +112,13 @@ function loadStrategy(strategyId: string | null): { strategy: IStrategy; stratCo
       throw new Error(`Strategy "${strategyId}" not found in strategies.json`);
     }
   } else {
-    // use first enabled strategy
     stratConfig = file.strategies.find((s) => s.enabled);
     if (!stratConfig) {
       throw new Error("No enabled strategies found in strategies.json");
     }
   }
 
-  // create strategy instance
+  // create strategy instance based on type
   let strategy: IStrategy;
   switch (stratConfig.type) {
     case "opening-range-breakout":
@@ -135,7 +134,8 @@ function loadStrategy(strategyId: string | null): { strategy: IStrategy; stratCo
 // get all trading days between two dates (skip weekends)
 function getTradingDays(fromDate: string, toDate: string): string[] {
   const days: string[] = [];
-  let current = new Date(fromDate + "T12:00:00Z"); // noon UTC to avoid timezone issues
+  // use noon UTC to avoid timezone edge cases
+  let current = new Date(fromDate + "T12:00:00Z");
   const end = new Date(toDate + "T12:00:00Z");
 
   while (current <= end) {
@@ -153,6 +153,7 @@ function getTradingDays(fromDate: string, toDate: string): string[] {
 
 // convert a PositionSize into a SimPosition for tracking
 function createSimPosition(posSize: PositionSize, entryTime: Date): SimPosition {
+  // determine side from entry vs target price
   const side = posSize.entryPrice < posSize.targetPrice ? "LONG" : "SHORT";
   return {
     symbol: posSize.symbol,
@@ -194,7 +195,7 @@ function simToPosition(sim: SimPosition): Position {
 
 // apply a PositionUpdate to a SimPosition, returns a trade if position closed
 function applyUpdate(sim: SimPosition, update: PositionUpdate, candle: Candle): BacktestTrade | null {
-  // partial exit
+  // handle partial exit
   if (update.doPartialExit && !sim.partialExitExecuted) {
     const exitQty = Math.floor(sim.originalQuantity * (update.partialExitPercent / 100));
     if (exitQty > 0) {
@@ -210,7 +211,7 @@ function applyUpdate(sim: SimPosition, update: PositionUpdate, candle: Candle): 
     }
   }
 
-  // activate trailing
+  // activate trailing stop
   if (update.activateTrailing) {
     sim.trailingStopActive = true;
   }
@@ -220,21 +221,23 @@ function applyUpdate(sim: SimPosition, update: PositionUpdate, candle: Candle): 
     sim.stopLoss = update.newStopLoss;
   }
 
-  // update high/low tracking
+  // update high/low tracking for trailing stops
   if (sim.side === "LONG") {
     sim.highestPrice = Math.max(candle.high, sim.highestPrice);
   } else {
     sim.lowestPrice = Math.min(candle.low, sim.lowestPrice);
   }
 
-  // close position
+  // close position if requested
   if (update.closePosition) {
+    // calculate P&L on remaining shares
     let remainingPnl = 0;
     if (sim.side === "LONG") {
       remainingPnl = (update.closePrice - sim.entryPrice) * sim.quantity;
     } else {
       remainingPnl = (sim.entryPrice - update.closePrice) * sim.quantity;
     }
+    // total P&L includes partial exit profits
     const totalPnl = remainingPnl + sim.partialPnL;
     const holdingMs = candle.timestamp.getTime() - sim.entryTime.getTime();
 
@@ -263,7 +266,7 @@ function computeStats(trades: BacktestTrade[], totalDays: number, tradingDays: n
   const grossWins = wins.reduce((sum, t) => sum + t.pnl, 0);
   const grossLosses = Math.abs(losses.reduce((sum, t) => sum + t.pnl, 0));
 
-  // max drawdown
+  // calculate max drawdown from peak equity
   let peak = 0;
   let maxDrawdown = 0;
   let cumPnL = 0;
@@ -314,7 +317,7 @@ function computeStats(trades: BacktestTrade[], totalDays: number, tradingDays: n
   };
 }
 
-// print results to console
+// print results to console in a formatted table
 function printResults(stats: BacktestStats, trades: BacktestTrade[], stratConfig: StrategyConfig): void {
   console.log(`\n${"═".repeat(70)}`);
   console.log(`BACKTEST RESULTS - ${stratConfig.id}`);
@@ -324,7 +327,7 @@ function printResults(stats: BacktestStats, trades: BacktestTrade[], stratConfig
   console.log(`Period: ${stats.totalDays} calendar days, ${stats.tradingDays} trading days`);
   console.log(`${"─".repeat(70)}`);
 
-  // summary
+  // performance summary
   console.log(`\nPERFORMANCE SUMMARY`);
   console.log(`${"─".repeat(40)}`);
   console.log(`Total Trades:     ${stats.totalTrades}`);
@@ -333,7 +336,7 @@ function printResults(stats: BacktestStats, trades: BacktestTrade[], stratConfig
   console.log(`Win Rate:         ${stats.winRate.toFixed(1)}%`);
   console.log(`Trades/Day:       ${stats.tradesPerDay.toFixed(2)}`);
 
-  // P&L
+  // P&L summary
   console.log(`\nP&L`);
   console.log(`${"─".repeat(40)}`);
   const pnlSign = stats.totalPnL >= 0 ? "+" : "";
@@ -349,7 +352,7 @@ function printResults(stats: BacktestStats, trades: BacktestTrade[], stratConfig
   console.log(`${"─".repeat(40)}`);
   console.log(`Avg Hold Time:    ${stats.averageHoldingMinutes.toFixed(0)} minutes`);
 
-  // per-symbol
+  // per-symbol breakdown
   console.log(`\nPER-SYMBOL BREAKDOWN`);
   console.log(`${"─".repeat(40)}`);
   for (const [sym, s] of Object.entries(stats.symbolStats)) {
@@ -374,73 +377,71 @@ function printResults(stats: BacktestStats, trades: BacktestTrade[], stratConfig
   console.log(`\n${"═".repeat(70)}\n`);
 }
 
-// main backtest function
-async function runBacktest(): Promise<void> {
-  const args = parseArgs();
-  console.log(`\nStarting backtest: ${args.fromDate} to ${args.toDate}`);
+// exported function for programmatic use (called by discord bot /backtest command)
+export async function runBacktestProgrammatic(
+  fromDate: string,
+  toDate: string,
+  strategyId?: string,
+): Promise<{ stats: any; trades: BacktestTrade[] }> {
+  return await executeBacktest(fromDate, toDate, strategyId || null, false);
+}
 
-  // load the strategy
-  const { strategy, stratConfig } = loadStrategy(args.strategyId);
-  console.log(`Strategy: ${stratConfig.id} (${stratConfig.type})`);
-  console.log(`Symbols: ${stratConfig.symbols.join(", ")}`);
+// main backtest function (shared by CLI and programmatic use)
+// uses ONLY IStrategy interface methods - no strategy-specific calls
+async function executeBacktest(
+  fromDate: string,
+  toDate: string,
+  strategyId: string | null,
+  printOutput: boolean,
+): Promise<{ stats: any; trades: BacktestTrade[] }> {
+  if (printOutput) console.log(`\nStarting backtest: ${fromDate} to ${toDate}`);
 
-  // get trading days in range
-  const tradingDays = getTradingDays(args.fromDate, args.toDate);
-  console.log(`Trading days: ${tradingDays.length}`);
+  // load the strategy from strategies.json
+  const { strategy, stratConfig } = loadStrategy(strategyId);
+  if (printOutput) console.log(`Strategy: ${stratConfig.id} (${stratConfig.type})`);
+  if (printOutput) console.log(`Symbols: ${stratConfig.symbols.join(", ")}`);
 
-  // track all trades
+  // get trading days in range (weekdays only)
+  const tradingDays = getTradingDays(fromDate, toDate);
+  if (printOutput) console.log(`Trading days: ${tradingDays.length}`);
+
+  // collect all trades across all days
   const allTrades: BacktestTrade[] = [];
   let daysWithData = 0;
 
-  // run each trading day
+  // replay each trading day through the strategy
   for (const date of tradingDays) {
-    process.stdout.write(`\r  Processing ${date}...`);
+    if (printOutput) process.stdout.write(`\r  Processing ${date}...`);
 
-    // initialize strategy for this day
+    // initialize strategy for this day (reset all internal state)
     strategy.initialize(stratConfig.symbols);
 
-    // process each symbol
+    // let the strategy set up for this date (fetches opening ranges, etc.)
+    await strategy.onSessionStart(date);
+
+    // process each symbol for the day
     for (const symbol of stratConfig.symbols) {
       try {
-        // fetch 5-min candles for opening range
-        const candles5min = await alpacaData.fetch5MinCandles(symbol, date);
-        if (candles5min.length === 0) continue;
-
-        daysWithData++;
-        const openingCandle = candles5min[0];
-
-        // fetch previous day close for gap detection
-        let prevClose: number | null = null;
-        try {
-          const dailyCandles = await alpacaData.fetchDailyCandles(symbol, 2);
-          if (dailyCandles.length >= 1) {
-            prevClose = dailyCandles[dailyCandles.length - 1].close;
-          }
-        } catch (e) {
-          // skip gap check if no previous close
-        }
-
-        // evaluate opening range
-        const orResult = strategy.evaluateOpeningRange(symbol, openingCandle, prevClose);
-        if (!orResult.accepted) continue;
-
-        // fetch 1-min candles for the rest of the day
+        // fetch 1-min candles for the trading day
         const candles1min = await alpacaData.fetch1MinCandles(symbol, date);
         if (candles1min.length === 0) continue;
 
-        // state for this symbol today
+        // at least one symbol had data for this day
+        daysWithData++;
+
+        // track simulated position and whether we've entered a trade
         let simPos: SimPosition | null = null;
         let tradeExecuted = false;
 
-        // iterate through 1-min candles
+        // iterate through each 1-min candle
         for (const candle of candles1min) {
-          // check cutoff time (based on candle time, not wall clock)
+          // extract candle time for cutoff check (using candle timestamp, not wall clock)
           const candleHour = candle.timestamp.getHours();
           const candleMin = candle.timestamp.getMinutes();
           const candleTime = `${String(candleHour).padStart(2, "0")}:${String(candleMin).padStart(2, "0")}`;
           const isPastCutoff = candleTime >= stratConfig.schedule.tradingCutoff;
 
-          // if we have a position, evaluate it
+          // if we have an open position, evaluate it for stops/targets/trailing
           if (simPos) {
             const pos = simToPosition(simPos);
             const update = strategy.evaluatePosition(symbol, candle, pos);
@@ -449,33 +450,24 @@ async function runBacktest(): Promise<void> {
               allTrades.push(trade);
               simPos = null;
             }
-            continue;
+            continue; // don't look for new signals while in a position
           }
 
-          // skip if already traded or past cutoff
+          // skip if already traded today or past the cutoff time
           if (tradeExecuted || isPastCutoff) continue;
 
-          // process candle for signals
-          const result = strategy.processCandle(symbol, candle);
+          // ask strategy what to do with this candle (generic interface call)
+          const action = strategy.onCandle(symbol, candle, 100000);
 
-          // if signal generated, create simulated position
-          if (result.signal && result.fvgPattern && orResult.openingRange) {
-            const posSize = strategy.calculatePositionSize(
-              symbol,
-              result.signal,
-              orResult.openingRange,
-              result.fvgPattern,
-              100000, // simulated $100k account
-            );
-
-            if (posSize) {
-              simPos = createSimPosition(posSize, candle.timestamp);
-              tradeExecuted = true;
-            }
+          // handle the strategy's decision
+          if (action.type === "ENTRY" && action.positionSize) {
+            // strategy wants to enter a trade - create simulated position
+            simPos = createSimPosition(action.positionSize, candle.timestamp);
+            tradeExecuted = true;
+          } else if (action.type === "DONE") {
+            // strategy is done with this symbol for today
+            break;
           }
-
-          // if strategy says done, stop processing this symbol
-          if (result.done && !result.signal) break;
         }
 
         // end of day - close any remaining position at last candle's close
@@ -487,6 +479,7 @@ async function runBacktest(): Promise<void> {
           } else {
             pnl = (simPos.entryPrice - lastCandle.close) * simPos.quantity;
           }
+          // add any partial exit profits
           pnl += simPos.partialPnL;
           const holdingMs = lastCandle.timestamp.getTime() - simPos.entryTime.getTime();
 
@@ -506,37 +499,44 @@ async function runBacktest(): Promise<void> {
         }
       } catch (error) {
         // skip symbols/days with data errors
-        console.log(`\n  Error on ${symbol} ${date}: ${(error as Error).message}`);
+        if (printOutput) console.log(`\n  Error on ${symbol} ${date}: ${(error as Error).message}`);
       }
     }
+
+    // end the trading session (strategy resets internal state)
+    strategy.onSessionEnd();
   }
 
-  console.log("\r" + " ".repeat(40) + "\r"); // clear progress line
+  if (printOutput) console.log("\r" + " ".repeat(40) + "\r");
 
-  // compute statistics
+  // compute statistics from all collected trades
   const totalCalendarDays = Math.ceil(
-    (new Date(args.toDate).getTime() - new Date(args.fromDate).getTime()) / (1000 * 60 * 60 * 24),
+    (new Date(toDate).getTime() - new Date(fromDate).getTime()) / (1000 * 60 * 60 * 24),
   ) + 1;
-  // deduplicate daysWithData (was incrementing per symbol, should be per day)
-  const uniqueDaysWithData = new Set(allTrades.map((t) => t.date)).size || (daysWithData > 0 ? Math.min(daysWithData / stratConfig.symbols.length, tradingDays.length) : 0);
 
   const stats = computeStats(allTrades, totalCalendarDays, tradingDays.length);
 
-  // print results
-  printResults(stats, allTrades, stratConfig);
+  // print results and save to file if CLI mode
+  if (printOutput) {
+    printResults(stats, allTrades, stratConfig);
+    // save results to JSON file
+    const outputPath = path.join(process.cwd(), "data", `backtest-${fromDate}-to-${toDate}.json`);
+    const output = { config: stratConfig, stats, trades: allTrades, runDate: new Date().toISOString() };
+    fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+    fs.writeFileSync(outputPath, JSON.stringify(output, null, 2));
+    console.log(`Results saved to: ${outputPath}`);
+  }
 
-  // save results to file
-  const outputPath = path.join(process.cwd(), "data", `backtest-${args.fromDate}-to-${args.toDate}.json`);
-  const output = { config: stratConfig, stats, trades: allTrades, runDate: new Date().toISOString() };
-  fs.mkdirSync(path.dirname(outputPath), { recursive: true });
-  fs.writeFileSync(outputPath, JSON.stringify(output, null, 2));
-  console.log(`Results saved to: ${outputPath}`);
+  return { stats, trades: allTrades };
 }
 
-// run
-runBacktest()
-  .then(() => process.exit(0))
-  .catch((err) => {
-    console.error("Backtest failed:", err);
-    process.exit(1);
-  });
+// CLI entry point (only runs when executed directly, not when imported)
+if (require.main === module) {
+  const args = parseArgs();
+  executeBacktest(args.fromDate, args.toDate, args.strategyId, true)
+    .then(() => process.exit(0))
+    .catch((err: Error) => {
+      console.error("Backtest failed:", err);
+      process.exit(1);
+    });
+}
