@@ -1,18 +1,11 @@
-//==============================================================================
-// STATE.TS - FILE-BASED STATE MANAGEMENT AND PERSISTENCE
-//==============================================================================
-// This file implements the "stateless with a journal" design philosophy.
-// All critical state is persisted to JSON files so the system can:
-// - Survive crashes and restarts
-// - Maintain history across sessions
-// - Recover positions by syncing with broker on startup
-// File structure:
-//   data/state/{SYMBOL}-{DATE}-state.json          (daily state per symbol)
-//   data/state/{SYMBOL}-current-position.json      (current position if open)
-//   data/trades/{DATE}-trades.json                 (trade history for day)
-//   data/trades/all-time-stats.json                (lifetime statistics)
+// state.ts - File-based state management and persistence
+// All critical state is persisted to JSON files so the system survives crashes.
 // The broker API is always the source of truth - files are a cache/journal.
-//==============================================================================
+// File structure:
+//   data/state/{SYMBOL}-{DATE}-state.json       (daily state per symbol)
+//   data/state/{SYMBOL}-current-position.json   (current position if open)
+//   data/trades/{DATE}-trades.json              (trade history for day)
+//   data/trades/all-time-stats.json             (lifetime statistics)
 
 import * as fs from "fs";
 import * as path from "path";
@@ -28,18 +21,15 @@ import {
 } from "./types";
 import * as logger from "./logger";
 
-//==============================================================================
-// DIRECTORY SETUP
-//==============================================================================
+// ---- DIRECTORY SETUP ----
 
+// paths for all data directories
 const DATA_DIR = path.join(process.cwd(), "data");
 const STATE_DIR = path.join(DATA_DIR, "state");
 const TRADES_DIR = path.join(DATA_DIR, "trades");
 const REJECTIONS_DIR = path.join(DATA_DIR, "rejections");
 
-// Ensure all required directories exist.
-// Creates them if they don't exist.
-
+// ensure all required directories exist
 function ensureDirectories(): void {
   [DATA_DIR, STATE_DIR, TRADES_DIR, REJECTIONS_DIR].forEach((dir) => {
     if (!fs.existsSync(dir)) {
@@ -49,16 +39,12 @@ function ensureDirectories(): void {
   });
 }
 
-// Ensure directories exist on module load
+// create directories on module load
 ensureDirectories();
 
-//==============================================================================
-// DATE UTILITIES
-//==============================================================================
+// ---- DATE UTILITIES ----
 
-// Get current date string in YYYY-MM-DD format (EST timezone).
-// This is used for file naming consistency.
-
+// get current date string in YYYY-MM-DD format
 function getCurrentDateString(): string {
   const now = new Date();
   const year = now.getFullYear();
@@ -67,20 +53,15 @@ function getCurrentDateString(): string {
   return `${year}-${month}-${day}`;
 }
 
-//==============================================================================
-// DAILY STATE MANAGEMENT
-//==============================================================================
+// ---- DAILY STATE MANAGEMENT ----
 
-// Get the file path for a symbol's daily state file.
-
+// get file path for a symbol's daily state
 function getDailyStateFilePath(symbol: string, date?: string): string {
   const dateStr = date || getCurrentDateString();
   return path.join(STATE_DIR, `${symbol}-${dateStr}-state.json`);
 }
 
-// Load daily state for a symbol.
-// Returns null if file doesn't exist (first run of the day).
-
+// load daily state for a symbol, returns null if not found
 export function loadDailyState(
   symbol: string,
   date?: string,
@@ -96,7 +77,7 @@ export function loadDailyState(
     const fileContent = fs.readFileSync(filePath, "utf8");
     const state: DailyState = JSON.parse(fileContent);
 
-    // Convert timestamp strings back to Date objects
+    // convert timestamp strings back to Date objects
     if (state.openingRange) {
       state.openingRange.timestamp = new Date(state.openingRange.timestamp);
     }
@@ -112,13 +93,12 @@ export function loadDailyState(
   }
 }
 
-// Save daily state for a symbol.
-
+// save daily state for a symbol
 export function saveDailyState(state: DailyState): void {
   const filePath = getDailyStateFilePath(state.symbol, state.date);
 
   try {
-    // Update last updated timestamp
+    // update last updated timestamp
     state.lastUpdated = new Date();
 
     const fileContent = JSON.stringify(state, null, 2);
@@ -135,8 +115,7 @@ export function saveDailyState(state: DailyState): void {
   }
 }
 
-// Create initial daily state for a new trading day.
-
+// create initial daily state for a new trading day
 export function createDailyState(symbol: string): DailyState {
   const state: DailyState = {
     date: getCurrentDateString(),
@@ -155,8 +134,7 @@ export function createDailyState(symbol: string): DailyState {
   return state;
 }
 
-// Update opening range in daily state.
-
+// update opening range in daily state
 export function updateOpeningRange(
   symbol: string,
   openingRange: OpeningRange,
@@ -171,8 +149,7 @@ export function updateOpeningRange(
   );
 }
 
-// Mark that a trade was executed today for a symbol.
-
+// mark that a trade was executed today for a symbol
 export function markTradeExecuted(symbol: string): void {
   const state = loadDailyState(symbol) || createDailyState(symbol);
   state.tradeExecutedToday = true;
@@ -182,19 +159,14 @@ export function markTradeExecuted(symbol: string): void {
   logger.normal(`Marked trade executed for ${symbol}`);
 }
 
-//==============================================================================
-// CURRENT POSITION STATE MANAGEMENT
-//==============================================================================
+// ---- CURRENT POSITION STATE MANAGEMENT ----
 
-// Get the file path for a symbol's current position file.
-
+// get file path for a symbol's current position
 function getCurrentPositionFilePath(symbol: string): string {
   return path.join(STATE_DIR, `${symbol}-current-position.json`);
 }
 
-// Load current position for a symbol.
-// Returns null if no position file exists.
-
+// load current position for a symbol, returns null if no position
 export function loadCurrentPosition(
   symbol: string,
 ): CurrentPositionState | null {
@@ -209,7 +181,7 @@ export function loadCurrentPosition(
     const fileContent = fs.readFileSync(filePath, "utf8");
     const position: CurrentPositionState = JSON.parse(fileContent);
 
-    // Convert timestamp strings back to Date objects
+    // convert timestamp strings back to Date objects
     position.entryTime = new Date(position.entryTime);
 
     logger.debug(
@@ -225,8 +197,7 @@ export function loadCurrentPosition(
   }
 }
 
-// Save current position for a symbol.
-
+// save current position for a symbol
 export function saveCurrentPosition(
   position: CurrentPositionState | Position,
 ): void {
@@ -247,8 +218,7 @@ export function saveCurrentPosition(
   }
 }
 
-// Delete current position file for a symbol (called when position closed).
-
+// delete current position file (called when position is closed)
 export function deleteCurrentPosition(symbol: string): void {
   const filePath = getCurrentPositionFilePath(symbol);
 
@@ -265,19 +235,15 @@ export function deleteCurrentPosition(symbol: string): void {
   }
 }
 
-//==============================================================================
-// TRADE HISTORY MANAGEMENT
-//==============================================================================
+// ---- TRADE HISTORY MANAGEMENT ----
 
-// Get the file path for a date's trade history file.
-
+// get file path for a date's trade history
 function getTradeHistoryFilePath(date?: string): string {
   const dateStr = date || getCurrentDateString();
   return path.join(TRADES_DIR, `${dateStr}-trades.json`);
 }
 
-// Load trade history for a specific date.
-
+// load trade history for a specific date
 export function loadTradeHistory(date?: string): TradeHistory | null {
   const filePath = getTradeHistoryFilePath(date);
 
@@ -290,7 +256,7 @@ export function loadTradeHistory(date?: string): TradeHistory | null {
     const fileContent = fs.readFileSync(filePath, "utf8");
     const history: TradeHistory = JSON.parse(fileContent);
 
-    // Convert timestamp strings back to Date objects
+    // convert timestamp strings back to Date objects
     history.trades.forEach((trade) => {
       trade.entryTime = new Date(trade.entryTime);
       trade.exitTime = new Date(trade.exitTime);
@@ -309,30 +275,24 @@ export function loadTradeHistory(date?: string): TradeHistory | null {
   }
 }
 
-// Save a completed trade to history.
-
+// save a completed trade to history
 export function saveTradeToHistory(trade: Trade): void {
   const dateStr = getCurrentDateString();
   const filePath = getTradeHistoryFilePath(dateStr);
 
+  // load existing history or create new
   let history: TradeHistory;
-
   if (fs.existsSync(filePath)) {
-    // Load existing history
     const fileContent = fs.readFileSync(filePath, "utf8");
     history = JSON.parse(fileContent);
   } else {
-    // Create new history
-    history = {
-      date: dateStr,
-      trades: [],
-    };
+    history = { date: dateStr, trades: [] };
   }
 
-  // Add new trade
+  // add new trade
   history.trades.push(trade);
 
-  // Save back to file
+  // save back to file
   try {
     const fileContent = JSON.stringify(history, null, 2);
     fs.writeFileSync(filePath, fileContent, "utf8");
@@ -344,18 +304,14 @@ export function saveTradeToHistory(trade: Trade): void {
   }
 }
 
-//==============================================================================
-// STATISTICS MANAGEMENT
-//==============================================================================
+// ---- STATISTICS MANAGEMENT ----
 
-// Get file path for all-time statistics.
-
+// get file path for all-time statistics
 function getAllTimeStatsFilePath(): string {
   return path.join(DATA_DIR, "all-time-stats.json");
 }
 
-// Create initial empty statistics.
-
+// create initial empty statistics object
 function createEmptyStats(): TradingStats {
   return {
     totalTrades: 0,
@@ -373,8 +329,7 @@ function createEmptyStats(): TradingStats {
   };
 }
 
-// Load all-time statistics.
-
+// load all-time statistics from file
 export function loadAllTimeStats(): AllTimeStats {
   const filePath = getAllTimeStatsFilePath();
 
@@ -402,21 +357,20 @@ export function loadAllTimeStats(): AllTimeStats {
   }
 }
 
-// Update statistics with a new trade.
-
+// update statistics with a new trade
 export function updateStatistics(trade: Trade): void {
   const allStats = loadAllTimeStats();
 
-  // Update overall stats
+  // update overall stats
   updateStatsWithTrade(allStats.allTimeStats, trade);
 
-  // Update per-symbol stats
+  // update per-symbol stats
   if (!allStats.symbolStats[trade.symbol]) {
     allStats.symbolStats[trade.symbol] = createEmptyStats();
   }
   updateStatsWithTrade(allStats.symbolStats[trade.symbol], trade);
 
-  // Save updated stats
+  // save updated stats
   allStats.lastUpdated = new Date();
 
   try {
@@ -430,12 +384,11 @@ export function updateStatistics(trade: Trade): void {
   }
 }
 
-// Helper function to update a TradingStats object with a new trade.
-
+// update a TradingStats object with a new trade
 function updateStatsWithTrade(stats: TradingStats, trade: Trade): void {
   const isWin = trade.pnl > 0;
 
-  // Update counts
+  // update counts
   stats.totalTrades++;
   if (isWin) {
     stats.wins++;
@@ -443,13 +396,13 @@ function updateStatsWithTrade(stats: TradingStats, trade: Trade): void {
     stats.losses++;
   }
 
-  // Update win rate
+  // update win rate
   stats.winRate = (stats.wins / stats.totalTrades) * 100;
 
-  // Update P&L
+  // update P&L
   stats.totalPnL += trade.pnl;
 
-  // Update best/worst
+  // update best/worst
   if (trade.pnl > stats.bestTrade) {
     stats.bestTrade = trade.pnl;
   }
@@ -457,15 +410,14 @@ function updateStatsWithTrade(stats: TradingStats, trade: Trade): void {
     stats.worstTrade = trade.pnl;
   }
 
-  // Update averages
+  // update average win (incremental calculation)
   if (stats.wins > 0) {
-    // Recalculate average win (need to track sum, not just average)
-    // For simplicity, we'll approximate by incremental update
     const oldWinSum = stats.averageWin * (stats.wins - (isWin ? 1 : 0));
     const newWinSum = oldWinSum + (isWin ? trade.pnl : 0);
     stats.averageWin = stats.wins > 0 ? newWinSum / stats.wins : 0;
   }
 
+  // update average loss (incremental calculation)
   if (stats.losses > 0) {
     const oldLossSum =
       stats.averageLoss * (stats.losses - (!isWin && trade.pnl < 0 ? 1 : 0));
@@ -473,7 +425,7 @@ function updateStatsWithTrade(stats: TradingStats, trade: Trade): void {
     stats.averageLoss = stats.losses > 0 ? newLossSum / stats.losses : 0;
   }
 
-  // Update streaks
+  // update streaks
   if (isWin) {
     if (stats.currentStreak.type === "WIN") {
       stats.currentStreak.count++;
@@ -495,36 +447,27 @@ function updateStatsWithTrade(stats: TradingStats, trade: Trade): void {
   }
 }
 
-//==============================================================================
-// STARTUP RECOVERY
-//==============================================================================
+// ---- STARTUP RECOVERY ----
 
-// Perform startup recovery for a symbol.
-// This reconciles file state with broker state to handle crashes/restarts.
-// Steps:
-// 1. Load daily state and position from files
-// 2. Query broker for actual positions
-// 3. Reconcile differences (broker is source of truth)
-// 4. Return recovered state
-
+// reconcile file state with broker state on startup to handle crashes/restarts
 export function performStartupRecovery(
   symbol: string,
   brokerPosition: Position | null,
 ): { dailyState: DailyState; position: Position | null } {
   logger.normal(`Performing startup recovery for ${symbol}...`);
 
-  // Load file states
+  // load file states
   const fileState = loadDailyState(symbol);
   const filePosition = loadCurrentPosition(symbol);
 
-  // Create or use existing daily state
+  // create or use existing daily state
   const dailyState = fileState || createDailyState(symbol);
 
-  // Reconcile positions
+  // reconcile positions (broker is source of truth)
   let recoveredPosition: Position | null = null;
 
   if (brokerPosition && filePosition) {
-    // Both have position - verify they match
+    // both have position - verify they match
     if (
       brokerPosition.side === filePosition.side &&
       brokerPosition.quantity === filePosition.quantity
@@ -534,6 +477,7 @@ export function performStartupRecovery(
       );
       recoveredPosition = brokerPosition;
     } else {
+      // mismatch - use broker state as source of truth
       logger.normal(
         `Position mismatch detected - using broker state (source of truth)`,
       );
@@ -541,22 +485,22 @@ export function performStartupRecovery(
       saveCurrentPosition(brokerPosition);
     }
   } else if (brokerPosition && !filePosition) {
-    // Broker has position but file doesn't - external position or file was deleted
+    // broker has position but file doesn't - external or file was deleted
     logger.normal(
       `Position found in broker but not in file - assuming external position`,
     );
     recoveredPosition = brokerPosition;
     saveCurrentPosition(brokerPosition);
   } else if (!brokerPosition && filePosition) {
-    // File has position but broker doesn't - position was closed externally or broker lost it
+    // file has position but broker doesn't - closed externally
     logger.normal(
       `Position in file but not in broker - assuming closed externally`,
     );
     deleteCurrentPosition(symbol);
-    markTradeExecuted(symbol); // Prevent reentry today
+    markTradeExecuted(symbol);
     recoveredPosition = null;
   } else {
-    // Neither has position - normal state
+    // neither has position - normal state
     logger.debug(`No position for ${symbol} - normal state`);
     recoveredPosition = null;
   }
@@ -569,12 +513,9 @@ export function performStartupRecovery(
   };
 }
 
-//==============================================================================
-// REJECTION LOGGING
-//==============================================================================
+// ---- REJECTION LOGGING ----
 
-// Log rejection for later analysis (why trades were rejected).
-
+// log a rejection for later analysis (why trades were rejected)
 export function logRejection(
   symbol: string,
   stage: import("./types").RejectionStage,
@@ -585,7 +526,7 @@ export function logRejection(
     const date = getCurrentDateString();
     const filePath = path.join(REJECTIONS_DIR, `${date}.json`);
 
-    // Load existing or create new
+    // load existing or create new
     let log: import("./types").RejectionLog;
     if (fs.existsSync(filePath)) {
       log = JSON.parse(fs.readFileSync(filePath, "utf8"));
@@ -593,6 +534,7 @@ export function logRejection(
       log = { date, rejections: [] };
     }
 
+    // add the rejection and save
     log.rejections.push({ timestamp: new Date(), symbol, stage, reason, details });
     fs.writeFileSync(filePath, JSON.stringify(log, null, 2));
   } catch (error) {
@@ -600,8 +542,7 @@ export function logRejection(
   }
 }
 
-// Get rejection summary for end-of-day reporting.
-
+// get rejection summary for end-of-day reporting
 export function getRejectionSummary(date: string): {
   total: number;
   byStage: { [key: string]: number };
@@ -616,6 +557,8 @@ export function getRejectionSummary(date: string): {
     const log: import("./types").RejectionLog = JSON.parse(
       fs.readFileSync(filePath, "utf8"),
     );
+
+    // count rejections by stage and by symbol
     const byStage: { [key: string]: number } = {};
     const bySymbol: { [key: string]: number } = {};
 

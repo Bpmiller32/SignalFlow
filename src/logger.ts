@@ -1,32 +1,25 @@
-//==============================================================================
-// LOGGER.TS - SIMPLE LOGGING SYSTEM
-//==============================================================================
-// This file provides logging functionality with two modes: normal and debug.
-// - normal: Logs key events to both console and file
-// - debug: Logs detailed information (only when LOG_LEVEL=debug)
-// All logs are written to data/logs/ directory.
-//==============================================================================
+// logger.ts - Simple logging system
+// Provides normal, debug, and error logging to console and file.
+// All logs are written to data/logs/ directory with daily rotation.
 
 import * as fs from "fs";
 import * as path from "path";
 import config from "./config";
 
-//==============================================================================
-// SETUP
-//==============================================================================
+// ---- SETUP ----
 
+// directory where log files are stored
 const LOG_DIR = path.join(process.cwd(), "data", "logs");
 
-// Ensure log directory exists
+// ensure log directory exists
 function ensureLogDirectory(): void {
   if (!fs.existsSync(LOG_DIR)) {
     fs.mkdirSync(LOG_DIR, { recursive: true });
   }
 }
 
-// Get current date string for log file names (YYYY-MM-DD in EST)
+// get current date string for log file names (YYYY-MM-DD in EST)
 function getCurrentDateString(): string {
-  // CRITICAL: Use EST timezone for consistency with market hours
   const estDate = new Date().toLocaleString("en-US", { timeZone: "America/New_York" });
   const date = new Date(estDate);
   const year = date.getFullYear();
@@ -35,7 +28,7 @@ function getCurrentDateString(): string {
   return `${year}-${month}-${day}`;
 }
 
-// Get current timestamp string for log entries (HH:MM:SS)
+// get current timestamp string for log entries (HH:MM:SS)
 function getTimestampString(): string {
   const now = new Date();
   const hours = String(now.getHours()).padStart(2, "0");
@@ -44,7 +37,7 @@ function getTimestampString(): string {
   return `${hours}:${minutes}:${seconds}`;
 }
 
-// Write a log entry to a file
+// write a log entry to a file
 function writeToFile(filename: string, message: string): void {
   try {
     ensureLogDirectory();
@@ -57,11 +50,9 @@ function writeToFile(filename: string, message: string): void {
   }
 }
 
-//==============================================================================
-// CORE LOGGING FUNCTIONS
-//==============================================================================
+// ---- CORE LOGGING FUNCTIONS ----
 
-// Log a normal-level message (always shown)
+// log a normal-level message (always shown)
 export function normal(message: string): void {
   const timestamp = getTimestampString();
   console.log(`[${timestamp}] ${message}`);
@@ -70,7 +61,7 @@ export function normal(message: string): void {
   writeToFile(`${dateString}.log`, message);
 }
 
-// Log a debug-level message (only shown if LOG_LEVEL=debug)
+// log a debug-level message (only shown if LOG_LEVEL=debug)
 export function debug(message: string): void {
   if (config.logLevel !== "debug") {
     return;
@@ -83,10 +74,11 @@ export function debug(message: string): void {
   writeToFile(`${dateString}.log`, `[DEBUG] ${message}`);
 }
 
-// Log an error message (always shown, written to both daily and error logs)
+// log an error message (always shown, written to both daily and error logs)
 export function error(message: string, err?: Error): void {
   const timestamp = getTimestampString();
 
+  // build full error message with optional stack trace
   let fullMessage = `❌ ERROR: ${message}`;
   if (err) {
     fullMessage += `\n   ${err.message}`;
@@ -97,19 +89,19 @@ export function error(message: string, err?: Error): void {
 
   console.error(`[${timestamp}] ${fullMessage}`);
 
+  // write to both the daily log and a separate error log
   const dateString = getCurrentDateString();
   writeToFile(`${dateString}.log`, fullMessage);
   writeToFile(`error-${dateString}.log`, fullMessage);
 }
 
-// Log a section separator (for visual organization)
+// log a section separator (for visual organization)
 export function separator(): void {
   const line = "═".repeat(80);
   normal(line);
 }
 
-//==============================================================================
-// INITIALIZATION
-//==============================================================================
+// ---- INITIALIZATION ----
 
+// create log directory on module load
 ensureLogDirectory();

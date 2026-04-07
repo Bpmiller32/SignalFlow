@@ -1,393 +1,348 @@
-//==============================================================================
-// TYPES.TS - ALL TYPESCRIPT INTERFACES AND TYPES
-//==============================================================================
-// This file contains every interface and type used throughout the application.
-// Keeping all types in one place makes it easy to understand the data structures
-// and ensures consistency across the entire codebase.
-//==============================================================================
+// types.ts - All TypeScript interfaces and types
+// Every interface and type used throughout the application lives here.
+// Keeping all types in one place ensures consistency across the codebase.
 
-//==============================================================================
-// CONFIGURATION TYPES
-//==============================================================================
+// ---- CONFIGURATION TYPES ----
 
-// Main application configuration loaded from .env file
+// main application configuration loaded from .env file
 export interface Config {
-  // Mode selection
-  mode: "PAPER" | "LIVE"; // Trading mode
-
-  // API credentials (Alpaca only - using for both data and trading)
+  mode: "PAPER" | "LIVE"; // trading mode
+  // api credentials (alpaca for both data and trading)
   alpacaApiKey: string;
   alpacaSecretKey: string;
   alpacaBaseUrl: string;
-
-  // Discord bot
+  // discord bot
   discordBotToken: string;
   discordGuildId: string;
   discordChannelTrades: string;
   discordChannelSystem: string;
   discordChannelErrors: string;
-
-  // Trading settings
-  symbols: string[]; // Array of stock symbols to trade
-  maxTradesPerDay: number; // Maximum trades per day per symbol
-  strategyCutoffTime: string; // Time to stop entering new trades (EST)
-
-  // Position sizing
+  // trading settings
+  symbols: string[]; // array of stock symbols to trade
+  maxTradesPerDay: number; // maximum trades per day per symbol
+  strategyCutoffTime: string; // time to stop entering new trades (EST)
+  // position sizing
   positionSizeMode: "FIXED" | "RISK_BASED";
-  fixedPositionSize: number; // Dollar amount for FIXED mode
-  accountRiskPercent: number; // Percentage for RISK_BASED mode
-  maxPositionValue: number; // Maximum position size in dollars
-  minPositionValue: number; // Minimum position size in dollars
-
-  // Risk management
-  riskRewardRatio: number; // Target profit vs risk ratio (e.g., 2.0 = 2:1)
-  stopLossBufferPercent: number; // Buffer added to stop loss
-
+  fixedPositionSize: number; // dollar amount for FIXED mode
+  accountRiskPercent: number; // percentage for RISK_BASED mode
+  maxPositionValue: number; // maximum position size in dollars
+  minPositionValue: number; // minimum position size in dollars
+  // risk management
+  riskRewardRatio: number; // target profit vs risk ratio (e.g., 2.0 = 2:1)
+  stopLossBufferPercent: number; // buffer added to stop loss
   // ATR-based stops
-  useAtrStops: boolean; // Use ATR for stops instead of opening range
+  useAtrStops: boolean; // use ATR for stops instead of opening range
   atrPeriod: number; // ATR calculation period (e.g., 14)
   atrStopMultiplier: number; // ATR multiplier for stops (e.g., 1.5)
-
-  // Trailing stops
-  useTrailingStops: boolean; // Enable trailing stops
+  // trailing stops
+  useTrailingStops: boolean; // enable trailing stops
   trailingStopActivation: number; // R-multiple to activate trailing (e.g., 1.0 = 1R)
   trailingStopAtrMultiple: number; // ATR distance for trailing stop
-
-  // Partial exits
-  usePartialExits: boolean; // Enable partial profit taking
+  // partial exits
+  usePartialExits: boolean; // enable partial profit taking
   partialExitAtRMultiple: number; // R-multiple to take partial profit (e.g., 1.0)
-  partialExitPercent: number; // Percentage to exit (e.g., 50 = 50%)
-
-  // Adaptive position sizing (size based on signal quality)
-  useAdaptivePositionSizing: boolean; // Enable signal-based sizing
-  weakSignalSizePercent: number; // Position size for weak signals (e.g., 50 = 50%)
-
-  // Opening range filters
-  openingRangeMinSize: number; // Minimum range as % of price
-  openingRangeMaxSize: number; // Maximum range as % of price
-
-  // Fair Value Gap (FVG) rules
-  fvgBodyPercent: number; // Required body size as % of candle range
-  fvgMinRangePercent: number; // Minimum candle range as % of price
-  fvgOverlapTolerance: number; // Allowed gap overlap as %
-  fvgClosePositionPercent: number; // Where close must be in candle range
-  requireVolumeConfirmation: boolean; // Require volume spike
-  volumeMultiplier: number; // Volume multiplier for confirmation
-
-  // Logging
+  partialExitPercent: number; // percentage to exit (e.g., 50 = 50%)
+  // adaptive position sizing (size based on signal quality)
+  useAdaptivePositionSizing: boolean; // enable signal-based sizing
+  weakSignalSizePercent: number; // position size for weak signals (e.g., 50 = 50%)
+  // opening range filters
+  openingRangeMinSize: number; // minimum range as % of price
+  openingRangeMaxSize: number; // maximum range as % of price
+  // fair value gap (FVG) rules
+  fvgBodyPercent: number; // required body size as % of candle range
+  fvgMinRangePercent: number; // minimum candle range as % of price
+  fvgOverlapTolerance: number; // allowed gap overlap as %
+  fvgClosePositionPercent: number; // where close must be in candle range
+  requireVolumeConfirmation: boolean; // require volume spike
+  volumeMultiplier: number; // volume multiplier for confirmation
+  // logging
   logLevel: "normal" | "debug";
-  saveCandleData: boolean; // Save candles to JSON files
-
-  // Earnings filter
-  skipEarningsDays: boolean; // Skip trading on earnings days
-
-  // Opening range strength filter
-  openingRangeMinStrength: number; // Minimum OR strength score (0-10)
-
-  // Volume safety threshold
-  minAbsoluteVolumePerMinute: number; // Minimum volume per minute (prevents low liquidity)
-
-  // Stale breakout timeout
-  maxFvgWindowMinutes: number; // Max time to complete FVG after breakout (invalidate stale)
-
-  // Pre-market gap filter
-  maxPremarketGapPercent: number; // Maximum pre-market gap allowed (% from previous close)
+  saveCandleData: boolean; // save candles to JSON files
+  // earnings filter
+  skipEarningsDays: boolean; // skip trading on earnings days
+  // opening range strength filter
+  openingRangeMinStrength: number; // minimum OR strength score (0-10)
+  // volume safety threshold
+  minAbsoluteVolumePerMinute: number; // minimum volume per minute (prevents low liquidity)
+  // stale breakout timeout
+  maxFvgWindowMinutes: number; // max time to complete FVG after breakout
+  // pre-market gap filter
+  maxPremarketGapPercent: number; // maximum pre-market gap allowed
 }
 
-//==============================================================================
-// MARKET DATA TYPES
-//==============================================================================
+// ---- MARKET DATA TYPES ----
 
-// Single candlestick with OHLC data
+// single candlestick with OHLC data
 export interface Candle {
-  symbol: string; // Stock symbol (e.g., "SPY")
-  timestamp: Date; // Candle timestamp in EST
-  open: number; // Opening price
-  high: number; // Highest price
-  low: number; // Lowest price
-  close: number; // Closing price
-  volume: number; // Trading volume
-  vwap?: number; // Volume-weighted average price (for quality analysis)
-  tradeCount?: number; // Number of trades (detects institutional vs retail)
+  symbol: string; // stock symbol (e.g., "SPY")
+  timestamp: Date; // candle timestamp in EST
+  open: number; // opening price
+  high: number; // highest price
+  low: number; // lowest price
+  close: number; // closing price
+  volume: number; // trading volume
+  vwap?: number; // volume-weighted average price (for quality analysis)
+  tradeCount?: number; // number of trades (detects institutional vs retail)
 }
 
-// Opening range calculated from first 5-minute candle
+// opening range calculated from first 5-minute candle
 export interface OpeningRange {
-  high: number; // High of opening range
-  low: number; // Low of opening range
-  size: number; // Range size as % of price
-  sizeInDollars: number; // Range size in dollars
-  timestamp: Date; // When range was established
+  high: number; // high of opening range
+  low: number; // low of opening range
+  size: number; // range size as % of price
+  sizeInDollars: number; // range size in dollars
+  timestamp: Date; // when range was established
 }
 
-//==============================================================================
-// STRATEGY TYPES
-//==============================================================================
+// ---- STRATEGY TYPES ----
 
-// Trading signal generated by strategy
+// trading signal generated by strategy
 export interface Signal {
-  symbol: string; // What to trade
-  direction: "LONG" | "SHORT"; // Buy or sell
-  timestamp: Date; // When signal was generated
-  currentPrice: number; // Price at signal generation
-  reason: string; // Why this signal was generated
+  symbol: string; // what to trade
+  direction: "LONG" | "SHORT"; // buy or sell
+  timestamp: Date; // when signal was generated
+  currentPrice: number; // price at signal generation
+  reason: string; // why this signal was generated
 }
 
-// Fair Value Gap pattern detection result
+// fair value gap pattern detection result
 export interface FVGPattern {
-  detected: boolean; // Was pattern found
-  direction: "BULLISH" | "BEARISH" | null; // Pattern direction
-  candle1: Candle; // First candle (breakout)
-  candle2: Candle; // Second candle (momentum)
-  candle3: Candle; // Third candle (gap)
-  details: string; // Human-readable explanation
+  detected: boolean; // was pattern found
+  direction: "BULLISH" | "BEARISH" | null; // pattern direction
+  candle1: Candle; // first candle (breakout)
+  candle2: Candle; // second candle (momentum)
+  candle3: Candle; // third candle (gap)
+  details: string; // human-readable explanation
 }
 
-// Breakout detection result
+// breakout detection result
 export interface Breakout {
-  detected: boolean; // Did price break range
-  direction: "ABOVE" | "BELOW" | null; // Which way
-  candle: Candle; // Candle that broke range
-  openingRange: OpeningRange; // The range that was broken
+  detected: boolean; // did price break range
+  direction: "ABOVE" | "BELOW" | null; // which way
+  candle: Candle; // candle that broke range
+  openingRange: OpeningRange; // the range that was broken
 }
 
-//==============================================================================
-// POSITION & ORDER TYPES
-//==============================================================================
+// ---- POSITION & ORDER TYPES ----
 
-// Active trading position
+// active trading position
 export interface Position {
-  symbol: string; // What we're holding
-  side: "LONG" | "SHORT"; // Direction
-  entryPrice: number; // Price we entered at
-  quantity: number; // Number of shares
-  entryTime: Date; // When we entered
-  stopLoss: number; // Stop loss price
-  takeProfit: number; // Take profit price
+  symbol: string; // what we're holding
+  side: "LONG" | "SHORT"; // direction
+  entryPrice: number; // price we entered at
+  quantity: number; // number of shares
+  entryTime: Date; // when we entered
+  stopLoss: number; // stop loss price
+  takeProfit: number; // take profit price
   orderIds: {
-    entry: string; // Entry order ID
-    stopLoss: string; // Stop loss order ID
-    takeProfit: string; // Take profit order ID
+    entry: string; // entry order ID
+    stopLoss: string; // stop loss order ID
+    takeProfit: string; // take profit order ID
   };
-  // Trailing stop tracking
-  initialStopLoss: number; // Original stop loss
-  highestPrice?: number; // Highest price since entry (for LONG)
-  lowestPrice?: number; // Lowest price since entry (for SHORT)
-  trailingStopActive: boolean; // Is trailing stop enabled
-  // Partial exit tracking
-  originalQuantity: number; // Quantity at entry
-  partialExitExecuted: boolean; // Has partial exit occurred
+  // trailing stop tracking
+  initialStopLoss: number; // original stop loss
+  highestPrice?: number; // highest price since entry (for LONG)
+  lowestPrice?: number; // lowest price since entry (for SHORT)
+  trailingStopActive: boolean; // is trailing stop enabled
+  // partial exit tracking
+  originalQuantity: number; // quantity at entry
+  partialExitExecuted: boolean; // has partial exit occurred
 }
 
-// Order to be placed with broker
+// order to be placed with broker
 export interface Order {
-  symbol: string; // What to trade
-  side: "BUY" | "SELL"; // Buy or sell
-  quantity: number; // Number of shares
-  type: "MARKET" | "LIMIT" | "STOP"; // Order type
-  price?: number; // Limit/stop price (if applicable)
-  timeInForce: "DAY" | "GTC"; // Order duration
+  symbol: string; // what to trade
+  side: "BUY" | "SELL"; // buy or sell
+  quantity: number; // number of shares
+  type: "MARKET" | "LIMIT" | "STOP"; // order type
+  price?: number; // limit/stop price (if applicable)
+  timeInForce: "DAY" | "GTC"; // order duration
 }
 
-// Result of position sizing calculation
+// result of position sizing calculation
 export interface PositionSize {
-  symbol: string; // What we're sizing for
-  quantity: number; // Number of shares to trade
-  dollarValue: number; // Total dollar value of position
-  entryPrice: number; // Price we'll enter at
-  stopPrice: number; // Stop loss price
-  targetPrice: number; // Take profit price
-  riskPerShare: number; // Risk per share in dollars
-  totalRisk: number; // Total dollar risk
-  potentialProfit: number; // Potential dollar profit
-  riskRewardRatio: number; // Ratio of profit to risk
+  symbol: string; // what we're sizing for
+  quantity: number; // number of shares to trade
+  dollarValue: number; // total dollar value of position
+  entryPrice: number; // price we'll enter at
+  stopPrice: number; // stop loss price
+  targetPrice: number; // take profit price
+  riskPerShare: number; // risk per share in dollars
+  totalRisk: number; // total dollar risk
+  potentialProfit: number; // potential dollar profit
+  riskRewardRatio: number; // ratio of profit to risk
 }
 
-//==============================================================================
-// TRADE TRACKING TYPES
-//==============================================================================
+// ---- TRADE TRACKING TYPES ----
 
-// Completed trade with full details
+// completed trade with full details
 export interface Trade {
-  id: string; // Unique trade ID
-  symbol: string; // What was traded
-  side: "LONG" | "SHORT"; // Direction
-  entryTime: Date; // When we entered
-  entryPrice: number; // Entry price
-  quantity: number; // Number of shares
-  exitTime: Date; // When we exited
-  exitPrice: number; // Exit price
-  exitReason: "TAKE_PROFIT" | "STOP_LOSS" | "MANUAL" | "END_OF_DAY"; // Why we exited
-  pnl: number; // Profit/loss in dollars
-  pnlPercent: number; // Profit/loss as percentage
-  fees: number; // Trading fees
-  holdingTime: number; // How long we held (in seconds)
+  id: string; // unique trade ID
+  symbol: string; // what was traded
+  side: "LONG" | "SHORT"; // direction
+  entryTime: Date; // when we entered
+  entryPrice: number; // entry price
+  quantity: number; // number of shares
+  exitTime: Date; // when we exited
+  exitPrice: number; // exit price
+  exitReason: "TAKE_PROFIT" | "STOP_LOSS" | "MANUAL" | "END_OF_DAY"; // why we exited
+  pnl: number; // profit/loss in dollars
+  pnlPercent: number; // profit/loss as percentage
+  fees: number; // trading fees
+  holdingTime: number; // how long we held (in seconds)
 }
 
-// Statistics for tracking performance
+// statistics for tracking performance
 export interface TradingStats {
-  totalTrades: number; // Total number of trades
-  wins: number; // Number of winning trades
-  losses: number; // Number of losing trades
-  winRate: number; // Win rate as percentage
-  totalPnL: number; // Total profit/loss
-  bestTrade: number; // Best single trade P&L
-  worstTrade: number; // Worst single trade P&L
-  averageWin: number; // Average winning trade
-  averageLoss: number; // Average losing trade
+  totalTrades: number; // total number of trades
+  wins: number; // number of winning trades
+  losses: number; // number of losing trades
+  winRate: number; // win rate as percentage
+  totalPnL: number; // total profit/loss
+  bestTrade: number; // best single trade P&L
+  worstTrade: number; // worst single trade P&L
+  averageWin: number; // average winning trade
+  averageLoss: number; // average losing trade
   currentStreak: {
-    type: "WIN" | "LOSS"; // Current streak type
-    count: number; // How many in a row
+    type: "WIN" | "LOSS"; // current streak type
+    count: number; // how many in a row
   };
-  longestWinStreak: number; // Longest winning streak
-  longestLossStreak: number; // Longest losing streak
+  longestWinStreak: number; // longest winning streak
+  longestLossStreak: number; // longest losing streak
 }
 
-//==============================================================================
-// STATE MANAGEMENT TYPES
-//==============================================================================
+// ---- STATE MANAGEMENT TYPES ----
 
-// Daily state for a symbol (persisted to JSON)
+// daily state for a symbol (persisted to JSON)
 export interface DailyState {
-  date: string; // Trading date (YYYY-MM-DD)
-  symbol: string; // Stock symbol
-  openingRange: OpeningRange | null; // Opening range if captured
-  openingRangeCandle?: Candle; // Full opening range candle for volume/ATR
-  tradeExecutedToday: boolean; // Have we traded yet today
-  tradeCount: number; // Number of trades executed today
+  date: string; // trading date (YYYY-MM-DD)
+  symbol: string; // stock symbol
+  openingRange: OpeningRange | null; // opening range if captured
+  openingRangeCandle?: Candle; // full opening range candle for volume/ATR
+  tradeExecutedToday: boolean; // have we traded yet today
+  tradeCount: number; // number of trades executed today
   sessionStatus:
     | "WAITING"
     | "CAPTURING_RANGE"
     | "MONITORING"
     | "POSITION_OPEN"
-    | "DONE"; // Current state
-  lastUpdated: Date; // Last state update time
+    | "DONE"; // current state
+  lastUpdated: Date; // last state update time
 }
 
-// Current position state (persisted to JSON)
+// current position state (persisted to JSON)
 export interface CurrentPositionState {
-  symbol: string; // What we're holding
-  side: "LONG" | "SHORT"; // Direction
-  entryPrice: number; // Entry price
-  quantity: number; // Number of shares
-  entryTime: Date; // Entry timestamp
-  stopLoss: number; // Stop loss price
-  takeProfit: number; // Take profit price
+  symbol: string; // what we're holding
+  side: "LONG" | "SHORT"; // direction
+  entryPrice: number; // entry price
+  quantity: number; // number of shares
+  entryTime: Date; // entry timestamp
+  stopLoss: number; // stop loss price
+  takeProfit: number; // take profit price
   orderIds: {
-    entry: string; // Entry order ID
-    stopLoss: string; // Stop loss order ID
-    takeProfit: string; // Take profit order ID
+    entry: string; // entry order ID
+    stopLoss: string; // stop loss order ID
+    takeProfit: string; // take profit order ID
   };
-  // Trailing stop fields
-  initialStopLoss: number; // Original stop loss
-  highestPrice?: number; // Highest price since entry (for LONG)
-  lowestPrice?: number; // Lowest price since entry (for SHORT)
-  trailingStopActive: boolean; // Is trailing stop enabled
-  // Partial exit fields
-  originalQuantity: number; // Quantity at entry
-  partialExitExecuted: boolean; // Has partial exit occurred
+  // trailing stop fields
+  initialStopLoss: number; // original stop loss
+  highestPrice?: number; // highest price since entry (for LONG)
+  lowestPrice?: number; // lowest price since entry (for SHORT)
+  trailingStopActive: boolean; // is trailing stop enabled
+  // partial exit fields
+  originalQuantity: number; // quantity at entry
+  partialExitExecuted: boolean; // has partial exit occurred
 }
 
-// Trade history file structure (persisted to JSON)
+// trade history file structure (persisted to JSON)
 export interface TradeHistory {
-  date: string; // Trading date
-  trades: Trade[]; // All trades for this date
+  date: string; // trading date
+  trades: Trade[]; // all trades for this date
 }
 
-// All-time statistics (persisted to JSON)
+// all-time statistics (persisted to JSON)
 export interface AllTimeStats {
-  allTimeStats: TradingStats; // Overall statistics
-  symbolStats: { [symbol: string]: TradingStats }; // Per-symbol stats
-  lastUpdated: Date; // Last update time
+  allTimeStats: TradingStats; // overall statistics
+  symbolStats: { [symbol: string]: TradingStats }; // per-symbol stats
+  lastUpdated: Date; // last update time
 }
 
-//==============================================================================
-// BROKER INTERFACE TYPES
-//==============================================================================
+// ---- BROKER INTERFACE TYPES ----
 
-// Broker account information
+// broker account information
 export interface AccountInfo {
-  equity: number; // Total account value
-  cash: number; // Available cash
-  buyingPower: number; // Buying power
-  dayTradeCount: number; // Pattern day trades in last 5 days
-  positions: Position[]; // Open positions
+  equity: number; // total account value
+  cash: number; // available cash
+  buyingPower: number; // buying power
+  dayTradeCount: number; // pattern day trades in last 5 days
+  positions: Position[]; // open positions
 }
 
-// Result of an order execution
+// result of an order execution
 export interface OrderResult {
-  success: boolean; // Was order successful
-  orderId: string; // Order ID from broker
-  filledPrice?: number; // Price order was filled at
-  filledQuantity?: number; // Quantity that was filled
-  error?: string; // Error message if failed
+  success: boolean; // was order successful
+  orderId: string; // order ID from broker
+  filledPrice?: number; // price order was filled at
+  filledQuantity?: number; // quantity that was filled
+  error?: string; // error message if failed
 }
 
-//==============================================================================
-// MARKET HOURS TYPES
-//==============================================================================
+// ---- MARKET HOURS TYPES ----
 
-// Market hours and status
+// market hours and status
 export interface MarketHours {
-  isOpen: boolean; // Is market currently open
-  nextOpen: Date; // Next market open time
-  nextClose: Date; // Next market close time
-  hoursUntilOpen: number; // Hours until next open
-  hoursUntilClose: number; // Hours until next close
+  isOpen: boolean; // is market currently open
+  nextOpen: Date; // next market open time
+  nextClose: Date; // next market close time
+  hoursUntilOpen: number; // hours until next open
+  hoursUntilClose: number; // hours until next close
 }
 
-//==============================================================================
-// REJECTION TRACKING TYPES
-//==============================================================================
+// ---- REJECTION TRACKING TYPES ----
 
-// Single rejection event
+// single rejection event
 export interface Rejection {
-  timestamp: Date; // When rejection occurred
-  symbol: string; // Symbol that was rejected
-  stage: RejectionStage; // At what stage rejection happened
-  reason: string; // Human-readable reason
-  details?: any; // Additional context (optional)
+  timestamp: Date; // when rejection occurred
+  symbol: string; // symbol that was rejected
+  stage: RejectionStage; // at what stage rejection happened
+  reason: string; // human-readable reason
+  details?: any; // additional context (optional)
 }
 
-// Rejection stages
+// rejection stages
 export type RejectionStage =
-  | "PRE_MARKET_GAP" // Gap too large
-  | "OPENING_RANGE_SIZE" // Size outside limits
-  | "OPENING_RANGE_STRENGTH" // Strength score too low
-  | "BREAKOUT_VOLUME" // Breakout volume too low
+  | "PRE_MARKET_GAP" // gap too large
+  | "OPENING_RANGE_SIZE" // size outside limits
+  | "OPENING_RANGE_STRENGTH" // strength score too low
+  | "BREAKOUT_VOLUME" // breakout volume too low
   | "FVG_PATTERN" // FVG requirements not met
-  | "TIME_WINDOW" // Outside allowed hours
-  | "MARKET_REGIME" // Against market trend
-  | "SIGNAL_QUALITY" // Signal quality too weak
-  | "EARNINGS_EVENT"; // Earnings day
+  | "TIME_WINDOW" // outside allowed hours
+  | "MARKET_REGIME" // against market trend
+  | "SIGNAL_QUALITY" // signal quality too weak
+  | "EARNINGS_EVENT"; // earnings day
 
-// Daily rejection log
+// daily rejection log
 export interface RejectionLog {
-  date: string; // Trading date
-  rejections: Rejection[]; // All rejections for this date
+  date: string; // trading date
+  rejections: Rejection[]; // all rejections for this date
 }
 
-//==============================================================================
-// STRATEGY CONFIG TYPES (loaded from strategies.json)
-//==============================================================================
+// ---- STRATEGY CONFIG TYPES (loaded from strategies.json) ----
 
-// Schedule settings - when the strategy runs (generic, works for any strategy type)
+// schedule settings - when the strategy runs
 export interface StrategySchedule {
-  sessionSetupEnd: string; // HH:MM EST, when the setup phase ends (runner waits until this)
+  sessionSetupEnd: string; // HH:MM EST, when the setup phase ends
   tradingCutoff: string; // HH:MM EST, no new entries after this time
   marketClose: string; // HH:MM EST, market close time
   pollingIntervalMs: number; // ms between candle polls during monitoring
   maxStaleDataMinutes: number; // reject candles older than this many minutes
 }
 
-//==============================================================================
-// ORB STRATEGY PARAMETER TYPES
-//==============================================================================
-// These types define the params for the Opening Range Breakout strategy.
-// They live here (not in orbStrategy.ts) so they're easy to find and reuse.
-// In strategies.json, these go inside the strategy's "params" object.
+// ---- ORB STRATEGY PARAMETER TYPES ----
+// these define the params for the Opening Range Breakout strategy
+// in strategies.json, these go inside the strategy's "params" object
 
-// Opening range filter settings
+// opening range filter settings
 export interface ORFilterConfig {
   minSize: number; // minimum range as % of price
   maxSize: number; // maximum range as % of price
@@ -396,14 +351,14 @@ export interface ORFilterConfig {
   skipEarningsDays: boolean; // skip trading on earnings days
 }
 
-// Breakout detection settings
+// breakout detection settings
 export interface BreakoutConfig {
   volumeMultiplier: number; // required volume vs OR avg (e.g. 1.2 = 20% above)
   minAbsoluteVolume: number; // minimum volume per candle
   maxFvgWindowMinutes: number; // max time after breakout to find FVG
 }
 
-// FVG (Fair Value Gap) pattern settings
+// FVG (fair value gap) pattern settings
 export interface FVGConfig {
   bodyPercent: number; // required body size as % of candle range
   minRangePercent: number; // minimum candle range as % of price
@@ -413,7 +368,7 @@ export interface FVGConfig {
   volumeMultiplier: number; // volume multiplier for FVG confirmation
 }
 
-// Position sizing settings
+// position sizing settings
 export interface PositionSizingConfig {
   mode: "FIXED" | "RISK_BASED"; // sizing mode
   fixedSize: number; // dollar amount for FIXED mode
@@ -424,7 +379,7 @@ export interface PositionSizingConfig {
   weakSignalSizePercent: number; // size % for weak signals (e.g. 50 = half)
 }
 
-// Risk management settings
+// risk management settings
 export interface RiskManagementConfig {
   riskRewardRatio: number; // target R:R (e.g. 2.0 = 2:1)
   stopLossBufferPercent: number; // buffer added to stop loss
@@ -439,16 +394,15 @@ export interface RiskManagementConfig {
   partialExitPercent: number; // % of position to exit
 }
 
-// Discord notification routing - env var names for webhook URLs
+// discord notification routing - env var names for channel IDs
 export interface NotificationConfig {
-  trades: string; // env var name for trades channel (e.g. "DISCORD_WEBHOOK_TRADES")
-  system: string; // env var name for system channel (e.g. "DISCORD_WEBHOOK_SYSTEM")
-  errors: string; // env var name for errors channel (e.g. "DISCORD_WEBHOOK_ERRORS")
+  trades: string; // env var name for trades channel
+  system: string; // env var name for system channel
+  errors: string; // env var name for errors channel
 }
 
-// Full strategy configuration - one entry in strategies.json
-// Generic fields live here. Strategy-specific settings go in the params object.
-// Each strategy implementation reads what it needs from params.
+// full strategy configuration - one entry in strategies.json
+// generic fields live here, strategy-specific settings go in the params object
 export interface StrategyConfig {
   id: string; // unique strategy identifier
   type: string; // strategy type key (e.g. "opening-range-breakout")
@@ -456,21 +410,19 @@ export interface StrategyConfig {
   symbols: string[]; // symbols this strategy trades
   maxTradesPerDay: number; // max trades per symbol per day
   holdOvernight: boolean; // if true, positions survive across sessions
-  schedule: StrategySchedule; // timing config (generic)
+  schedule: StrategySchedule; // timing config
   notifications: NotificationConfig; // discord channel routing
-  params: Record<string, any>; // strategy-specific config (each strategy reads what it needs)
+  params: Record<string, any>; // strategy-specific config
 }
 
-// Root structure of strategies.json file
+// root structure of strategies.json file
 export interface StrategiesFile {
   strategies: StrategyConfig[];
 }
 
-//==============================================================================
-// STRATEGY RESULT TYPES (returned by IStrategy methods)
-//==============================================================================
+// ---- STRATEGY RESULT TYPES (returned by IStrategy methods) ----
 
-// Result from evaluating opening range candle
+// result from evaluating opening range candle
 export interface OpeningRangeResult {
   accepted: boolean; // true if range qualifies for trading
   openingRange: OpeningRange | null; // the calculated range (null if rejected)
@@ -478,7 +430,7 @@ export interface OpeningRangeResult {
   strength: number; // strength score 0-10
 }
 
-// Result from processing a monitoring candle
+// result from processing a monitoring candle
 export interface CandleResult {
   signal: Signal | null; // trading signal if generated
   fvgPattern: FVGPattern | null; // FVG pattern if detected

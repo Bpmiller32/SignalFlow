@@ -12,7 +12,7 @@ import * as alpacaData from "./alpacaData";
 import * as paperBroker from "./paperBroker";
 import * as state from "./state";
 import { IStrategy } from "./strategies/IStrategy";
-import { ORBStrategy } from "./strategies/orbStrategy";
+import { createStrategy as createStrategyFromRegistry } from "./strategies/registry";
 import {
   Position,
   StrategyConfig,
@@ -114,9 +114,7 @@ export class StrategyRunner {
     }
   }
 
-  //============================================================================
-  // LIFECYCLE METHODS
-  //============================================================================
+  // ---- LIFECYCLE METHODS ----
 
   // initialize broker, strategies, recovery
   private async startup(): Promise<void> {
@@ -523,19 +521,12 @@ export class StrategyRunner {
     logger.separator();
   }
 
-  //============================================================================
-  // HELPERS
-  //============================================================================
+  // ---- HELPERS ----
 
   // create a strategy instance from config type
-  // add new strategy types here (e.g. "mean-reversion", "vwap-bounce")
+  // strategies are registered in src/strategies/registry.ts
   private createStrategy(stratConfig: StrategyConfig): IStrategy {
-    switch (stratConfig.type) {
-      case "opening-range-breakout":
-        return new ORBStrategy(stratConfig, this.globalConfig);
-      default:
-        throw new Error(`Unknown strategy type: ${stratConfig.type}. Register new types in createStrategy().`);
-    }
+    return createStrategyFromRegistry(stratConfig, this.globalConfig);
   }
 
   // build a tracking map key from strategy id and symbol

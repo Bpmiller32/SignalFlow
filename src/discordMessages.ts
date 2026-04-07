@@ -1,4 +1,4 @@
-// discord.ts - Discord message formatting and sending
+// discordMessages.ts - Discord message formatting and sending
 // All notification messages are formatted here and sent via the Discord bot.
 // Each function takes an optional channelId override for per-strategy routing.
 // Falls back to global channel IDs from config if no override provided.
@@ -14,9 +14,7 @@ async function send(channelId: string, fallbackChannelId: string, content: strin
   await sendToChannel(targetChannel, content);
 }
 
-//==============================================================================
-// TRADE NOTIFICATIONS
-//==============================================================================
+// ---- TRADE NOTIFICATIONS ----
 
 // send trade entry notification
 export async function sendTradeEntry(
@@ -118,9 +116,7 @@ ${emoji} **Daily P&L:** ${pnlFormatted}
   await send(channelId || "", config.discordChannelTrades, message);
 }
 
-//==============================================================================
-// SYSTEM NOTIFICATIONS
-//==============================================================================
+// ---- SYSTEM NOTIFICATIONS ----
 
 // send app startup notification
 export async function sendStartup(mode: string, symbols: string[], channelId?: string): Promise<void> {
@@ -178,9 +174,7 @@ export async function sendMarketOpenSummary(date: string, symbolCount: number, s
   await send(channelId || "", config.discordChannelSystem, message);
 }
 
-//==============================================================================
-// ERROR NOTIFICATIONS
-//==============================================================================
+// ---- ERROR NOTIFICATIONS ----
 
 // send error notification
 export async function sendError(errorMessage: string, details?: string, channelId?: string): Promise<void> {

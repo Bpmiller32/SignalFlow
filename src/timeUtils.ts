@@ -1,67 +1,54 @@
-//==============================================================================
-// TIMEUTILS.TS - TIME AND TIMEZONE UTILITIES
-//==============================================================================
-// This file handles all time-related operations including:
-// - Working with EST (Eastern) time zone (market time)
-// - Determining if market is open
-// - Calculating market open/close times
-// - Checking if we're within trading windows
-//==============================================================================
+// timeUtils.ts - Time and timezone utilities
+// Handles all time-related operations: EST conversion, market hours,
+// strategy timing windows, duration calculations, and sleep helpers.
 
 import { toZonedTime, format } from "date-fns-tz";
 import { addDays, isWeekend, setHours, setMinutes, setSeconds } from "date-fns";
 import { MarketHours } from "./types";
 
-//==============================================================================
-// TIMEZONE CONSTANTS
-//==============================================================================
+// ---- TIMEZONE CONSTANTS ----
 
-const EST_TIMEZONE = "America/New_York"; // Eastern time (market time)
+// eastern time (market time)
+const EST_TIMEZONE = "America/New_York";
 
-// Market hours in EST
+// market hours in EST
 const MARKET_OPEN_HOUR = 9;
 const MARKET_OPEN_MINUTE = 30;
 const MARKET_CLOSE_HOUR = 16;
 const MARKET_CLOSE_MINUTE = 0;
 
-//==============================================================================
-// TIMEZONE CONVERSION
-//==============================================================================
+// ---- TIMEZONE CONVERSION ----
 
-// Get current time in EST (market time)
+// get current time in EST (market time)
 export function getCurrentEstTime(): Date {
   return toZonedTime(new Date(), EST_TIMEZONE);
 }
 
-//==============================================================================
-// TIME FORMATTING
-//==============================================================================
+// ---- TIME FORMATTING ----
 
-// Format a date in EST timezone (HH:MM:SS)
+// format a date in EST timezone (HH:MM:SS)
 export function formatEstTime(date: Date): string {
   return format(date, "HH:mm:ss", { timeZone: EST_TIMEZONE });
 }
 
-// Format a date in EST timezone with custom format
+// format a date in EST timezone with custom format
 export function formatTimeEST(date: Date, formatStr: string): string {
   return format(date, formatStr, { timeZone: EST_TIMEZONE });
 }
 
-// Format a date as YYYY-MM-DD
+// format a date as YYYY-MM-DD
 export function formatDate(date: Date): string {
   return format(date, "yyyy-MM-dd", { timeZone: EST_TIMEZONE });
 }
 
-// Format a date with full timestamp (YYYY-MM-DD HH:MM:SS EST)
+// format a date with full timestamp (YYYY-MM-DD HH:MM:SS EST)
 export function formatFullTimestamp(date: Date): string {
   return format(date, "yyyy-MM-dd HH:mm:ss zzz", { timeZone: EST_TIMEZONE });
 }
 
-//==============================================================================
-// MARKET HOURS
-//==============================================================================
+// ---- MARKET HOURS ----
 
-// Get market open time for a given date (9:30 AM EST)
+// get market open time for a given date (9:30 AM EST)
 export function getMarketOpen(date: Date): Date {
   const estDate = toZonedTime(date, EST_TIMEZONE);
   let openTime = setHours(estDate, MARKET_OPEN_HOUR);
@@ -70,7 +57,7 @@ export function getMarketOpen(date: Date): Date {
   return openTime;
 }
 
-// Get market close time for a given date (4:00 PM EST)
+// get market close time for a given date (4:00 PM EST)
 export function getMarketClose(date: Date): Date {
   const estDate = toZonedTime(date, EST_TIMEZONE);
   let closeTime = setHours(estDate, MARKET_CLOSE_HOUR);
@@ -79,30 +66,30 @@ export function getMarketClose(date: Date): Date {
   return closeTime;
 }
 
-// Check if a given date is a weekend (markets are closed)
+// check if a given date is a weekend (markets are closed)
 export function isMarketWeekend(date: Date): boolean {
   const estDate = toZonedTime(date, EST_TIMEZONE);
   return isWeekend(estDate);
 }
 
-// Check if market is currently open
+// check if market is currently open
 export function isMarketOpen(): boolean {
   const now = getCurrentEstTime();
 
-  // Market is closed on weekends
+  // market is closed on weekends
   if (isMarketWeekend(now)) {
     return false;
   }
 
-  // Get today's open and close times
+  // get today's open and close times
   const marketOpen = getMarketOpen(now);
   const marketClose = getMarketClose(now);
 
-  // Check if current time is between open and close
+  // check if current time is between open and close
   return now >= marketOpen && now < marketClose;
 }
 
-// Get market hours information (open/closed, next open, next close)
+// get market hours information (open/closed, next open, next close)
 export function getMarketHours(): MarketHours {
   const now = getCurrentEstTime();
   const isOpen = isMarketOpen();
@@ -111,20 +98,20 @@ export function getMarketHours(): MarketHours {
   let nextClose: Date;
 
   if (isOpen) {
-    // Market is open now
-    nextOpen = getMarketOpen(now); // Today's open (already passed)
-    nextClose = getMarketClose(now); // Today's close (upcoming)
+    // market is open now
+    nextOpen = getMarketOpen(now);
+    nextClose = getMarketClose(now);
   } else {
-    // Market is closed - find next open
+    // market is closed - find next open
     const todayOpen = getMarketOpen(now);
     const todayClose = getMarketClose(now);
 
     if (now < todayOpen && !isMarketWeekend(now)) {
-      // Before today's open - next open is today
+      // before today's open - next open is today
       nextOpen = todayOpen;
       nextClose = todayClose;
     } else {
-      // After today's close or weekend - find next trading day
+      // after today's close or weekend - find next trading day
       let searchDate = addDays(now, 1);
       while (isMarketWeekend(searchDate)) {
         searchDate = addDays(searchDate, 1);
@@ -134,7 +121,7 @@ export function getMarketHours(): MarketHours {
     }
   }
 
-  // Calculate hours until open/close
+  // calculate hours until open/close
   const msUntilOpen = nextOpen.getTime() - now.getTime();
   const msUntilClose = nextClose.getTime() - now.getTime();
   const hoursUntilOpen = msUntilOpen / (1000 * 60 * 60);
@@ -149,27 +136,24 @@ export function getMarketHours(): MarketHours {
   };
 }
 
-//==============================================================================
-// STRATEGY TIMING
-//==============================================================================
+// ---- STRATEGY TIMING ----
 
-// Check if we're in the opening range capture window (9:30-9:35 AM EST)
+// check if we're in the opening range capture window (9:30-9:35 AM EST)
 export function isOpeningRangeWindow(): boolean {
   const now = getCurrentEstTime();
   const marketOpen = getMarketOpen(now);
 
-  // Opening range window is 5 minutes after market open
+  // opening range window is 5 minutes after market open
   const rangeEnd = new Date(marketOpen.getTime() + 5 * 60 * 1000);
 
   return now >= marketOpen && now < rangeEnd;
 }
 
-// Check if we're past the strategy cutoff time (default 11:30 AM EST)
-// After this time, no new trades should be entered
+// check if we're past the strategy cutoff time (e.g. 11:30 AM EST)
 export function isPastStrategyCutoff(cutoffTime: string): boolean {
   const now = getCurrentEstTime();
 
-  // Parse cutoff time (format: "HH:MM")
+  // parse cutoff time (format: "HH:MM")
   const [hours, minutes] = cutoffTime.split(":").map(Number);
 
   let cutoff = setHours(now, hours);
@@ -179,11 +163,11 @@ export function isPastStrategyCutoff(cutoffTime: string): boolean {
   return now >= cutoff;
 }
 
-// Get time until strategy cutoff in minutes
+// get time until strategy cutoff in minutes
 export function getMinutesUntilCutoff(cutoffTime: string): number {
   const now = getCurrentEstTime();
 
-  // Parse cutoff time
+  // parse cutoff time
   const [hours, minutes] = cutoffTime.split(":").map(Number);
 
   let cutoff = setHours(now, hours);
@@ -194,28 +178,26 @@ export function getMinutesUntilCutoff(cutoffTime: string): number {
   return Math.floor(msUntilCutoff / (1000 * 60));
 }
 
-// Check if we should wait for market to open
+// check if we should wait for market to open
 export function shouldWaitForMarketOpen(): boolean {
   return !isMarketOpen();
 }
 
-//==============================================================================
-// DURATION CALCULATIONS
-//==============================================================================
+// ---- DURATION CALCULATIONS ----
 
-// Calculate duration between two dates in seconds
+// calculate duration between two dates in seconds
 export function getDurationSeconds(start: Date, end: Date): number {
   const ms = end.getTime() - start.getTime();
   return Math.floor(ms / 1000);
 }
 
-// Calculate duration between two dates in minutes
+// calculate duration between two dates in minutes
 export function getDurationMinutes(start: Date, end: Date): number {
   const ms = end.getTime() - start.getTime();
   return Math.floor(ms / (1000 * 60));
 }
 
-// Format duration in seconds as human-readable string
+// format duration in seconds as human-readable string
 export function formatDuration(seconds: number): string {
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
@@ -230,21 +212,19 @@ export function formatDuration(seconds: number): string {
   }
 }
 
-//==============================================================================
-// UTILITY FUNCTIONS
-//==============================================================================
+// ---- UTILITY FUNCTIONS ----
 
-// Sleep for a given number of milliseconds
+// sleep for a given number of milliseconds
 export function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-// Get date string for today in YYYY-MM-DD format (EST timezone)
+// get date string for today in YYYY-MM-DD format (EST timezone)
 export function getTodayDateString(): string {
   return formatDate(getCurrentEstTime());
 }
 
-// Parse a time string (HH:MM) and return Date object for today at that time (EST)
+// parse a time string (HH:MM) and return Date object for today at that time (EST)
 export function parseTimeToday(timeString: string): Date {
   const now = getCurrentEstTime();
   const [hours, minutes] = timeString.split(":").map(Number);
@@ -256,7 +236,7 @@ export function parseTimeToday(timeString: string): Date {
   return result;
 }
 
-// Check if current time is before a target time (HH:MM format in EST)
+// check if current time is before a target time (HH:MM format in EST)
 export function isBeforeTime(current: Date, targetTime: string): boolean {
   const currentTimeStr = formatTimeEST(current, "HH:mm");
   return currentTimeStr < targetTime;

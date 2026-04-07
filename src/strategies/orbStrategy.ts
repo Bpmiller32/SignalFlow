@@ -326,9 +326,7 @@ export class ORBStrategy implements IStrategy {
     return this.config;
   }
 
-  //============================================================================
-  // INTERNAL ORB LOGIC (private helpers called by the interface methods above)
-  //============================================================================
+  // ---- INTERNAL ORB LOGIC ----
 
   // evaluate the opening range candle - returns accept/reject with details
   private evaluateOpeningRange(
@@ -535,9 +533,7 @@ export class ORBStrategy implements IStrategy {
     });
   }
 
-  //============================================================================
-  // PRIVATE HELPERS
-  //============================================================================
+  // ---- PRIVATE HELPERS ----
 
   // get internal state for a symbol, throws if not initialized
   private getState(symbol: string): ORBSymbolState {

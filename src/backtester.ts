@@ -19,7 +19,7 @@ import config from "./config";
 import * as logger from "./logger";
 import * as alpacaData from "./alpacaData";
 import { IStrategy } from "./strategies/IStrategy";
-import { ORBStrategy } from "./strategies/orbStrategy";
+import { createStrategy as createStrategyFromRegistry } from "./strategies/registry";
 import {
   Candle,
   Position,
@@ -119,15 +119,8 @@ function loadStrategy(strategyId: string | null): { strategy: IStrategy; stratCo
     }
   }
 
-  // create strategy instance based on type
-  let strategy: IStrategy;
-  switch (stratConfig.type) {
-    case "opening-range-breakout":
-      strategy = new ORBStrategy(stratConfig, config);
-      break;
-    default:
-      throw new Error(`Unknown strategy type: ${stratConfig.type}`);
-  }
+  // create strategy instance using the registry
+  const strategy = createStrategyFromRegistry(stratConfig, config);
 
   return { strategy, stratConfig };
 }

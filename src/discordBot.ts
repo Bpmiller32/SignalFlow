@@ -1,6 +1,6 @@
 // discordBot.ts - Discord bot with slash commands
-// This is the interactive layer. Handles commands and sends messages to channels.
-// The bot is the main process. It manages the StrategyRunner lifecycle.
+// Handles user interaction via Discord. Manages the StrategyRunner lifecycle.
+// Commands: /backtest, /balance, /status, /help
 
 import {
   Client,
@@ -11,7 +11,6 @@ import {
   SlashCommandBuilder,
   ChatInputCommandInteraction,
   TextChannel,
-  AttachmentBuilder,
 } from "discord.js";
 import * as fs from "fs";
 import * as path from "path";
@@ -19,14 +18,12 @@ import config from "./config";
 import * as logger from "./logger";
 import * as state from "./state";
 import * as paperBroker from "./paperBroker";
-
-// backtester import (the runBacktest function)
 import { runBacktestProgrammatic } from "./backtester";
 
 // the discord.js client
 let client: Client | null = null;
 
-// reference to the strategy runner start/stop functions (set by main.ts)
+// reference to the strategy runner controls (set by main.ts)
 let runnerControls: {
   start: () => Promise<void>;
   stop: () => void;
@@ -38,7 +35,7 @@ export function setRunnerControls(controls: typeof runnerControls): void {
   runnerControls = controls;
 }
 
-// get the discord client (used by discord.ts for sending messages)
+// get the discord client (used by discordMessages.ts for sending messages)
 export function getClient(): Client | null {
   return client;
 }
@@ -48,20 +45,16 @@ export async function startBot(): Promise<void> {
   const token = config.discordBotToken;
   const guildId = config.discordGuildId;
 
-  // create the client
   client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-  // register slash commands
   await registerCommands(token, guildId);
 
-  // set up command handler
   client.on(Events.InteractionCreate, async (interaction) => {
     if (!interaction.isChatInputCommand()) return;
     try {
       await handleCommand(interaction);
     } catch (error) {
       logger.error("Error handling discord command", error as Error);
-      // try to reply with error
       const reply = { content: `❌ Error: ${(error as Error).message}`, ephemeral: true };
       if (interaction.replied || interaction.deferred) {
         await interaction.followUp(reply).catch(() => {});
@@ -71,11 +64,10 @@ export async function startBot(): Promise<void> {
     }
   });
 
-  // log when ready and set avatar if available
   client.once(Events.ClientReady, async (c) => {
     logger.normal(`Discord bot logged in as ${c.user.tag}`);
 
-    // try to set bot avatar from data/avatar.png (supports png, jpg, gif)
+    // try to set bot avatar from data/avatar.png
     const avatarPath = path.join(process.cwd(), "data", "avatar.png");
     if (fs.existsSync(avatarPath)) {
       try {
@@ -87,7 +79,6 @@ export async function startBot(): Promise<void> {
     }
   });
 
-  // login
   await client.login(token);
 }
 
@@ -97,11 +88,9 @@ export async function sendToChannel(channelId: string, content: string): Promise
   try {
     const channel = await client.channels.fetch(channelId);
     if (channel && channel.isTextBased()) {
-      // discord has a 2000 char limit per message
       if (content.length <= 2000) {
         await (channel as TextChannel).send(content);
       } else {
-        // split long messages
         const chunks = splitMessage(content, 2000);
         for (const chunk of chunks) {
           await (channel as TextChannel).send(chunk);
@@ -116,7 +105,6 @@ export async function sendToChannel(channelId: string, content: string): Promise
 // register all slash commands with discord
 async function registerCommands(token: string, guildId: string): Promise<void> {
   const commands = [
-    // /backtest <from> <to> [strategy]
     new SlashCommandBuilder()
       .setName("backtest")
       .setDescription("Run a historical backtest")
@@ -124,42 +112,19 @@ async function registerCommands(token: string, guildId: string): Promise<void> {
       .addStringOption((opt) => opt.setName("to").setDescription("End date (YYYY-MM-DD)").setRequired(true))
       .addStringOption((opt) => opt.setName("strategy").setDescription("Strategy ID (optional)").setRequired(false)),
 
-    // /strategies view|download|upload
-    new SlashCommandBuilder()
-      .setName("strategies")
-      .setDescription("View, download, or upload strategies.json")
-      .addStringOption((opt) =>
-        opt.setName("action").setDescription("What to do").setRequired(true)
-          .addChoices(
-            { name: "view", value: "view" },
-            { name: "download", value: "download" },
-            { name: "upload", value: "upload" },
-          ),
-      )
-      .addAttachmentOption((opt) => opt.setName("file").setDescription("JSON file to upload (for upload action)").setRequired(false)),
-
-    // /restart
-    new SlashCommandBuilder()
-      .setName("restart")
-      .setDescription("Restart the trading bot with fresh strategy config"),
-
-    // /balance
     new SlashCommandBuilder()
       .setName("balance")
       .setDescription("Show P&L summary and trade history"),
 
-    // /status
     new SlashCommandBuilder()
       .setName("status")
       .setDescription("Show what the bot is currently doing"),
 
-    // /help
     new SlashCommandBuilder()
       .setName("help")
       .setDescription("Show all available commands and how to use them"),
   ];
 
-  // register commands in the guild
   const rest = new REST({ version: "10" }).setToken(token);
   const clientId = Buffer.from(token.split(".")[0], "base64").toString();
   await rest.put(Routes.applicationGuildCommands(clientId, guildId), {
@@ -175,12 +140,6 @@ async function handleCommand(interaction: ChatInputCommandInteraction): Promise<
     case "backtest":
       await handleBacktest(interaction);
       break;
-    case "strategies":
-      await handleStrategies(interaction);
-      break;
-    case "restart":
-      await handleRestart(interaction);
-      break;
     case "balance":
       await handleBalance(interaction);
       break;
@@ -193,9 +152,7 @@ async function handleCommand(interaction: ChatInputCommandInteraction): Promise<
   }
 }
 
-//=============================================================================
-// COMMAND HANDLERS
-//=============================================================================
+// ---- COMMAND HANDLERS ----
 
 // /backtest - run a historical backtest
 async function handleBacktest(interaction: ChatInputCommandInteraction): Promise<void> {
@@ -203,122 +160,21 @@ async function handleBacktest(interaction: ChatInputCommandInteraction): Promise
   const toDate = interaction.options.getString("to", true);
   const strategyId = interaction.options.getString("strategy") || undefined;
 
-  // reply immediately (backtests take time)
   await interaction.reply(`🔄 Running backtest: ${fromDate} to ${toDate}${strategyId ? ` (${strategyId})` : ""}...`);
 
   try {
-    // run the backtest
     const result = await runBacktestProgrammatic(fromDate, toDate, strategyId);
-
-    // format results for discord
     const msg = formatBacktestResults(result);
-
-    // edit the reply with results
     await interaction.editReply(msg);
   } catch (error) {
     await interaction.editReply(`❌ Backtest failed: ${(error as Error).message}`);
   }
 }
 
-// /strategies - view, download, or upload strategies.json
-async function handleStrategies(interaction: ChatInputCommandInteraction): Promise<void> {
-  const action = interaction.options.getString("action", true);
-  const strategiesPath = path.join(process.cwd(), "strategies.json");
-
-  if (action === "view") {
-    // show strategies.json content in a code block
-    if (!fs.existsSync(strategiesPath)) {
-      await interaction.reply("❌ strategies.json not found");
-      return;
-    }
-    const content = fs.readFileSync(strategiesPath, "utf8");
-    // discord code block limit is ~2000 chars
-    if (content.length > 1900) {
-      await interaction.reply("📄 strategies.json is too large for a message. Use `/strategies download` instead.");
-    } else {
-      await interaction.reply("```json\n" + content + "\n```");
-    }
-
-  } else if (action === "download") {
-    // send strategies.json as a file attachment
-    if (!fs.existsSync(strategiesPath)) {
-      await interaction.reply("❌ strategies.json not found");
-      return;
-    }
-    const attachment = new AttachmentBuilder(strategiesPath, { name: "strategies.json" });
-    await interaction.reply({ content: "📎 Current strategies.json:", files: [attachment] });
-
-  } else if (action === "upload") {
-    // user uploads a new strategies.json
-    const file = interaction.options.getAttachment("file");
-    if (!file) {
-      await interaction.reply("❌ Please attach a JSON file with the upload action");
-      return;
-    }
-
-    try {
-      // fetch the file content
-      const response = await fetch(file.url);
-      const text = await response.text();
-
-      // validate it's valid JSON with strategies array
-      const parsed = JSON.parse(text);
-      if (!parsed.strategies || !Array.isArray(parsed.strategies)) {
-        await interaction.reply('❌ Invalid format: must have a "strategies" array');
-        return;
-      }
-
-      // backup current file
-      if (fs.existsSync(strategiesPath)) {
-        const backup = strategiesPath + ".backup";
-        fs.copyFileSync(strategiesPath, backup);
-      }
-
-      // save new file
-      fs.writeFileSync(strategiesPath, JSON.stringify(parsed, null, 2));
-      await interaction.reply(`✅ strategies.json updated (${parsed.strategies.length} strategies). Use \`/restart\` to apply.`);
-    } catch (error) {
-      await interaction.reply(`❌ Upload failed: ${(error as Error).message}`);
-    }
-  }
-}
-
-// /restart - restart the trading loop
-async function handleRestart(interaction: ChatInputCommandInteraction): Promise<void> {
-  if (!runnerControls) {
-    await interaction.reply("❌ Runner not initialized");
-    return;
-  }
-
-  await interaction.reply("🔄 Restarting trading bot...");
-
-  try {
-    // stop current runner
-    runnerControls.stop();
-
-    // small delay for cleanup
-    await new Promise((r) => setTimeout(r, 1000));
-
-    // start fresh
-    runnerControls.start().catch((err) => {
-      logger.error("Runner restart failed", err);
-    });
-
-    await interaction.editReply("✅ Trading bot restarted. Strategies reloaded from strategies.json.");
-  } catch (error) {
-    await interaction.editReply(`❌ Restart failed: ${(error as Error).message}`);
-  }
-}
-
 // /balance - show P&L summary
 async function handleBalance(interaction: ChatInputCommandInteraction): Promise<void> {
-  // load all-time stats
   const stats = state.loadAllTimeStats();
-
-  // get account balance
   const accountInfo = config.mode === "PAPER" ? paperBroker.getAccountInfo() : null;
-
-  // format the message
   const allTime = stats.allTimeStats;
   const pnlSign = allTime.totalPnL >= 0 ? "+" : "";
   const winRate = allTime.totalTrades > 0 ? ((allTime.wins / allTime.totalTrades) * 100).toFixed(1) : "0.0";
@@ -344,7 +200,6 @@ async function handleBalance(interaction: ChatInputCommandInteraction): Promise<
     msg += `**Avg Loss:** $${allTime.averageLoss.toFixed(2)}\n`;
   }
 
-  // per-symbol breakdown
   const symbolKeys = Object.keys(stats.symbolStats);
   if (symbolKeys.length > 0) {
     msg += `\n**PER-SYMBOL**\n`;
@@ -373,7 +228,6 @@ async function handleStatus(interaction: ChatInputCommandInteraction): Promise<v
     msg += `**Trading:** Not initialized\n`;
   }
 
-  // show account info
   if (config.mode === "PAPER") {
     const info = paperBroker.getAccountInfo();
     msg += `**Equity:** $${info.equity.toFixed(2)}\n`;
@@ -395,19 +249,12 @@ async function handleHelp(interaction: ChatInputCommandInteraction): Promise<voi
   const msg = `🤖 **SignalFlow Bot Commands**
 ══════════════════════════════
 
-📊 **/backtest** \`from\` \`to\` \`[strategy]\`
+📊 **/backtest** \`from\
 Run a historical backtest on past market data.
 Example: \`/backtest from:2026-03-01 to:2026-04-01\`
 
-📄 **/strategies** \`action\`
-Manage the strategies.json config file.
-• \`view\` — show current config in chat
-• \`download\` — get the file as an attachment
-• \`upload\` — replace config (attach a .json file)
-
-🔄 **/restart**
-Stop the trading loop, reload strategies.json, and start fresh.
-Use after uploading a new strategies.json.
+🔄**/br
+start**Stop the trading loop, reload strategies.json, and start fresh.
 
 💰 **/balance**
 Show total P&L, win rate, per-symbol breakdown, and account balance.
@@ -420,17 +267,14 @@ This message.
 
 ══════════════════════════════
 **How it works:**
-The bot runs an automated trading strategy during market hours (9:30 AM - 4:00 PM EST).
-It monitors symbols for Opening Range Breakouts with FVG confirmation.
-All strategy parameters are in \`strategies.json\` — edit and \`/restart\` to apply.
+The bot runs automated trading strategies during market hours (9:30 AM - 4:00 PM EST).
+Strategies are defined in code (src/strategies/) and configured via strategies.json.
 `;
 
   await interaction.reply(msg);
 }
 
-//=============================================================================
-// HELPERS
-//=============================================================================
+// ---- HELPERS ----
 
 // format backtest results for discord
 function formatBacktestResults(result: any): string {
@@ -445,10 +289,9 @@ function formatBacktestResults(result: any): string {
   msg += `**Profit Factor:** ${s.profitFactor === Infinity ? "∞" : s.profitFactor.toFixed(2)}\n`;
   msg += `**Avg Hold:** ${s.averageHoldingMinutes.toFixed(0)} min\n`;
 
-  // trade log (abbreviated)
   if (result.trades && result.trades.length > 0) {
     msg += `\n**TRADES:**\n`;
-    for (const t of result.trades.slice(0, 20)) { // max 20 trades in message
+    for (const t of result.trades.slice(0, 20)) {
       const tSign = t.pnl >= 0 ? "+" : "";
       msg += `${t.date} ${t.symbol} ${t.side} ${tSign}$${t.pnl.toFixed(2)} (${t.exitReason})\n`;
     }
@@ -460,7 +303,7 @@ function formatBacktestResults(result: any): string {
   return msg;
 }
 
-// split a long message into chunks
+// split a long message into chunks respecting newlines
 function splitMessage(text: string, maxLength: number): string[] {
   const chunks: string[] = [];
   let remaining = text;
@@ -469,7 +312,6 @@ function splitMessage(text: string, maxLength: number): string[] {
       chunks.push(remaining);
       break;
     }
-    // find last newline before limit
     let splitAt = remaining.lastIndexOf("\n", maxLength);
     if (splitAt === -1) splitAt = maxLength;
     chunks.push(remaining.substring(0, splitAt));
