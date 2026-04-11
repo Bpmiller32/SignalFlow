@@ -82,25 +82,40 @@ export class StrategyRunner {
     logger.normal(`${this.strategies.length} strategy(s) loaded`);
   }
 
-  // run the full trading session lifecycle
+  // run the full trading session lifecycle - loops indefinitely across trading days
   async run(): Promise<void> {
-    try {
-      await this.startup();
-      await this.waitForMarketOpen();
-      await this.sendMarketOpenSummary();
-      // let each strategy do its session setup (fetch data, evaluate conditions)
-      const today = timeUtils.getTodayDateString();
-      for (const entry of this.strategies) {
-        // wait until this strategy's setup window ends before starting
-        await this.waitUntilTime(entry.config.schedule.sessionSetupEnd);
-        await entry.strategy.onSessionStart(today);
+    await this.startup();
+
+    // keep running sessions until stop() is called
+    while (!this.stopRequested) {
+      try {
+        await this.waitForMarketOpen();
+        if (this.stopRequested) break;
+
+        await this.sendMarketOpenSummary();
+
+        // reset per-symbol tracking for the new trading day
+        this.resetDailyTracking();
+
+        // let each strategy do its session setup (fetch data, evaluate conditions)
+        const today = timeUtils.getTodayDateString();
+        for (const entry of this.strategies) {
+          if (this.stopRequested) break;
+          // wait until this strategy's setup window ends before starting
+          await this.waitUntilTime(entry.config.schedule.sessionSetupEnd);
+          await entry.strategy.onSessionStart(today);
+        }
+
+        if (!this.stopRequested) {
+          await this.monitoringLoop();
+          await this.shutdown();
+        }
+      } catch (error) {
+        logger.error("Critical error in strategy runner", error as Error);
+        await discord.sendError("CRITICAL ERROR", (error as Error).message);
+        // wait a minute before retrying to avoid tight error loops
+        await this.sleep(60000);
       }
-      await this.monitoringLoop();
-      await this.shutdown();
-    } catch (error) {
-      logger.error("Critical error in strategy runner", error as Error);
-      await discord.sendError("CRITICAL ERROR", (error as Error).message);
-      throw error;
     }
   }
 
@@ -562,6 +577,22 @@ export class StrategyRunner {
       logger.debug(`Waiting for ${targetTime} EST (current: ${currentTime} EST)`);
       await this.sleep(30000);
     }
+  }
+
+  // reset per-symbol tracking state for a new trading day
+  // called at the start of each session so yesterday's done/traded flags don't carry over
+  private resetDailyTracking(): void {
+    for (const [key, track] of this.tracking) {
+      this.tracking.set(key, {
+        strategyId: track.strategyId,
+        symbol: track.symbol,
+        position: track.position, // keep any open positions (for holdOvernight strategies)
+        done: false,
+        tradeExecutedToday: false,
+        lastCandleTimestamp: null,
+      });
+    }
+    logger.normal("Daily tracking state reset for new session");
   }
 
   // stop the runner gracefully (called by /restart command)
