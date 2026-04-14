@@ -109,10 +109,19 @@ export class ORBStrategy implements IStrategy {
   async onSessionStart(date: string): Promise<void> {
     for (const symbol of this.config.symbols) {
       try {
-        // fetch the 5-min opening range candle for this date
-        const candles5min = await alpacaData.fetch5MinCandles(symbol, date);
+        // fetch the 5-min opening range candle, retrying if Alpaca hasn't published it yet
+        // the 9:30-9:35 bar can take up to ~60s after close to appear in the API
+        let candles5min = await alpacaData.fetch5MinCandles(symbol, date);
+        const MAX_RETRIES = 6;
+        let retries = 0;
+        while (candles5min.length === 0 && retries < MAX_RETRIES) {
+          retries++;
+          logger.normal(`No opening range data for ${symbol} on ${date} - waiting 30s (attempt ${retries}/${MAX_RETRIES})`);
+          await new Promise((resolve) => setTimeout(resolve, 30000));
+          candles5min = await alpacaData.fetch5MinCandles(symbol, date);
+        }
         if (candles5min.length === 0) {
-          logger.normal(`No opening range data for ${symbol} on ${date}`);
+          logger.normal(`No opening range data for ${symbol} on ${date} after ${MAX_RETRIES} attempts - skipping`);
           this.getState(symbol).done = true;
           continue;
         }
