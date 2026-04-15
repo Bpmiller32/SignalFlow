@@ -6,6 +6,7 @@
 import * as path from "path";
 import * as logger from "./logger";
 import { startBot, setRunnerControls } from "./discordBot";
+import { startApiServer, setApiRunnerControls } from "./apiServer";
 import { StrategyRunner } from "./strategyRunner";
 
 // path to strategies JSON config
@@ -54,10 +55,20 @@ async function main(): Promise<void> {
       getStatus: getRunnerStatus,
     });
 
+    // start the REST API server for the web dashboard
+    startApiServer();
+
+    // give the API server access to runner controls as well
+    setApiRunnerControls({
+      start: startRunner,
+      stop: stopRunner,
+      getStatus: getRunnerStatus,
+    });
+
     // start the trading loop
     await startRunner();
 
-    logger.normal("SignalFlow is running. Use Discord slash commands to control.");
+    logger.normal("SignalFlow is running. Use Discord slash commands or the web dashboard to control.");
   } catch (error) {
     logger.error("Fatal error in main", error as Error);
     process.exit(1);

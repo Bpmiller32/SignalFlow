@@ -107,21 +107,40 @@ export class ORBStrategy implements IStrategy {
   // called at session start - fetches opening range data for all symbols
   // date param allows backtester to pass historical dates
   async onSessionStart(date: string): Promise<void> {
+    // check if this is a live session (today's date) vs a historical backtest date
+    // we only wait for Alpaca to publish bars when running live - historical data is already there or not
+    const todayStr = new Date().toLocaleDateString("en-CA", { timeZone: "America/New_York" });
+    const isLiveSession = date === todayStr;
+
+    if (isLiveSession) {
+      // only wait if we're actually near market open (9:35-9:45 AM EST)
+      // this avoids the 90s wait when backtesting with today's date in the evening
+      const nowEstTime = new Date().toLocaleTimeString("en-US", {
+        timeZone: "America/New_York", hour12: false, hour: "2-digit", minute: "2-digit",
+      });
+      const nearMarketOpen = nowEstTime >= "09:35" && nowEstTime <= "09:45";
+
+      if (nearMarketOpen) {
+        logger.normal(`Live session at market open - waiting 90s for Alpaca to publish opening range bars...`);
+        await new Promise((resolve) => setTimeout(resolve, 90000));
+      }
+    }
+
     for (const symbol of this.config.symbols) {
       try {
-        // fetch the 5-min opening range candle, retrying if Alpaca hasn't published it yet
-        // the 9:30-9:35 bar can take up to ~60s after close to appear in the API
+        // fetch the 5-min opening range candle for this date
         let candles5min = await alpacaData.fetch5MinCandles(symbol, date);
-        const MAX_RETRIES = 6;
-        let retries = 0;
-        while (candles5min.length === 0 && retries < MAX_RETRIES) {
-          retries++;
-          logger.normal(`No opening range data for ${symbol} on ${date} - waiting 30s (attempt ${retries}/${MAX_RETRIES})`);
-          await new Promise((resolve) => setTimeout(resolve, 30000));
+
+        // if still no data on a live session, do one final retry after another 60s
+        // this handles slow publishing days without blocking the backtester
+        if (candles5min.length === 0 && isLiveSession) {
+          logger.normal(`No opening range data for ${symbol} on ${date} - waiting 60s for one more attempt`);
+          await new Promise((resolve) => setTimeout(resolve, 60000));
           candles5min = await alpacaData.fetch5MinCandles(symbol, date);
         }
+
         if (candles5min.length === 0) {
-          logger.normal(`No opening range data for ${symbol} on ${date} after ${MAX_RETRIES} attempts - skipping`);
+          logger.normal(`No opening range data for ${symbol} on ${date} - skipping`);
           this.getState(symbol).done = true;
           continue;
         }

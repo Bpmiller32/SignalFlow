@@ -547,8 +547,16 @@ async function executeBacktest(
   if (printOutput) console.log(`Strategy: ${stratConfig.id} (${stratConfig.type})`);
   if (printOutput) console.log(`Symbols: ${stratConfig.symbols.join(", ")}`);
 
+  // cap toDate at today - no point fetching future dates that have no data
+  const todayStr = new Date().toLocaleDateString("en-CA", { timeZone: "America/New_York" });
+  const effectiveToDate = toDate > todayStr ? todayStr : toDate;
+  if (effectiveToDate !== toDate) {
+    logger.normal(`Capping backtest to today: ${effectiveToDate} (requested ${toDate} is in the future)`);
+    if (printOutput) console.log(`Note: toDate capped at today (${effectiveToDate})`);
+  }
+
   // get trading days in range (weekdays only)
-  const tradingDays = getTradingDays(fromDate, toDate);
+  const tradingDays = getTradingDays(fromDate, effectiveToDate);
   logger.normal(`Backtest trading days: ${tradingDays.length}`);
   if (printOutput) console.log(`Trading days: ${tradingDays.length}`);
 

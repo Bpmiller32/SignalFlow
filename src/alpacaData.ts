@@ -3,9 +3,16 @@
 // and daily candles (previous close/gap detection) from Alpaca's API.
 
 import Alpaca from "@alpacahq/alpaca-trade-api";
+import { fromZonedTime } from "date-fns-tz";
 import config from "./config";
 import * as logger from "./logger";
 import { Candle } from "./types";
+
+// convert a date string (YYYY-MM-DD) and a time string (HH:MM) in New York time
+// to a UTC ISO string - handles EST vs EDT automatically
+function nyToUtc(date: string, time: string): string {
+  return fromZonedTime(new Date(`${date}T${time}:00`), "America/New_York").toISOString();
+}
 
 // ---- ALPACA CLIENT INITIALIZATION ----
 
@@ -65,9 +72,9 @@ export async function fetch5MinCandles(
 
     const client = getAlpacaClient();
 
-    // market open to close in EST
-    const startTime = `${date}T09:30:00-05:00`;
-    const endTime = `${date}T16:00:00-05:00`;
+    // market open to close in New York time (handles EST vs EDT automatically)
+    const startTime = nyToUtc(date, "09:30");
+    const endTime = nyToUtc(date, "16:00");
 
     // fetch bars using alpaca's getBarsV2 API
     const bars = client.getBarsV2(symbol, {
@@ -114,9 +121,9 @@ export async function fetch1MinCandles(
 
     const client = getAlpacaClient();
 
-    // market open to close in EST
-    const startTime = `${date}T09:30:00-05:00`;
-    const endTime = `${date}T16:00:00-05:00`;
+    // market open to close in New York time (handles EST vs EDT automatically)
+    const startTime = nyToUtc(date, "09:30");
+    const endTime = nyToUtc(date, "16:00");
 
     // fetch bars using alpaca's getBarsV2 API
     const bars = client.getBarsV2(symbol, {

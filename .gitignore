@@ -1,6 +1,12 @@
 /dist
 /node_modules
 .env
+
+# web frontend build artifacts and local env
+web/dist
+web/node_modules
+web/.env.local
+web/.env
 .DS_Store
 data/logs/
 data/*-state.json

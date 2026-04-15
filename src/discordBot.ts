@@ -187,9 +187,9 @@ async function handleBacktest(
   const toDate = interaction.options.getString("to", true);
   const strategyId = interaction.options.getString("strategy") || undefined;
 
-  await interaction.reply(
-    `🔄 Running backtest: ${fromDate} to ${toDate}${strategyId ? ` (${strategyId})` : ""}...`,
-  );
+  // deferReply extends the interaction window to 15 minutes (vs 3 seconds default)
+  // this is necessary because backtest fetches data from Alpaca which takes time
+  await interaction.deferReply();
 
   try {
     const result = await runBacktestProgrammatic(fromDate, toDate, strategyId);
@@ -203,9 +203,16 @@ async function handleBacktest(
       await interaction.followUp(chunks[i]);
     }
   } catch (error) {
-    await interaction.editReply(
-      `❌ Backtest failed: ${(error as Error).message}`,
-    );
+    // catch expired webhook token separately so we can log it clearly
+    const errMsg = (error as Error).message || "";
+    if (errMsg.includes("Webhook Token")) {
+      logger.error("Backtest Discord reply expired - operation took too long");
+    }
+    try {
+      await interaction.editReply(`❌ Backtest failed: ${errMsg}`);
+    } catch (_e) {
+      // interaction already expired, nothing we can do
+    }
   }
 }
 
