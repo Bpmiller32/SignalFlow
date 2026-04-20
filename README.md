@@ -7,6 +7,7 @@ A Discord-controlled trading bot that runs strategies against real market data v
 ## Quick Start
 
 ```bash
+cd server
 npm install
 cp .env.example .env  # Add your Alpaca API keys + Discord bot token
 npx ts-node src/main.ts
@@ -27,24 +28,28 @@ Strategies are pluggable modules that make all the trading decisions. The bot ju
 ## Architecture
 
 ```
-src/                          ← Core bot (strategy-agnostic)
-├── main.ts                   ← Entry point
-├── strategyRunner.ts         ← Orchestrates strategies, executes trades
-├── backtester.ts             ← Historical replay through IStrategy interface
-├── alpacaData.ts             ← Market data fetching
-├── paperBroker.ts            ← Paper trading simulator
-├── discordBot.ts             ← Discord slash commands
-├── discordMessages.ts        ← Notification formatting
-├── state.ts                  ← File-based state persistence
-├── config.ts                 ← Global config (.env loader)
-├── types.ts                  ← All TypeScript types
-├── logger.ts                 ← Logging
-├── timeUtils.ts              ← Market hours and timezone utilities
-└── strategies/
-    ├── IStrategy.ts           ← Strategy interface (implement this)
-    ├── registry.ts            ← Strategy registry (register new strategies here)
-    ├── orbStrategy.ts         ← ORB+FVG strategy (decision-maker)
-    └── orbHelpers.ts          ← ORB pure functions (OR calc, FVG, sizing)
+server/
+├── src/                      ← Core bot (strategy-agnostic)
+│   ├── main.ts               ← Entry point
+│   ├── strategyRunner.ts     ← Orchestrates strategies, executes trades
+│   ├── backtester.ts         ← Historical replay through IStrategy interface
+│   ├── alpacaData.ts         ← Market data fetching
+│   ├── paperBroker.ts        ← Paper trading simulator
+│   ├── discordBot.ts         ← Discord slash commands
+│   ├── discordMessages.ts    ← Notification formatting
+│   ├── state.ts              ← File-based state persistence
+│   ├── config.ts             ← Global config (.env loader)
+│   ├── types.ts              ← All TypeScript types
+│   ├── logger.ts             ← Logging
+│   ├── timeUtils.ts          ← Market hours and timezone utilities
+│   └── strategies/
+│       ├── IStrategy.ts      ← Strategy interface (implement this)
+│       ├── registry.ts       ← Strategy registry (register new strategies here)
+│       ├── orbStrategy.ts    ← ORB+FVG strategy (decision-maker)
+│       └── orbHelpers.ts     ← ORB pure functions (OR calc, FVG, sizing)
+├── strategies.json           ← Strategy configuration
+├── data/                     ← Runtime data (state, logs, backtest results)
+└── web/                      ← React frontend (deployed to Firebase)
 ```
 
 **Key principle:** Strategy-specific logic never leaks into the core bot. The core only talks to strategies through the `IStrategy` interface.
@@ -78,9 +83,9 @@ Phase 5 - Execution (5 filters): 16. ❌ Weak signal (reduce size) 17. ❌ Weak 
 
 ## Adding a New Strategy
 
-1. Create `src/strategies/yourStrategy.ts` implementing `IStrategy`
-2. Create `src/strategies/yourHelpers.ts` for pure functions (optional)
-3. Register it in `src/strategies/registry.ts`:
+1. Create `server/src/strategies/yourStrategy.ts` implementing `IStrategy`
+2. Create `server/src/strategies/yourHelpers.ts` for pure functions (optional)
+3. Register it in `server/src/strategies/registry.ts`:
    ```ts
    import { YourStrategy } from "./yourStrategy";
    // add to registry:
@@ -136,6 +141,7 @@ All strategy-specific configuration lives here, not in `.env`. Each strategy ent
 Run from CLI:
 
 ```bash
+cd server
 npx ts-node src/backtester.ts 2026-01-01 2026-03-31
 npx ts-node src/backtester.ts 2026-01-01 2026-03-31 orb-fvg-default
 ```

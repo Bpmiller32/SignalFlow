@@ -1,6 +1,5 @@
-/dist
-/node_modules
-.env
+server/node_modules
+server/.env
 
 # web frontend build artifacts and local env
 web/dist
@@ -8,10 +7,10 @@ web/node_modules
 web/.env.local
 web/.env
 .DS_Store
-data/logs/
-data/*-state.json
-data/*-current-position.json
-data/*-trades.json
-data/*-rejections.json
-data/backtest-*.json
-data/all-time-stats.json
+server/data/logs/
+server/data/*-state.json
+server/data/*-current-position.json
+server/data/*-trades.json
+server/data/*-rejections.json
+server/data/backtest-*.json
+server/data/all-time-stats.json

@@ -15,7 +15,7 @@ echo "=== SignalFlow Deploy ==="
 
 # --- Step 1: Build ---
 echo "[1/4] Building TypeScript..."
-npm run build
+cd server && npm run build && cd ..
 
 # --- Step 2: Open shared SSH connection (you type password once here) ---
 echo "[2/4] Connecting to Pi..."
@@ -26,17 +26,17 @@ echo "[3/4] Syncing files to Pi..."
 ssh ${SSH_OPTS} ${SSH_TARGET} "mkdir -p ${PI_DIR}/dist ${PI_DIR}/data"
 rsync -avz --delete \
   -e "ssh ${SSH_OPTS}" \
-  dist/ \
+  server/dist/ \
   ${SSH_TARGET}:${PI_DIR}/dist/
 
 rsync -avz \
   -e "ssh ${SSH_OPTS}" \
-  package.json package-lock.json strategies.json .env \
+  server/package.json server/package-lock.json server/strategies.json server/.env \
   ${SSH_TARGET}:${PI_DIR}/
 
 rsync -avz \
   -e "ssh ${SSH_OPTS}" \
-  data/ \
+  server/data/ \
   ${SSH_TARGET}:${PI_DIR}/data/
 
 # --- Step 4: Install dependencies on Pi ---
